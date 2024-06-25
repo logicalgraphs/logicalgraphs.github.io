@@ -137,20 +137,24 @@ const parseFlatData = data => {
 
 const flatData = parseFlatData(data);
 
-const voronoiData = {
-  const v = [...new d3.Delaunay(arr.flatten(flatData.map(d => [xScale(d.date), yScale(d.value)]))).voronoi([0, 0, chartWidth, chartHeight]).cellPolygons()];
+const voronoiData = () => {
+  const scaleData = flatData.map(d => [xScale(d.date), yScale(d.value)]);
+  const vrange = [0,0,chartWidth,chartHeight];
+  const v = [...new d3.Delaunay(arr.flatten(scaleData)))
+                      .voronoi(vrange)
+                      .cellPolygons()];
   for (let i = 0, l = v.length; i < l; i++){
     v[i].data = flatData[i];
   }
   return v;
 };
 
-const parseLargestVoronoi = (flatData, voronoiData) => {
+const parseLargestVoronoi = (flatData, voronf) => {
   let output = {};
   for (let i = 1, l = flatData.columns.length; i < l; i++){
     output[flatData.columns[i]] = {area: 0}
   }
-  
+  const voronoiData = voronf();
   for (let i = 0, l = voronoiData.length; i < l; i++){
     let o = {},
         cell = voronoiData[i],
@@ -160,7 +164,8 @@ const parseLargestVoronoi = (flatData, voronoiData) => {
     if (area > output[key].area){
       output[key].centroid = geometric.polygonCentroid(cell);
       output[key].point = [xScale(cell.data.date), yScale(cell.data.value)];
-      output[key].angle = geometric.lineAngle([output[key].point, output[key].centroid]);
+      output[key].angle =
+         geometric.lineAngle([output[key].point, output[key].centroid]);
       output[key].area = area;
       output[key].polygon = cell;
       output[key].colors = colors[key];
