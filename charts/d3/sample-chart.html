@@ -6,10 +6,10 @@
 <body>
 <div id="container"></div>
 </body>
-<script src="https://d3js.org/d3.v7.min.js">
-
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
 // import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
-import * as d3 from "d3";
+// import * as d3 from "d3";
 
 // Declare the chart dimensions and margins.
 const width = 640;
@@ -45,7 +45,7 @@ svg.append("g")
     .call(d3.axisLeft(y));
 
 // Append the SVG element.
-d3.select("#container").append(svg);
+d3.select("#container").append(svg.node());
 
 </script>
 
