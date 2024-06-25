@@ -1,8 +1,15 @@
 <!DOCTYPE html>
+<html>
+<head>
+<script src="https::/d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
 <div id="container"></div>
+
 <script type="module">
 
-import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+// import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+import * as d3 from "d3";
 
 // Declare the chart dimensions and margins.
 const width = 640;
@@ -14,7 +21,7 @@ const marginLeft = 40;
 
 // Declare the x (horizontal position) scale.
 const x = d3.scaleUtc()
-    .domain([new Date("2023-01-01"), new Date("2024-01-01")])
+    .domain([new Date("2024-01-01"), new Date("2025-01-01")])
     .range([marginLeft, width - marginRight]);
 
 // Declare the y (vertical position) scale.
@@ -41,3 +48,6 @@ svg.append("g")
 container.append(svg.node());
 
 </script>
+
+</body>
+</html>
