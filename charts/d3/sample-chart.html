@@ -146,7 +146,7 @@ const flatData = parseFlatData(data);
 const voronoiData = () => {
   const scaleData = flatData.map(d => [xScale(d.date), yScale(d.value)]);
   const vrange = [0,0,chartWidth,chartHeight];
-  const v = [...new d3.Delaunay(arr.flatten(scaleData)))
+  const v = [...new d3.Delaunay(arr.flatten(scaleData))
                       .voronoi(vrange)
                       .cellPolygons()];
   for (let i = 0, l = v.length; i < l; i++){
