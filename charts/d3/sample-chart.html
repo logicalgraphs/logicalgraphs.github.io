@@ -228,7 +228,7 @@ const svg = d3.select(DOM.svg(width, height));
     .style("font-family", "monospace")
     .style("fill", d => d.dark);
   
-  yield svg.node();
+  // yield svg.node();
 
   g.selectAll(".line-label")
       .data(largestVoronoiData)
