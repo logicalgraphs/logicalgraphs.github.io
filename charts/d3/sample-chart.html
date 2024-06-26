@@ -60,8 +60,8 @@ const parseData = data => {
 const data = parseData(ratios);
 
 const dates = data.map(d => d.date);
-const minDate = min(dates);
-const maxDate = max(dates);
+const minDate = Math.min(dates);
+const maxDate = Math.max(dates);
 const dateRange = maxDate - minDate;
 
 const xScale = d3.scaleTime()
@@ -70,8 +70,8 @@ const xScale = d3.scaleTime()
   .range([0, chartWidth]);
 
 const daters = data.map(d => d.ratio);
-const minVal = min(daters) * 0.9;
-const maxVal = max(daters) * 1.1;
+const minVal = Math.min(daters) * 0.9;
+const maxVal = Math.max(daters) * 1.1;
 const valRange = maxVal - minVal;
 
 const yScale = d3.scaleLinear()
