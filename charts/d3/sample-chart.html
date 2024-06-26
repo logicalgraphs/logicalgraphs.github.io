@@ -39,9 +39,9 @@ const margin = {
 const chartWidth = width;
 const chartHeight = height;
 
-const ratios = d3.csv("https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io/main/charts/d3/ethbtc.csv");
+const ratios = await d3.csv("https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io/main/charts/d3/ethbtc.csv");
 
-const parseData = data => {
+const parseData = (data) => {
    const output = [];
    for (let i = 0, l = data.length; i < l; i++) {
       let d = data[i],
@@ -83,7 +83,7 @@ const xAxisGenerator = d3.axisBottom(xScale)
 const yAxisGenerator = d3.axisLeft(yScale)
   .tickValues(d3.range(minVal, maxVal, valRange / 5));
 
-const parseLineData = data => {
+const parseLineData = (data) => {
   const output = [];
   
   let i = 0;
@@ -115,7 +115,7 @@ const parseLineData = data => {
 
 const lineData = parseLineData(data);
 
-const parseFlatData = data => {
+const parseFlatData = (data) => {
   const output = [],
         columns = [];
   
@@ -187,7 +187,7 @@ const parseLargestVoronoi = (flatData, voronoiData) => {
   return output2;
 };
 
-const last = array => array[array.length - 1];
+const last = (array) => array[array.length - 1];
 
 const svg = d3.select("#container")
               .append("svg")
