@@ -63,6 +63,10 @@ const parseData = (data) => {
 
 const data = getRatios().then(parseData);
 
+// ICK! xxx we run into a problem here. 'data' is now a Promise, so we're
+// infinitely chained to csv data. I'm thinking of a Javascript embedding 
+// of the ratio-structure, like for the 'sets' value in venn.js
+
 const dates = data.map(d => d.date);
 const minDate = Math.min(dates);
 const maxDate = Math.max(dates);
