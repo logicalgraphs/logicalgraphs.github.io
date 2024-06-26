@@ -68,28 +68,30 @@ const minDate = Math.min(...dates);
 const maxDate = Math.max(...dates);
 const dateRange = maxDate - minDate;
 
-const xScale = d3.scaleTime()
+const xScale = (x) => d3.scaleTime()
   // .domain([new Date(2010, 0, 1), new Date(2010, 3, 1)])
   .domain([minDate, maxDate])
-  .range([0, chartWidth]);
+  .range([0, chartWidth])(x);
 
 const daters = data.map(d => d.ratio);
 const minVal = Math.min(...daters) * 0.9;
 const maxVal = Math.max(...daters) * 1.1;
 const valRange = maxVal - minVal;
 
-const yScale = d3.scaleLinear()
+const yScale = (y) => d3.scaleLinear()
   .domain([minVal, maxVal])
-  .range([chartHeight, 0]);
+  .range([chartHeight, 0])(y);
 
-const xAxisGenerator = d3.axisBottom(xScale)
-    .tickValues(d3.range(0, 9).map(d => new Date(minDate + d * dateRange / 10)));
-const yAxisGenerator = d3.axisLeft(yScale)
-  .tickValues(d3.range(minVal, maxVal, valRange / 5));
+const xAxisGenerator = (x) => d3.axisBottom(xScale)
+    .tickValues(d3.range(0,9).map(d => new Date(minDate + d * dateRange / 10)))
+    (x);
 
-const lineGenerator = d3.line()
+const yAxisGenerator = (y) => d3.axisLeft(yScale)
+  .tickValues(d3.range(minVal, maxVal, valRange / 5))(y);
+
+const lineGenerator = (line) => d3.line()
   .x(d => xScale(d.date))
-  .y(d => yScale(d.ratio));
+  .y(d => yScale(d.ratio))(line);
 
 const parseLineData = (data) => {
   const output = [];
