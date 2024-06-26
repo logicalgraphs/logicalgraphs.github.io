@@ -88,9 +88,9 @@ const xAxisGenerator = d3.axisBottom(xScale)
 const yAxisGenerator = d3.axisLeft(yScale)
   .tickValues(d3.range(minVal, maxVal, valRange / 5));
 
-const lineGenerator = (line) => d3.line()
+const lineGenerator = d3.line()
   .x(d => xScale(d.date))
-  .y(d => yScale(d.ratio))(line);
+  .y(d => yScale(d.ratio));
 
 const parseLineData = (data) => {
   const output = [];
