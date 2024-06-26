@@ -144,7 +144,7 @@ const parseFlatData = data => {
 
 const flatData = parseFlatData(data);
 
-const voronoiData = () => {
+const voronf = () => {
   const scaleData = flatData.map(d => [xScale(d.date), yScale(d.value)]);
   const vrange = [0,0,chartWidth,chartHeight];
   const v = [...new d3.Delaunay(arr.flatten(scaleData))
@@ -156,12 +156,11 @@ const voronoiData = () => {
   return v;
 };
 
-const parseLargestVoronoi = (flatData, voronf) => {
+const parseLargestVoronoi = (flatData, voronoiData) => {
   let output = {};
   for (let i = 1, l = flatData.columns.length; i < l; i++){
     output[flatData.columns[i]] = {area: 0}
   }
-  const voronoiData = voronf();
   for (let i = 0, l = voronoiData.length; i < l; i++){
     let o = {},
         cell = voronoiData[i],
@@ -234,6 +233,7 @@ const svg = d3.select("#container")
   
   // yield svg.node();
 
+  const largestVoronoiData = parseLargestVoronoi(flatData, voronf());
   g.selectAll(".line-label")
       .data(largestVoronoiData)
     .enter().append("text")
