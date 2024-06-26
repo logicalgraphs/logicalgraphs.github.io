@@ -40,9 +40,9 @@ const chartWidth = width;
 const chartHeight = height;
 
 
-function* getRatios() {
-   let ratios = d3.csv("https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io/main/charts/d3/ethbtc.csv");
-   yield ratios;
+async function getRatios() {
+   let ratios = await d3.csv("https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io/main/charts/d3/ethbtc.csv");
+   return ratios;
 }
 
 const parseData = (data) => {
@@ -61,7 +61,7 @@ const parseData = (data) => {
    return output;
 };
 
-const data = parseData(getRatios().next());
+const data = parseData(getRatios());
 
 const dates = data.map(d => d.date);
 const minDate = Math.min(dates);
