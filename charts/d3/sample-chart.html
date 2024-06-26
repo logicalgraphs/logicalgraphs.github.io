@@ -64,8 +64,8 @@ const data = parseData(ratios.ratios);
 // of the ratio-structure, like for the 'sets' value in venn.js
 
 const dates = data.map(d => d.date);
-const minDate = Math.min(dates);
-const maxDate = Math.max(dates);
+const minDate = Math.min(...dates);
+const maxDate = Math.max(...dates);
 const dateRange = maxDate - minDate;
 
 const xScale = d3.scaleTime()
@@ -74,8 +74,8 @@ const xScale = d3.scaleTime()
   .range([0, chartWidth]);
 
 const daters = data.map(d => d.ratio);
-const minVal = Math.min(daters) * 0.9;
-const maxVal = Math.max(daters) * 1.1;
+const minVal = Math.min(...daters) * 0.9;
+const maxVal = Math.max(...daters) * 1.1;
 const valRange = maxVal - minVal;
 
 const yScale = d3.scaleLinear()
@@ -86,6 +86,10 @@ const xAxisGenerator = d3.axisBottom(xScale)
     .tickValues(d3.range(0, 9).map(d => new Date(minDate + d * dateRange / 10)));
 const yAxisGenerator = d3.axisLeft(yScale)
   .tickValues(d3.range(minVal, maxVal, valRange / 5));
+
+const lineGenerator = d3.line()
+  .x(d => xScale(d.date))
+  .y(d => yScale(d.ratio));
 
 const parseLineData = (data) => {
   const output = [];
@@ -149,7 +153,7 @@ const parseFlatData = (data) => {
 const flatData = parseFlatData(data);
 
 const voronf = () => {
-  const scaleData = flatData.map(d => [xScale(d.date), yScale(d.value)]);
+  const scaleData = flatData.map(d => [xScale(d.date), yScale(d.ratio)]);
   const vrange = [0,0,chartWidth,chartHeight];
   const v = [...new d3.Delaunay(arr.flatten(scaleData))
                       .voronoi(vrange)
@@ -173,7 +177,7 @@ const parseLargestVoronoi = (flatData, voronoiData) => {
     
     if (area > output[key].area){
       output[key].centroid = geometric.polygonCentroid(cell);
-      output[key].point = [xScale(cell.data.date), yScale(cell.data.value)];
+      output[key].point = [xScale(cell.data.date), yScale(cell.data.ratio)];
       output[key].angle =
          geometric.lineAngle([output[key].point, output[key].centroid]);
       output[key].area = area;
@@ -221,7 +225,7 @@ const svg = d3.select("#container")
       .data(lineData)
     .enter().append("g")
       .attr("class", "label")
-      .attr("transform", d => `translate(${xScale(last(d.data).date)}, ${yScale(last(d.data).value)})`);
+      .attr("transform", d => `translate(${xScale(last(d.data).date)}, ${yScale(last(d.data).ratio)})`);
   
   valueLabel.append("circle")
     .attr("r", 4)
@@ -229,7 +233,7 @@ const svg = d3.select("#container")
     .style("fill", d => d.light);
   
   valueLabel.append("text")
-    .text(d => last(d.data).value)
+    .text(d => last(d.data).ratio)
     .attr("dy", 5)
     .attr("dx", 10)
     .style("font-family", "monospace")
@@ -264,7 +268,7 @@ const svg = d3.select("#container")
                 [labelLeft, labelBottom]
               ];
           
-          return flatData.some(d0 => geometric.pointInPolygon([xScale(d0.date), yScale(d0.value)], labelRect));
+          return flatData.some(d0 => geometric.pointInPolygon([xScale(d0.date), yScale(d0.ratio)], labelRect));
         }
      
         let i0 = 1, iMax = 50;
