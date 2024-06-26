@@ -61,7 +61,7 @@ const parseData = (data) => {
    return output;
 };
 
-const data = parseData(getRatios());
+const data = getRatios().then(parseData);
 
 const dates = data.map(d => d.date);
 const minDate = Math.min(dates);
