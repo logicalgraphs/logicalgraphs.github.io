@@ -16,6 +16,7 @@
 <script src="https://unpkg.com/geometric@2.5.4/build/geometric.min.js"></script>
 
 <script src="colors.js"></script>
+<script src="ratios.js"></script>
 
 <script>
 
@@ -40,11 +41,6 @@ const chartWidth = width;
 const chartHeight = height;
 
 
-async function getRatios() {
-   let ratios = await d3.csv("https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io/main/charts/d3/ethbtc.csv");
-   return ratios;
-}
-
 const parseData = (data) => {
    const output = [];
    for (let i = 0, l = data.length; i < l; i++) {
@@ -61,7 +57,7 @@ const parseData = (data) => {
    return output;
 };
 
-const data = getRatios().then(parseData);
+const data = parseData(ratios.ratios);
 
 // ICK! xxx we run into a problem here. 'data' is now a Promise, so we're
 // infinitely chained to csv data. I'm thinking of a Javascript embedding 
