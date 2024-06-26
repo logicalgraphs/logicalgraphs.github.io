@@ -41,30 +41,6 @@ const chartHeight = height;
 
 const ratios = d3.csv("https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io/main/charts/d3/ethbtc.csv");
 
-const dates = ratios.map(d => d.date);
-const minDate = min(dates);
-const maxDate = max(dates);
-const dateRange = maxDate - minDate;
-
-const xScale = d3.scaleTime()
-  // .domain([new Date(2010, 0, 1), new Date(2010, 3, 1)])
-  .domain([minDate, maxDate])
-  .range([0, chartWidth]);
-
-const daters = ratios.map(d => d.ratio);
-const minVal = min(daters) * 0.9;
-const maxVal = max(daters) * 1.1;
-const valRange = maxVal - minVal;
-
-const yScale = d3.scaleLinear()
-  .domain([minVal, maxVal])
-  .range([chartHeight, 0]);
-
-const xAxisGenerator = d3.axisBottom(xScale)
-    .tickValues(d3.range(0, 9).map(d => new Date(minDate + d * dateRange / 10)));
-const yAxisGenerator = d3.axisLeft(yScale)
-  .tickValues(d3.range(minVal, maxVal, valRange / 5));
-
 const parseData = data => {
    const output = [];
    for (let i = 0, l = data.length; i < l; i++) {
@@ -82,6 +58,30 @@ const parseData = data => {
 };
 
 const data = parseData(ratios);
+
+const dates = data.map(d => d.date);
+const minDate = min(dates);
+const maxDate = max(dates);
+const dateRange = maxDate - minDate;
+
+const xScale = d3.scaleTime()
+  // .domain([new Date(2010, 0, 1), new Date(2010, 3, 1)])
+  .domain([minDate, maxDate])
+  .range([0, chartWidth]);
+
+const daters = data.map(d => d.ratio);
+const minVal = min(daters) * 0.9;
+const maxVal = max(daters) * 1.1;
+const valRange = maxVal - minVal;
+
+const yScale = d3.scaleLinear()
+  .domain([minVal, maxVal])
+  .range([chartHeight, 0]);
+
+const xAxisGenerator = d3.axisBottom(xScale)
+    .tickValues(d3.range(0, 9).map(d => new Date(minDate + d * dateRange / 10)));
+const yAxisGenerator = d3.axisLeft(yScale)
+  .tickValues(d3.range(minVal, maxVal, valRange / 5));
 
 const parseLineData = data => {
   const output = [];
