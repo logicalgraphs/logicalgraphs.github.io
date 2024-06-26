@@ -39,7 +39,9 @@ const margin = {
 const chartWidth = width;
 const chartHeight = height;
 
-const ratios = await d3.csv("https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io/main/charts/d3/ethbtc.csv");
+const ratios = d3.csv("https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io/main/charts/d3/ethbtc.csv");
+
+yield ratios;
 
 const parseData = (data) => {
    const output = [];
