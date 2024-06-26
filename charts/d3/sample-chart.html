@@ -82,12 +82,11 @@ const yScale = (y) => d3.scaleLinear()
   .domain([minVal, maxVal])
   .range([chartHeight, 0])(y);
 
-const xAxisGenerator = (x) => d3.axisBottom(xScale)
-    .tickValues(d3.range(0,9).map(d => new Date(minDate + d * dateRange / 10)))
-    (x);
+const xAxisGenerator = d3.axisBottom(xScale)
+    .tickValues(d3.range(0,9).map(d => new Date(minDate + d * dateRange / 10)));
 
-const yAxisGenerator = (y) => d3.axisLeft(yScale)
-  .tickValues(d3.range(minVal, maxVal, valRange / 5))(y);
+const yAxisGenerator = d3.axisLeft(yScale)
+  .tickValues(d3.range(minVal, maxVal, valRange / 5));
 
 const lineGenerator = (line) => d3.line()
   .x(d => xScale(d.date))
