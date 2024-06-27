@@ -27,7 +27,7 @@
          const d = d => d.date, r = d => d.ratio;
 
          // define the line
-         const valueline = d3.line().x(d).y(r);
+         const valueline = d3.line().x(d => x(d.date)).y(d => y(d.ratio));
 
          // append the svg obgect to the body of the page
          // appends a 'group' element to 'svg'
