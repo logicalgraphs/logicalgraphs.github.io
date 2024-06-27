@@ -78,7 +78,8 @@ const ratData =
       return ans });
 
 const ratSeries =
-   chart.addLineSeries({ color: 'green', lineWidth: 2, title: emas.name });
+   chart.addLineSeries({ color: 'green', lineWidth: 2,
+                         lastValueVisible: false, title: emas.name });
 ratSeries.setData(ratData);
 
 const emaData =
@@ -88,7 +89,8 @@ const emaData =
       return ans });
 
 const emaSeries =
-   chart.addLineSeries({ color: 'blue', lineWidth: 2, title: 'EMA20' });
+   chart.addLineSeries({ color: 'blue', lineWidth: 2,
+                         lastValueVisible: false,  title: 'EMA20' });
 emaSeries.setData(emaData);
 
 chart.priceScale().applyOptions({
