@@ -9,7 +9,7 @@
 <script src="ethbtc.js"></script>
 <title id="doc-title">TradingView Ratio Chart</title>
 </head>
-<body>
+<body bgcolor='black'>
 <h3 id="chart-title">TradingView Ratio Chart</h3>
 <style>
 html,
@@ -54,7 +54,7 @@ const maData =
                         value: +d.ratio };
             return ans });
 
-const maSeries = chart.addLineSeries({ color: 'cyan', lineWidth: 2 });
+const maSeries = chart.addLineSeries({ color: 'blue', lineWidth: 2 });
 maSeries.setData(maData);
 </script>
 </html>
