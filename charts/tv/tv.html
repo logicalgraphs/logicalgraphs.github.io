@@ -32,8 +32,10 @@ const chart = createChart(document.getElementById('container'), chartOptions);
 
 const maData =
    ratios.ratios
-         .map(d => { time:  new Date(d.date).getTime() / 1000,
-                     value: +d.ratio });
+         .map(d => { 
+            let ans = { time:  new Date(d.date).getTime() / 1000,
+                        value: +d.ratio };
+            return ans });
 
 const maSeries = chart.addLineSeries({ color: 'cyan', lineWidth: 2 });
 maSeries.setData(maData);
