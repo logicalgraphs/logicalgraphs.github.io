@@ -20,16 +20,33 @@ body,
    overflow: hidden;
    margin: 5;
 }
+ /* Styles for attribution message */
+    .lw-attribution {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        z-index: 3; /* place above the charts */
+        padding: 10px 0px 0px 12px;
+        font-family: "Roboto", sans-serif;
+        font-size: 0.8em;
+    }
+    .lw-attribution a {
+        cursor: pointer;
+        color: rgb(54, 116, 217);
+        opacity: 0.8;
+    }
+    .lw-attribution a:hover {
+        color: rgb(54, 116, 217);
+        opacity: 1;
+    }
 </style>
-<h3>Attribution</h3>
-<p>TradingView 
-<a href='https://tradingview.github.io/lightweight-charts/docs'>Lightweight 
-Charts</a>™<br/>
-Copyright (с) 2023 
-<a href='https://www.tradingview.com/'>TradingView, Inc. 
-https://www.tradingview.com/</a></p>
-<p>&nbsp;</p>
-<div id="container"></div>
+<div id="container">
+<!-- Lightweight Charts Attribution Message and Link -->
+    <div class="lw-attribution">
+        <a href="https://tradingview.github.io/lightweight-charts/">
+            Powered by Lightweight Charts™</a>
+    </div>
+</div>
 </body>
 
 <script>
@@ -40,9 +57,15 @@ document.getElementById("chart-title").innerHTML = ttl;
 
 const chartOptions = {
     layout: {
-        textColor: 'black',
-        background: { type: 'solid', color: 'white' },
+        background: { color: '#222' },
+        textColor: '#DDD',
     },
+    grid: {
+        vertLines: { color: '#444' },
+        horzLines: { color: '#444' },
+    },
+    height: 400,
+    width: 600,
 };
 const chart = 
    LightweightCharts.createChart(document.getElementById('container'),
@@ -65,6 +88,19 @@ const emaData =
 
 const emaSeries = chart.addLineSeries({ color: 'blue', lineWidth: 2 });
 emaSeries.setData(emaData);
+
+window.addEventListener('resize', () => {
+    chart.resize(window.innerWidth, window.innerHeight);
+});
+
+chart.priceScale().applyOptions({
+    borderColor: '#71649C',
+});
+
+// Setting the border color for the horizontal axis
+chart.timeScale().applyOptions({
+    borderColor: '#71649C',
+});
 
 </script>
 </html>
