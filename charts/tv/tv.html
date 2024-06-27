@@ -1,0 +1,41 @@
+
+<meta http-equiv='cache-control' content='no-cache'>
+<meta http-equiv='expires' content='0'>
+<meta http-equiv='pragma' content='no-cache'>
+<html>
+<head>
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+</head>
+<body>
+<div id='container'></div>
+<h3>Attribution</h3>
+<p>TradingView 
+<a href='https://tradingview.github.io/lightweight-charts/docs'>Lightweight 
+Charts</a>™<br/>
+Copyright (с) 2023 
+<a href='https://www.tradingview.com/'>TradingView, Inc. 
+https://www.tradingview.com/</a></p>
+</body>
+
+<script src="ethbtc.js"></script>
+<script>
+
+import { createChart } from 'lightweight-charts';
+
+const chartOptions = {
+    layout: {
+        textColor: 'yellow',
+        background: { type: 'solid', color: 'black' },
+    },
+};
+const chart = createChart(document.getElementById('container'), chartOptions);
+
+const maData =
+   ratios.ratios
+         .map(d => { time:  new Date(d.date).getTime() / 1000,
+                     value: +d.ratio });
+
+const maSeries = chart.addLineSeries({ color: 'cyan', lineWidth: 2 });
+maSeries.setData(maData);
+</script>
+</html>
