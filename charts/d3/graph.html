@@ -17,15 +17,15 @@
       <script>
          // set the dimensions and margins of the graph
          const margin = {top: 20, right: 20, bottom: 30, left: 50},
-         const width = 960 - margin.left - margin.right,
-         const height = 500 - margin.top - margin.bottom;
+               width = 960 - margin.left - margin.right,
+               height = 500 - margin.top - margin.bottom;
 
          // set the ranges
-         const x = d3.scaleTime().range([0, width]);
-         const y = d3.scaleLinear().range([height, 0]);
+         const x = d3.scaleTime().range([0, width]),
+               y = d3.scaleLinear().range([height, 0]);
 
          // define the line
-         var valueline = d3.line().x(date).y(ratio);
+         const valueline = d3.line().x(date).y(ratio);
             // .x(function(d) { return x(d.date); })
             // .y(function(d) { return y(d.ratio); });
 
@@ -41,8 +41,7 @@
          // Get the data
             // format the data
          const data = [];
-         ratios.ratios
-            .forEach(function(d) {
+         ratios.ratios.forEach(d => {
                data.push({ date: new Date(d.date), ratio: +d.ratio });
             });
 
