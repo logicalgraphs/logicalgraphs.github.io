@@ -29,7 +29,9 @@ const chartOptions = {
         background: { type: 'solid', color: 'black' },
     },
 };
-const chart = createChart(document.getElementById('container'), chartOptions);
+const chart = 
+   LightweightCharts.createChart(document.getElementById('container'),
+                                 chartOptions);
 
 const maData =
    ratios.ratios
