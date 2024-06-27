@@ -3,6 +3,9 @@
    <head>
       <script type="text/javascript" src="https://d3js.org/d3.v7.min.js">
       </script>
+      <script type="text/javascript" 
+              src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">  
+      </script>
       <style> 
          .line {
             fill: none;
@@ -11,9 +14,11 @@
          }
       </style>
       <script src="ratios.js"></script>
+      <title>$(ratios.name) Chart</title>
    </head>
 
    <body>
+      <h3>$(ratios.name) Chart</h3>
       <script>
          // set the dimensions and margins of the graph
          const margin = {top: 20, right: 20, bottom: 30, left: 50},
@@ -24,10 +29,11 @@
          const x = d3.scaleTime().range([0, width]),
                y = d3.scaleLinear().range([height, 0]);
 
-         const d = d => d.date, r = d => d.ratio;
+         const d = d => d.date, r = d => d.ratio,
+               compose = (g, f) => x => g(f(x));
 
          // define the line
-         const valueline = d3.line().x(d => x(d.date)).y(d => y(d.ratio));
+         const valueline = d3.line().x(compose(x,d)).y(compose(y,r));
 
          // append the svg obgect to the body of the page
          // appends a 'group' element to 'svg'
@@ -47,7 +53,7 @@
 
          // Scale the range of the data
          x.domain(d3.extent(data, d));
-         y.domain([d3.min(data, r), d3.max(data, r)]);
+         y.domain([d3.min(data, r) * 0.9, d3.max(data, r) * 1.1]);
 
          // Add the valueline path.
          svg.append("path")
