@@ -77,7 +77,8 @@ const ratData =
                   value: +d.ratio };
       return ans });
 
-const ratSeries = chart.addLineSeries({ color: 'green', lineWidth: 2 });
+const ratSeries =
+   chart.addLineSeries({ color: 'green', lineWidth: 2, title: emas.name });
 ratSeries.setData(ratData);
 
 const emaData =
@@ -86,7 +87,8 @@ const emaData =
                   value: +d.ema };
       return ans });
 
-const emaSeries = chart.addLineSeries({ color: 'blue', lineWidth: 2 });
+const emaSeries =
+   chart.addLineSeries({ color: 'blue', lineWidth: 2, title: 'EMA20' });
 emaSeries.setData(emaData);
 
 chart.priceScale().applyOptions({
