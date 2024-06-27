@@ -6,7 +6,7 @@
 <head>
 <script type="text/javascript" 
         src="https://unpkg.com/lightweight-charts@3.4.0/dist/lightweight-charts.standalone.production.js"></script>
-<script src="avaxqi.js"></script>
+<script src="btceth.js"></script>
 <title id="doc-title">TradingView Ratio Chart</title>
 </head>
 <body bgcolor='ivory'>
@@ -48,15 +48,23 @@ const chart =
    LightweightCharts.createChart(document.getElementById('container'),
                                  chartOptions);
 
-const maData =
-   ratios.ratios
-         .map(d => { 
-            let ans = { time:  new Date(d.date).getTime() / 1000,
-                        value: +d.ratio };
-            return ans });
+const ratData =
+   emas.emas.map(d => { 
+      let ans = { time:  new Date(d.date).getTime() / 1000,
+                  value: +d.ratio };
+      return ans });
 
-const maSeries = chart.addLineSeries({ color: 'blue', lineWidth: 2 });
-maSeries.setData(maData);
+const ratSeries = chart.addLineSeries({ color: 'green', lineWidth: 2 });
+ratSeries.setData(ratData);
+
+const emaData =
+   emas.emas.map(d => {
+      let ans = { time:  new Date(d.date).getTime() / 1000,
+                  value: +d.ema };
+      return ans });
+
+const emaSeries = chart.addLineSeries({ color: 'blue', lineWidth: 2 });
+emaSeries.setData(emaData);
 
 </script>
 </html>
