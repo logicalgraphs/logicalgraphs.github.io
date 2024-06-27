@@ -14,11 +14,16 @@
          }
       </style>
       <script src="ratios.js"></script>
-      <title>$(ratios.name) Chart</title>
+      <script>
+        const ratioChart = ratios.name.concat(" Ratio Chart");
+        $("#chart-title").text(ratioChart);
+        $("#doc-title").text(ratioChart);
+      </script>
+      <title id="doc-title">Ratio Chart</title>
    </head>
 
    <body>
-      <h3>$(ratios.name) Chart</h3>
+      <h3 id="chart-title">Ratio Chart</h3>
       <script>
          // set the dimensions and margins of the graph
          const margin = {top: 20, right: 20, bottom: 30, left: 50},
@@ -48,12 +53,12 @@
             // format the data
          const data = [];
          ratios.ratios.forEach(d => {
-               data.push({ date: new Date(d.date), ratio: +d.ratio });
+            data.push({ date: new Date(d.date), ratio: +d.ratio });
          });
 
          // Scale the range of the data
          x.domain(d3.extent(data, d));
-         y.domain([d3.min(data, r) * 0.9, d3.max(data, r) * 1.1]);
+         y.domain([d3.min(data, r) * 0.99, d3.max(data, r) * 1.01]);
 
          // Add the valueline path.
          svg.append("path")
