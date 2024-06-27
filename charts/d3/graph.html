@@ -3,9 +3,6 @@
    <head>
       <script type="text/javascript" src="https://d3js.org/d3.v7.min.js">
       </script>
-      <script type="text/javascript" 
-              src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
-      </script>
       <style> 
          .line {
             fill: none;
@@ -14,17 +11,16 @@
          }
       </style>
       <script src="ratios.js"></script>
-      <script>
-        const ratioChart = ratios.name.concat(" Ratio Chart");
-        $("#chart-title").text(ratioChart);
-        $("#doc-title").text(ratioChart);
-      </script>
       <title id="doc-title">Ratio Chart</title>
    </head>
 
    <body>
       <h3 id="chart-title">Ratio Chart</h3>
       <script>
+        const ratioChart = ratios.name.concat(" Ratio Chart");
+        document.getElementById("doc-title").innerHTML = ratioChart;
+        document.getElementById("chart-title").innerHTML = ratioChart;
+
          // set the dimensions and margins of the graph
          const margin = {top: 20, right: 20, bottom: 30, left: 50},
                width = 960 - margin.left - margin.right,
