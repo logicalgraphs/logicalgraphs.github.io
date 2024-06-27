@@ -34,8 +34,8 @@ https://www.tradingview.com/</a></p>
 <script>
 
 const ttl = "Tradingview Ratio Chart: ".concat(ratios.name);
-document.getElementById("doc-title").text(ttl);
-document.getElementById("chart-title").text(ttl);
+document.getElementById("doc-title").innerHTML = ttl;
+document.getElementById("chart-title").innerHTML = ttl;
 
 const chartOptions = {
     layout: {
