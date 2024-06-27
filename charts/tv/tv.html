@@ -22,7 +22,7 @@ body,
 }
  /* Styles for attribution message */
     .lw-attribution {
-        position: absolute;
+/*        position: absolute; */
         left: 0px;
         top: 0px;
         z-index: 3; /* place above the charts */
@@ -88,10 +88,6 @@ const emaData =
 
 const emaSeries = chart.addLineSeries({ color: 'blue', lineWidth: 2 });
 emaSeries.setData(emaData);
-
-window.addEventListener('resize', () => {
-    chart.resize(window.innerWidth, window.innerHeight);
-});
 
 chart.priceScale().applyOptions({
     borderColor: '#71649C',
