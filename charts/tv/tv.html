@@ -21,7 +21,6 @@ body,
    margin: 5;
 }
 </style>
-<div id="container"></div>
 <h3>Attribution</h3>
 <p>TradingView 
 <a href='https://tradingview.github.io/lightweight-charts/docs'>Lightweight 
@@ -29,6 +28,8 @@ Charts</a>™<br/>
 Copyright (с) 2023 
 <a href='https://www.tradingview.com/'>TradingView, Inc. 
 https://www.tradingview.com/</a></p>
+<p>&nbsp;</p>
+<div id="container"></div>
 </body>
 
 <script>
@@ -56,5 +57,7 @@ const maData =
 
 const maSeries = chart.addLineSeries({ color: 'blue', lineWidth: 2 });
 maSeries.setData(maData);
+
+// chart.timeScale().fitContent();
 </script>
 </html>
