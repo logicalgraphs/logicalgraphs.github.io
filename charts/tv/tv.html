@@ -130,7 +130,7 @@ const dData = deltas.deltas.map(d => {
    let ans = { time:  new Date(d.date).getTime() / 1000, value: +d.delta };
    return ans });
 
-const dSeries = chart1.addHistogramSeries({ color: 'blue', lineWidth: 2 });
+const dSeries = chart1.addHistogramSeries({ color: 'blue' });
 dSeries.setData(dData);
 </script>
 </html>
