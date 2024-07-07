@@ -7,6 +7,7 @@
 <script type="text/javascript" 
         src="https://unpkg.com/lightweight-charts@3.4.0/dist/lightweight-charts.standalone.production.js"></script>
 <script src="btceth.js"></script>
+<script src="deltas.js"></script>
 <title id="doc-title">TradingView Ratio Chart</title>
 </head>
 <body bgcolor='ivory'>
@@ -20,9 +21,14 @@ body,
    overflow: hidden;
    margin: 5;
 }
+#dawns {
+   width: 85%;
+   height: 100%;
+   overflow: hidden;
+   margin: 5;
+}
  /* Styles for attribution message */
     .lw-attribution {
-/*        position: absolute; */
         left: 0px;
         top: 0px;
         z-index: 3; /* place above the charts */
@@ -40,6 +46,7 @@ body,
         opacity: 1;
     }
 </style>
+
 <div id="container">
 <!-- Lightweight Charts Attribution Message and Link -->
     <div class="lw-attribution">
@@ -47,6 +54,19 @@ body,
             Powered by Lightweight Charts™</a>
     </div>
 </div>
+
+<p>&nbsp;</p>
+
+<h3>Deltas</h3>
+
+<div id="dawns">
+<!-- Lightweight Charts Attribution Message and Link -->
+    <div class="lw-attribution">
+        <a href="https://tradingview.github.io/lightweight-charts/">
+            Powered by Lightweight Charts™</a>
+    </div>
+</div>
+
 </body>
 
 <script>
@@ -102,5 +122,15 @@ chart.timeScale().applyOptions({
     borderColor: '#71649C',
 });
 
+const chart1 =
+   LightweightCharts.createChart(document.getElementById('dawns'),
+                                 chartOptions);
+
+const dData = deltas.deltas.map(d => { 
+   let ans = { time:  new Date(d.date).getTime() / 1000, value: +d.delta };
+   return ans });
+
+const dSeries = chart1.addHistogramSeries({ color: 'blue', lineWidth: 2 });
+dSeries.setData(dData);
 </script>
 </html>
