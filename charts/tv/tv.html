@@ -71,6 +71,17 @@ body,
 
 <script>
 
+const dData = deltas.deltas.map(d => { 
+   let ans = { time: new Date(d.date).getTime() / 1000, value: +d.delta };
+   return ans });
+
+const dates = dData.map(d => d.time);
+const maxDate = Math.max(...dates);
+const ttl = "Tradingview Ratio Chart: ".concat(emas.name);
+const titl = ttl.concat(maxDate.toDateString());
+document.getElementById("doc-title").innerHTML = titl;
+document.getElementById("chart-title").innerHTML = titl;
+
 const chartOptions = {
     layout: {
         background: { color: '#222' },
@@ -83,6 +94,7 @@ const chartOptions = {
     height: 400,
     width: 600,
 };
+
 const chart = 
    LightweightCharts.createChart(document.getElementById('container'),
                                  chartOptions);
@@ -121,17 +133,6 @@ chart.timeScale().applyOptions({
 const chart1 =
    LightweightCharts.createChart(document.getElementById('dawns'),
                                  chartOptions);
-
-const dData = deltas.deltas.map(d => { 
-   let ans = { time:  new Date(d.date).getTime() / 1000, value: +d.delta };
-   return ans });
-
-const dates = dData.map(d => d.time);
-const maxDate = Math.max(...dates);
-const ttl = "Tradingview Ratio Chart: ".concat(emas.name);
-const titl = ttl.concat(ttl, maxDate.toDateString());
-document.getElementById("doc-title").innerHTML = titl;
-document.getElementById("chart-title").innerHTML = titl;
 
 const dSeries = chart1.addHistogramSeries({ color: 'blue' });
 dSeries.setData(dData);
