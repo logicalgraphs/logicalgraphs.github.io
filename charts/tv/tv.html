@@ -77,7 +77,7 @@ const dData = deltas.deltas.map(d => {
 
 const dates = dData.map(d => d.time);
 const maxDate = new Date(Math.max(...dates) * 1000);
-const ttl = "Tradingview Ratio Chart: ".concat(emas.name);
+const ttl = "Tradingview Ratio Chart: ".concat(emas.name, ", ");
 const titl = ttl.concat(maxDate.toDateString());
 document.getElementById("doc-title").innerHTML = titl;
 document.getElementById("chart-title").innerHTML = titl;
