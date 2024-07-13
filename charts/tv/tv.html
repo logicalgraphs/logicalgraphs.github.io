@@ -6,7 +6,7 @@
 <head>
 <script type="text/javascript" 
         src="https://unpkg.com/lightweight-charts@3.4.0/dist/lightweight-charts.standalone.production.js"></script>
-<script src="btceth.js"></script>
+<script src="avaxqi.js"></script>
 <script src="deltas.js"></script>
 <title id="doc-title">TradingView Ratio Chart</title>
 </head>
@@ -71,10 +71,6 @@ body,
 
 <script>
 
-const ttl = "Tradingview Ratio Chart: ".concat(emas.name);
-document.getElementById("doc-title").innerHTML = ttl;
-document.getElementById("chart-title").innerHTML = ttl;
-
 const chartOptions = {
     layout: {
         background: { color: '#222' },
@@ -129,6 +125,13 @@ const chart1 =
 const dData = deltas.deltas.map(d => { 
    let ans = { time:  new Date(d.date).getTime() / 1000, value: +d.delta };
    return ans });
+
+const dates = dData.map(d => d.time);
+const maxDate = Math.max(...dates);
+const ttl = "Tradingview Ratio Chart: ".concat(emas.name);
+const titl = ttl.concat(ttl, maxDate.toDateString());
+document.getElementById("doc-title").innerHTML = titl;
+document.getElementById("chart-title").innerHTML = titl;
 
 const dSeries = chart1.addHistogramSeries({ color: 'blue' });
 dSeries.setData(dData);
