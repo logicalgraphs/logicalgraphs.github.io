@@ -1,6 +1,3 @@
-[submodule "charts/venn.js"]
-	path = charts/venn.js
-	url = https://github.com/benfred/venn.js
 [submodule "charts/d3/d3fc"]
 	path = charts/d3/d3fc
 	url = https://github.com/logicalgraphs/d3fc.git
