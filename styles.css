@@ -1,0 +1,10 @@
+body { 
+ background-image: url('imgs/backgrounds/light-purple-wave.png');
+ font-family: Arial, sans-serif;
+ color: white;
+}
+
+a { color: cyan; }
+th { text-align: left; }
+table { border-spacing: 10px; }
+canvas { background-color: black; }
