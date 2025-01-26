@@ -3,13 +3,49 @@
     <title>Charts, logically graphed</title>
     <link rel="shortcut icon" href="/icon/favicon.ico" type="image/x-icon"></link>
     <link rel="icon" href="/icon/favicon.ico" type="image/x-icon"></link>
-    <link rel='stylesheet' href='styles.css?version=1'></link>
+    <link rel='stylesheet' href='styles.css?version=2'></link>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
 
-    <ul>
-      <li><a href="charts/d3/graph.html">graph</a> (tutorial-style)</li>
-      <li><a href="charts/tv/tv.html">TradingView chart</a> of pivots</li>
-    </ul>
+   <center>
+    <h2>Logicalgraphs, LLC</h2>
+
+   <table border='1' width='85%'>
+     <tr>
+      <td style='vertical-align:top' width='20%'>
+       <table border='0'>
+        <tr>
+         <td><a href="charts/d3/graph.html">graph</a> (tutorial-style)</td>
+        </tr>
+        <tr>
+         <td><a href="charts/tv/tv.html">TradingView chart</a> of pivots</td>
+        </tr>
+       </table>
+      </td>
+      <td style='vertical-align:top' width='80%'>
+       <table border='1' width='100%'>
+        <tr><td>
+         <table border="0" width='100%'>
+   <tr>
+    <td align="center"><h3>Assets</h3><br/>
+     <canvas id="barChart" width="400" height="200"></canvas></td>
+   </tr>
+  </table>
+  </td></tr></table>
+  </td></tr></table>
+  </td></tr></table>
+
+    <script src="libs/table.js"></script>
+    <script src='libs/canvas-bg.js'></script>
+    <script src='libs/colors.js'></script>
+    <script src='libs/usd.js'></script>
+    <script src="libs/charts/bar.js"></script>
+
+    <script>
+       fetch('data/assets.tsv')
+            .then(result => result.text())
+            .then(data => tvlChart(data));
+    </script>
   </body>
 </html>
