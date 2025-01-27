@@ -15,18 +15,24 @@
      <tr>
       <td style='vertical-align:top' width='20%'>
        <ul>
-        <li>Dashboard</li>
-        <li><a href='treasury.html'>Treasury</a></li>
+        <li><a href='index.html'>Dashboard</a></li>
+        <li>Treasury</li>
         <li>Pools [TBD]</li>
        </ul>
       </td>
       <td style='vertical-align:top' width='80%'>
        <table border='1' width='100%'>
-        <tr><td>
-         <table border="0" width='100%'>
+        <tr><td align='center'>
+         <table border="0" width='75%'>
    <tr>
-    <td align="center"><h3>Assets</h3><br/>
-     <canvas id="barChart" width="400" height="200"></canvas></td>
+    <td align="center"><h3>Treasury</h3><br/>
+     <canvas id="pieChart" width="200" height="200"></canvas>
+    </td>
+   </tr>
+   <tr>
+    <td align="center">
+     <canvas id="barChart" width="400" height="200"></canvas>
+    </td>
    </tr>
   </table>
   </td></tr></table>
@@ -38,11 +44,33 @@
     <script src='libs/colors.js'></script>
     <script src='libs/usd.js'></script>
     <script src="libs/charts/bar.js"></script>
+    <script src="libs/charts/pie.js"></script>
 
     <script>
-       fetch('data/assets.tsv')
+       fetch('data/treasury.tsv')
             .then(result => result.text())
-            .then(data => tvlChart(data));
+            .then(data => {
+   let [assets, idx] = sortedTable(data);
+   const labels = usdLabels(idx);
+   let amounts = parseData(assets, labels);
+   barChartTbl(labels, amounts);
+   let todayish = amounts.pop().data;
+   let labs = [];
+   let amnts = [];
+   let stables = 0;
+   labels.forEach(([k, _v]) => {
+      let val = todayish[k];
+      if(k.includes('USD')) {
+         stables += val;
+      } else {
+         labs.push(k);
+         amnts.push(val);
+      }
+   });
+   labs.push("stable");
+   amnts.push(stables);
+   doughnutChartTbl(labs, amnts, 'pieChart');
+       });
     </script>
   </body>
 </html>

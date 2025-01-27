@@ -35,6 +35,8 @@ const crypto = new Map([
    ["ALGO", "rgb(0, 0, 0)"],
    ["ATOM", "rgb(46, 49, 72)"],
    ["AVAX", "red"],
+   ["sAVAX", "CornflowerBlue"],
+   ["AUSD", "DarkSeaGreen"],
    ["BAL",  "rgb(29, 40, 42)"],
    ["BAND", "rgb(81, 111, 250)"],
    ["BNB",  "rgb(240, 185, 11)"],
@@ -60,7 +62,8 @@ const crypto = new Map([
    ["SUSHI","rgb(240, 85, 162)"],
    ["UNDEAD","darkred"],
    ["UNI",  "rgb(255, 0, 122)"],
-   ["USDC", "lightBlue"]
+   ["USDC", "lightBlue"],
+   ["USDt", "turquoise"]
 ]);
 
 const baseName = token => token.replace(/[γ\s\$]/g,'');
