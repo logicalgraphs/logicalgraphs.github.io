@@ -16,7 +16,11 @@ const sets = kinds => {
 
 const vennChart = (data, canvas, kind='dapp') => {
    let [wallets, idx] = table(data);
-   let kinds = tokenByKind(wallets, idx, kind);
+   vennTbl(wallets, idx, canvas, kind);
+};
+
+const vennTbl = (table, idx, canvas, kind='dapp') => {
+   let kinds = tokenByKind(table, idx, kind);
    let vs = sets(kinds);
    let chart = venn.VennDiagram();
    d3.select('#' + canvas).datum(vs).call(chart);
