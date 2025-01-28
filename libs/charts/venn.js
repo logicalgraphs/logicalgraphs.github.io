@@ -10,7 +10,9 @@ const sets = kinds => {
       pushSum(ans, [kind], kindSum(row));
       for(let tok in row) { pushSum(ans, [tok, kind], row[tok]); }
    }
-   for(tok in kinds['treasury']) { pushSum(ans, [tok], tokSum(kinds, tok)); }
+   for(tok in Object.values(kinds)[0]) {
+      pushSum(ans, [tok], tokSum(kinds, tok));
+   }
    return ans;
 };
 

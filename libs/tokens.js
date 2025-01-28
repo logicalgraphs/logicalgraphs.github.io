@@ -59,7 +59,6 @@ const refine = kinds => {
 
 const tokenByKind = (table, idx, kind) => {
    let hier = {};
-   let rawLabels = usdLabels(idx);
    let grid = parseData(table, usdLabels(idx), idx[kind]);
    let sum = (a, b) => {
       let ans = {};
