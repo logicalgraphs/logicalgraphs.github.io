@@ -10,25 +10,14 @@ const tvlChart = data => {
    barChartTbl(labels, parseData(assets, labels));
 };
 
-const parseData = (assets, labels) => {
-   let data = assets.map(columns => {
-      const daters = {};
-      labels.forEach(([k, i]) => { daters[k] = parseUSD(columns[i]); });
-      return {
-         date: columns[0],
-         data: daters
-      };
-   });
-   return data;
-};
-
 const barChartTbl = (labels, parsedData) => {
     let amounts = {};
     const dates = [];
     parsedData.forEach(row => {
-        dates.push(row.date);
+        dates.push(row.kind);
         for(let asset in row.data) { 
-           let datum = row.data[asset];
+           let key = asset;
+           let datum = row.data[key];
            if (amounts[asset]) {
               amounts[asset].push(datum);
            } else {
@@ -38,12 +27,11 @@ const barChartTbl = (labels, parsedData) => {
     });
 
     let datasets = [];
-    // const myColors = colors();
     const mkSet = asset => {
        return {
           label: asset,
           data: amounts[asset],
-          backgroundColor: colorOf(asset)  // randomColor(myColors)
+          backgroundColor: colorOf(asset)
        };
     };
     for (let amount in amounts) { datasets.push(mkSet(amount)); };

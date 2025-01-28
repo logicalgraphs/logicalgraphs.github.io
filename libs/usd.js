@@ -6,6 +6,11 @@ const total = row => row.reduce((acc, x) => parseUSD(x) + acc,0);
 
 const usdLabels = idx => {
    const labels = [];
-   for (let k in idx) { if (k.endsWith('$')) { labels.push([k, idx[k]]); } }
+   for (let k in idx) {
+      if (k.endsWith('$')) {
+         let ix = idx[k];
+         labels.push([k.slice(0, -2), ix]);
+      }
+   }
    return labels;
 };

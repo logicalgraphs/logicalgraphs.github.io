@@ -1,10 +1,14 @@
 <html>
   <head>
     <title>Charts, logically graphed</title>
-    <link rel="shortcut icon" href="/icon/favicon.ico" type="image/x-icon"></link>
+    <link rel="shortcut icon" href="/icon/favicon.ico" type="image/x-icon">
+    </link>
     <link rel="icon" href="/icon/favicon.ico" type="image/x-icon"></link>
     <link rel='stylesheet' href='styles.css?version=2'></link>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+     div { background: rgba(15,15,15,0.7); }
+    </style>
   </head>
   <body>
 
@@ -26,8 +30,14 @@
         <tr><td>
          <table border="0" width='100%'>
    <tr>
-    <td align="center"><h3>Assets</h3><br/>
-     <canvas id="barChart" width="400" height="200"></canvas></td>
+    <td align="center"><h3>Protocol Assets by dapp</h3><br/>
+     <div id="pieChart"></div>
+    </td>
+   </tr>
+   <tr>
+    <td align="center"><h3>TVL</h3><br/>
+     <canvas id="barChart" width="400" height="200"></canvas>
+    </td>
    </tr>
   </table>
   </td></tr></table>
@@ -38,12 +48,18 @@
     <script src='libs/canvas-bg.js'></script>
     <script src='libs/colors.js'></script>
     <script src='libs/usd.js'></script>
+    <script src='libs/tokens.js'></script>
     <script src="libs/charts/bar.js"></script>
-
+    <script src='https://d3js.org/d3.v4.min.js'></script>
+    <script src='http://benfred.github.io/venn.js/venn.js'></script>
+    <script src='libs/charts/venn.js'></script>
     <script>
-       fetch('data/assets.tsv')
-            .then(result => result.text())
-            .then(data => tvlChart(data));
+fetch('data/assets.tsv')
+     .then(result => result.text())
+     .then(data => tvlChart(data));
+fetch('data/wallets.tsv')
+     .then(result => result.text())
+     .then(data => vennChart(data, 'pieChart'));
     </script>
   </body>
 </html>
