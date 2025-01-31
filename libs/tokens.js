@@ -50,7 +50,7 @@ const refine = kinds => {
          let lk = likeKind(tok);
          let amt = silver[lk];
          let more = row[tok];
-         silver[lk] = amt ? amt + more : more;
+         silver[lk] = (amt ? amt : 0) + more;
       }
       gold[kind] = silver;
    }

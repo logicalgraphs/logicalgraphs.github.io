@@ -14,3 +14,10 @@ const usdLabels = idx => {
    }
    return labels;
 };
+
+const showUsd = n => {
+   let d = Math.floor(n);
+   let c = Math.floor((n - d) * 100);
+   let cents = c === 0 ? "00" : c < 10 ? "0" + c : c;
+   return "$" + d + '.' + cents;
+};
