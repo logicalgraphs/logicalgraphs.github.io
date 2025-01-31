@@ -27,12 +27,15 @@
         <tr><td align='center'>
          <table border="0" width='75%'>
    <tr>
-    <td align="center"><h3>Protocol Assets by dapp</h3><br/>
+    <td align='center'><h3>Tokens</h3><br/>
+     <canvas id="tokensChart" width="400" height="200"></canvas>
+    </td>
+    <td align="center"><h3>dapps</h3><br/>
      <canvas id="dappsChart" width="400" height="200"></canvas>
     </td>
    </tr>
    <tr>
-    <td align="center"><h3>TVL</h3><br/>
+    <td align="center" colspan='2'><h3>TVL</h3><br/>
      <canvas id="barChart" width="400" height="200"></canvas>
     </td>
    </tr>
@@ -57,6 +60,15 @@ fetch('data/wallets.tsv')
      .then(data => {
    let [wallets, idx] = table(data);
    pieChart(wallets, idx, 'dappsChart', 'dapp', true);
+   let labels = [];
+   let amounts = [];
+   for (label in idx) {
+      if(label.endsWith('$')) {
+         labels.push(label.slice(0,-2));
+         amounts.push(total(row(wallets, idx, label)));
+      }
+   }
+   doughnutChartTbl(labels, amounts, 'tokensChart');
 });
     </script>
   </body>
