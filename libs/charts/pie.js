@@ -37,8 +37,7 @@ const doughnutChartTbl = (labels, amounts, canvasName, randomizeColors = false,
       }
    });
    if(others > 0) { amts.push(others); kinds.push('others'); }
-   let slices =
-      randomizeColors ? undefined : labels.map(token => colorOf(token));
+   let slices = randomizeColors ? undefined : kinds.map(colorOf);
 
    new Chart(ctx, {
       type: chartType,
