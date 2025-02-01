@@ -24,16 +24,29 @@ const doughnutChartTbl = (labels, amounts, canvasName, randomizeColors = false,
                           chartType='doughnut', position='left') => {
    const ctx = document.getElementById(canvasName).getContext('2d');
 
+   let fiver = amounts.reduce((acc, ans) => acc + ans, 0) * 0.05;
+   let others = 0;
+   let ix = 0;
+   let kinds = [];
+   let amts = [];
+   labels.forEach(kind => {
+      let amt = amounts[ix++];
+      if(amt < fiver) { others += amt } else {
+         amts.push(amt);
+         kinds.push(kind);
+      }
+   });
+   if(others > 0) { amts.push(others); kinds.push('others'); }
    let slices =
       randomizeColors ? undefined : labels.map(token => colorOf(token));
 
    new Chart(ctx, {
       type: chartType,
       data: {
-         labels: labels,
+         labels: kinds,
          datasets: [{
             label: 'TVL $',
-            data: amounts,
+            data: amts,
             backgroundColor: slices
          }],
       },
