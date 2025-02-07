@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <title>Charts, logically graphed</title>
+    <link rel="shortcut icon" href="/icon/favicon.ico" type="image/x-icon"></link>
+    <link rel="icon" href="/icon/favicon.ico" type="image/x-icon"></link>
+    <link rel='stylesheet' href='styles.css?version=2'></link>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src='https://d3js.org/d3.v4.min.js'></script>
+    <style>
+     div { background: rgba(15,15,15,0.7); }
+   .venntooltip {
+      position: absolute;
+      text-align: center;
+      width: 400px;
+      heigth: 200px;
+      background: #333;
+      color: #ddd;
+      padding: 2px;
+      border: 0px;
+      border-radius: 8px;
+      opacity: 0;
+   }
+    </style>
+  </head>
+  <body>
+
+   <center>
+    <h1>Logicalgraphs, LLC</h1>
+   </center>
+   <center>
+   <table border='1' width='85%'>
+     <tr>
+      <td style='vertical-align:top' width='20%'>
+       <table border='0'>
+        <tr><td><a href='index.html'>Dashboard</a></td></tr>
+        <tr><td><a href='treasury.html'>Treasury</a></td></tr>
+        <tr><td><hr/></td></tr>
+        <tr><td>Pools</td></tr>
+        <tr><td><ul id='brief'></ul></td></tr>
+       </table>
+      </td>
+      <td style='vertical-align:top' width='80%'>
+       <table border='1' width='100%'>
+        <tr><td>
+         <table border="1" width='100%' id='poolTable'>
+   <tr><td colspan='5'><div id='vennChart'></div></td></tr>
+   <tr>
+    <td colspan='5'><h2>Pivot Pools TVL <span class='tvl'>$0.00</span></h2></td>
+   </tr>
+   <tr><td colspan='5'><hr/></td></tr>
+   <tr style="background: cyan; color: black">
+    <th>Pool Name</th><th>incept</th><th>TVL</th><th>ROI</th><th>APR</th>
+   </tr>
+
+   <!-- data for pools inserted here via javascript -->
+
+   <tr><td colspan='5'><hr/></td></tr>
+   <tr><th colspan='5' style="background: cyan; color: black">
+    Non-pool stakes
+   </th></tr>
+
+   <!-- data for treasure and echo pool inserted here -->
+
+  </table>
+
+
+    <script src="libs/table.js"></script>
+    <script src='libs/canvas-bg.js'></script>
+    <script src='libs/colors.js'></script>
+    <script src='libs/usd.js'></script>
+    <script src='libs/tokens.js'></script>
+    <script src='https://benfred.github.io/venn.js/venn.js'></script>
+    <script src='libs/charts/venn.js'></script>
+    <script src='libs/dom.js'></script>
+    <script>indexPools();</script>
+  </body>
+</html>

@@ -10,7 +10,7 @@
   <body>
 
    <center>
-    <h2>Logicalgraphs, LLC</h2>
+    <h1>Logicalgraphs, LLC</h1>
 
    <table border='1' width='85%'>
      <tr>
@@ -19,10 +19,11 @@
         <tr><td>Dashboard</td></tr>
         <tr><td><a href='treasury.html'>Treasury</a></td></tr>
         <tr><td><hr/></td></tr>
-        <tr><td>Pools [TBD]</td></tr>
+        <tr><td><a href='pools.html'>Pools</a></td></tr>
        </table>
       </td>
       <td style='vertical-align:top' width='80%'>
+       <h2>Portfolio TVL <span class='tvl'>$0.00</span></h2>
        <table border='1' width='100%'>
         <tr><td align='center'>
          <table border="0" width='75%'>
@@ -51,6 +52,8 @@
     <script src='libs/tokens.js'></script>
     <script src="libs/charts/bar.js"></script>
     <script src="libs/charts/pie.js"></script>
+    <script src='libs/dom.js'></script>
+    <script src='libs/indicators.js'></script>
     <script>
 fetch('data/assets.tsv')
      .then(result => result.text())
@@ -69,6 +72,8 @@ fetch('data/wallets.tsv')
       }
    }
    doughnutChartTbl(labels, amounts, 'tokensChart');
+   let tot = sum(amounts);
+   replaceText('tvl', showUsd(tot));
 });
     </script>
   </body>
