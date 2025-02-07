@@ -61,7 +61,7 @@ const poolRow = (pool, row, idx, hrefIx, nonpool=false) => {
       incept: row[idx['incept']],
       roi: row[idx['ROI']],
       apr: row[idx['APR']],
-      tvl: row[idx['TVL']]
+      tvl: parseUSD(row[idx['TVL']])
    };
 };
 
@@ -77,25 +77,28 @@ const pivotTR = (tableId, rowIx, row) => {
   let { pool, href, incept, roi, apr, tvl } = row;
   datum(tr, 0, "<a href='" + href + "'>" + pool + "</a>");
   datum(tr, 1, incept);
-  datum(tr, 2, tvl);
+  datum(tr, 2, showUsd(tvl));
   datum(tr, 3, roi);
   datum(tr, 4, apr);
 };
 
 async function indexPools() {
    fetch('data/wallets.tsv').then(result => result.text()).then(data => {
-      const pools = [];
+      let pools = [];
       const nonPools = [];
       let tot = 0;
 
       let [wallets, idx] = table(data);
       let hrefIx = idx['href'];
       let dappIx = idx['dapp'];
+      let tvlIx = idx['TVL'];
       let tpSet = new Set(['pools', 'treasury']);
-      let poolRows = wallets.filter(row => tpSet.has(row[dappIx]));
+      let poolRows =
+         wallets.filter(row => tpSet.has(row[dappIx])
+                            && parseUSD(row[tvlIx]) > 0);
       poolRows.forEach(row => {
          let pool = row[idx['pool']];
-         tot += parseUSD(row[idx['TVL']]);
+         tot += parseUSD(row[tvlIx]);
          if(pool === 'n/a') {
             nonPools.push(poolRow(row[idx['name']], row, idx, hrefIx, true));
          } else { pools.push(poolRow(pool, row, idx, hrefIx)); }
@@ -104,7 +107,8 @@ async function indexPools() {
       replaceText('tvl', showUsd(tot));
 
       let rowIx = 4;
-      pools.forEach(row => pivotTR("poolTable", rowIx++, row));
+      pools.sort((a, b) => b.tvl > a.tvl ? 1 : -1)
+           .forEach(row => pivotTR("poolTable", rowIx++, row));
       let stakeIx = rowIx + 2; // to hop over the horizontal rule
       nonPools.forEach(row => pivotTR("poolTable", stakeIx++, row));
 

@@ -40,7 +40,7 @@ div.selectAll("g")
 
         // Display a tooltip with the current size
         tooltip.transition().duration(400).style("opacity", .9);
-        tooltip.text(showUsd(d.size));
+        tooltip.text(d.sets + ': ' + showUsd(d.size));
         
         // highlight the current path
         var selection = d3.select(this).transition("tooltip").duration(400);
