@@ -44,7 +44,7 @@ async function populatePivotPoolUX(graphf, piep, canvasName='pieChart') {
          .then(data => {
             let [wallets, idx] = table(data);
             let pool = wallets.filter(row => row[idx['pool']] === pp);
-            pieChart(wallets, idx, canvasName, 'pool');
+            replaceText('tvl', tokenChart(pool, idx, canvasName));
       });
    }
 }
@@ -98,10 +98,12 @@ async function indexPools() {
                             && parseUSD(row[tvlIx]) > 0);
       poolRows.forEach(row => {
          let pool = row[idx['pool']];
-         tot += parseUSD(row[tvlIx]);
          if(pool === 'n/a') {
             nonPools.push(poolRow(row[idx['name']], row, idx, hrefIx, true));
-         } else { pools.push(poolRow(pool, row, idx, hrefIx)); }
+         } else { 
+            pools.push(poolRow(pool, row, idx, hrefIx));
+            tot += parseUSD(row[tvlIx]);
+         }
       });
 
       replaceText('tvl', showUsd(tot));

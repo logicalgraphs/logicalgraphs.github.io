@@ -9,7 +9,7 @@
   <body>
 
    <center>
-    <h2>Logicalgraphs, LLC</h2>
+    <h1>Logicalgraphs, LLC</h1>
 
    <table border='1' width='85%'>
      <tr>
@@ -23,10 +23,16 @@
        </table>
       </td>
       <td style='vertical-align:top' width='80%'>
-    <center>
-    <h1><span class='title'>BTC+BNB Pivot</span> Pool</h1>
    
+    <center>
    <table border='1' width='85%'>
+    <tr>
+     <td colspan='2'>
+      <h2><span class='title'>BTC+BNB Pivot</span> Pool,
+       TVL: <span class='tvl'>$0.00</span>
+      </h2>
+     </td>
+    </tr>
     <tr>
      <td colspan='2'>
       <canvas id="pieChart" width="800" height="400"></canvas>
@@ -61,9 +67,8 @@
     <script src='libs/tokens.js'></script>
     <script src="libs/charts/bar.js"></script>
     <script src="libs/charts/pie.js"></script>
-    <script src="libs/charts/pool.js"></script>
     <script src='libs/dom.js'></script>
-    <script>replaceText(barChart, true);</script>
+    <script>populatePivotPoolUX(barChart, true);</script>
 
   </body>
 </html>
