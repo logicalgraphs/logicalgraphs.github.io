@@ -9,24 +9,20 @@
   <body>
 
    <center>
-    <h2>Logicalgraphs, LLC</h2>
+    <h1>Logicalgraphs, LLC</h1>
 
    <table border='1' width='85%'>
      <tr>
       <td style='vertical-align:top' width='20%'>
-       <table border='0'>
-        <tr><td><a href='index.html'>Dashboard</a></td></tr>
-        <tr><td>Treasury</td></tr>
-        <tr><td><hr/></td></tr>
-        <tr><td><a href='pools.html'>Pools</a></td></tr>
-       </table>
+       <table border='0' id='sidebar'></table>
       </td>
       <td style='vertical-align:top' width='80%'>
        <table border='1' width='100%'>
         <tr><td align='center'>
          <table border="0" width='75%'>
+   <tr><td><h2>Treasury TVL <span class='tvl'>$0.00</span></h2></td></tr>
    <tr>
-    <td align="center"><h3>Treasury</h3><br/>
+    <td align="center">
      <canvas id="pieChart" width="200" height="200"></canvas>
     </td>
    </tr>
@@ -37,8 +33,6 @@
    </tr>
   </table>
   </td></tr></table>
-  </td></tr></table>
-  </td></tr></table>
 
     <script src="libs/table.js"></script>
     <script src='libs/canvas-bg.js'></script>
@@ -47,32 +41,22 @@
     <script src='libs/tokens.js'></script>
     <script src="libs/charts/bar.js"></script>
     <script src="libs/charts/pie.js"></script>
+    <script src='libs/dom.js'></script>
+    <script src='libs/indicators.js'></script>
 
     <script>
+menu('sidebar');
        fetch('data/treasury.tsv')
             .then(result => result.text())
+            .then(data => barChart(data));
+       fetch('data/wallets.tsv')
+            .then(result => result.text())
             .then(data => {
-   let [assets, idx] = sortedTable(data);
-   const labels = usdLabels(idx);
-   let amounts = parseData(assets, labels);
-   barChartTbl1(labels, amounts);
-   let todayish = amounts.pop().data;
-   let labs = [];
-   let amnts = [];
-   let stables = 0;
-   labels.forEach(([k, _v]) => {
-      let val = todayish[k];
-      if(k.includes('USD')) {
-         stables += val;
-      } else {
-         labs.push(k);
-         amnts.push(val);
-      }
-   });
-   labs.push("stable");
-   amnts.push(stables);
-   doughnutChartTbl(labs, amnts, 'pieChart');
-       });
+   let [wallets, idx] = table(data);
+   let treasz = wallets.filter(addy => addy[idx['dapp']] === 'treasury');
+   replaceText('tvl', tokenChart(treasz, idx, 'pieChart'));
+});
+
     </script>
   </body>
 </html>
