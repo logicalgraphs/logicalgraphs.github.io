@@ -18,6 +18,32 @@ const replaceText = (eltClass, txt) => {
    }
 };
 
+const sitemap = [
+   ['/index.html', 'Dashboard'],
+   ['/treasury.html', 'Treasury'],
+   ['hr', 'hr'],
+   ['/pools.html', 'Pools'],
+   ['hr', 'hr'],
+   ['/diy.html', 'DIY Charts++']
+];
+
+const ahref = (href, txt) => "<a href='" + href + "'>" + txt + "</a>";
+
+const linkerHr = (url, mi, loc) => {
+   return mi === 'hr' ? "<hr/>" : url !== loc ? ahref(url, mi) : mi;
+};
+
+const menu = tableId => {
+   let lepath = window.location.pathname;
+   console.log('pathname is ' + lepath);
+   let table = document.getElementById(tableId);
+   let rowIx = 0;
+   sitemap.forEach(([url, mi]) => {
+      let tr = table.insertRow(rowIx++);
+      datum(tr, 0, linkerHr(url, mi, lepath));
+   });
+};
+
 async function populatePivotPoolUX(graphf, piep, canvasName='pieChart') {
    let vars = params();
 
@@ -54,14 +80,14 @@ async function populatePivotPoolUX(graphf, piep, canvasName='pieChart') {
 const mkUrl = (row, idx) =>
    "pool.html?p1=" + row[idx['p1']] + "&p2=" + row[idx['p2']];
 
-const poolRow = (pool, row, idx, hrefIx, nonpool=false) => {
+const poolRow = (pool, row, idx, hrefIx, tvl, nonpool=false) => {
    return {
       pool: pool,
       href: nonpool? row[hrefIx] : mkUrl(row, idx),
       incept: row[idx['incept']],
       roi: row[idx['ROI']],
       apr: row[idx['APR']],
-      tvl: parseUSD(row[idx['TVL']])
+      tvl: tvl
    };
 };
 
@@ -93,16 +119,19 @@ async function indexPools() {
       let dappIx = idx['dapp'];
       let tvlIx = idx['TVL'];
       let tpSet = new Set(['pools', 'treasury']);
-      let poolRows =
-         wallets.filter(row => tpSet.has(row[dappIx])
-                            && parseUSD(row[tvlIx]) > 0);
-      poolRows.forEach(row => {
-         let pool = row[idx['pool']];
-         if(pool === 'n/a') {
-            nonPools.push(poolRow(row[idx['name']], row, idx, hrefIx, true));
-         } else { 
-            pools.push(poolRow(pool, row, idx, hrefIx));
-            tot += parseUSD(row[tvlIx]);
+      wallets.forEach(row => {
+         if(tpSet.has(row[dappIx])) {
+            let tvl = parseUSD(row[tvlIx]);
+            if(tvl > 0) {
+               let pool = row[idx['pool']];
+               if(pool === 'n/a') {
+                  nonPools.push(poolRow(row[idx['name']],
+                                        row, idx, hrefIx, tvl, true));
+               } else { 
+                  pools.push(poolRow(pool, row, idx, hrefIx, tvl));
+                  tot += tvl;
+               }
+            }
          }
       });
 

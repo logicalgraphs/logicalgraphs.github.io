@@ -15,35 +15,33 @@
    <table border='1' width='85%'>
      <tr>
       <td style='vertical-align:top' width='20%'>
-       <table border='0'>
-        <tr><td>Dashboard</td></tr>
-        <tr><td><a href='treasury.html'>Treasury</a></td></tr>
-        <tr><td><hr/></td></tr>
-        <tr><td><a href='pools.html'>Pools</a></td></tr>
-       </table>
+       <table border='0' id='sidebar'></table>
       </td>
       <td style='vertical-align:top' width='80%'>
        <h2>Portfolio TVL <span class='tvl'>$0.00</span></h2>
        <table border='1' width='100%'>
         <tr><td align='center'>
          <table border="0" width='75%'>
-   <tr>
-    <td align='center'><h3>Tokens</h3><br/>
-     <canvas id="tokensChart" width="400" height="200"></canvas>
-    </td>
-    <td align="center"><h3>dapps</h3><br/>
-     <canvas id="dappsChart" width="400" height="200"></canvas>
-    </td>
-   </tr>
-   <tr>
-    <td align="center" colspan='2'><h3>TVL</h3><br/>
-     <canvas id="barChart" width="400" height="200"></canvas>
-    </td>
-   </tr>
-  </table>
-  </td></tr></table>
-  </td></tr></table>
-  </td></tr></table>
+          <tr>
+           <td align='center'><h3>Tokens</h3><br/>
+            <canvas id="tokensChart" width="400" height="200"></canvas>
+           </td>
+           <td align="center"><h3>dapps</h3><br/>
+            <canvas id="dappsChart" width="400" height="200"></canvas>
+           </td>
+          </tr>
+          <tr>
+           <td align="center" colspan='2'><h3>TVL</h3><br/>
+            <canvas id="barChart" width="400" height="200"></canvas>
+           </td>
+          </tr>
+         </table>
+        </td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+   </table>
 
     <script src="libs/table.js"></script>
     <script src='libs/canvas-bg.js'></script>
@@ -55,6 +53,7 @@
     <script src='libs/dom.js'></script>
     <script src='libs/indicators.js'></script>
     <script>
+menu('sidebar');
 fetch('data/assets.tsv')
      .then(result => result.text())
      .then(data => tvlChart(data));
@@ -63,17 +62,7 @@ fetch('data/wallets.tsv')
      .then(data => {
    let [wallets, idx] = table(data);
    pieChart(wallets, idx, 'dappsChart', 'dapp', true);
-   let labels = [];
-   let amounts = [];
-   for (label in idx) {
-      if(label.endsWith('$')) {
-         labels.push(label.slice(0,-2));
-         amounts.push(total(row(wallets, idx, label)));
-      }
-   }
-   doughnutChartTbl(labels, amounts, 'tokensChart');
-   let tot = sum(amounts);
-   replaceText('tvl', showUsd(tot));
+   replaceText('tvl', tokenChart(wallets, idx, 'tokensChart'));
 });
     </script>
   </body>
