@@ -31,13 +31,7 @@
    <table border='1' width='85%'>
      <tr>
       <td style='vertical-align:top' width='20%'>
-       <table border='0'>
-        <tr><td><a href='index.html'>Dashboard</a></td></tr>
-        <tr><td><a href='treasury.html'>Treasury</a></td></tr>
-        <tr><td><hr/></td></tr>
-        <tr><td>Pools</td></tr>
-        <tr><td><ul id='brief'></ul></td></tr>
-       </table>
+       <table border='0' id='sidebar'></table>
       </td>
       <td style='vertical-align:top' width='80%'>
        <table border='1' width='100%'>
@@ -72,6 +66,6 @@
     <script src='https://benfred.github.io/venn.js/venn.js'></script>
     <script src='libs/charts/venn.js'></script>
     <script src='libs/dom.js'></script>
-    <script>indexPools();</script>
+    <script>menu('sidebar'); indexPools();</script>
   </body>
 </html>

@@ -27,7 +27,10 @@ const sitemap = [
    ['/diy.html', 'DIY Charts++']
 ];
 
-const ahref = (href, txt) => "<a href='" + href + "'>" + txt + "</a>";
+const ahref = (href, txt) => {
+   let url = href + (href === '/diy.html' ? '?t1=BTC&t2=ETH' : '');
+   return "<a href='" + url + "'>" + txt + "</a>";
+};
 
 const linkerHr = (url, mi, loc) => {
    return mi === 'hr' ? "<hr/>" : url !== loc ? ahref(url, mi) : mi;
@@ -44,7 +47,7 @@ const menu = tableId => {
    });
 };
 
-async function populatePivotPoolUX(graphf, piep, canvasName='pieChart') {
+async function populatePivotPoolUX(graphf, piep = true, canvasName='pieChart') {
    let vars = params();
 
    let pp = poolName(vars, '+');

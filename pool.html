@@ -14,12 +14,7 @@
    <table border='1' width='85%'>
      <tr>
       <td style='vertical-align:top' width='20%'>
-       <table border='0'>
-        <tr><td><a href='index.html'>Dashboard</a></td></tr>
-        <tr><td><a href='treasury.html'>Treasury</a></td></tr>
-        <tr><td><hr/></td></tr>
-        <tr><td><a href='pools.html'>Pools</a></td></tr>
-        <tr><td><ul id='brief'></ul></td></tr>
+       <table border='0' id='sidebar'>
        </table>
       </td>
       <td style='vertical-align:top' width='80%'>
@@ -47,9 +42,11 @@
     <tr>
      <td>See 
        <a href="detail.html?p1=ETH&p2=UNDEAD" id='detail'>
-        <span class='title'>Echo</span> Pool details</a></td>
+        <span class='title'>Echo</span> Pool details</a>
+     </td>
      <td>See <a href="diy.html?t1=BTC&t2=BNB" id='screens'>
-        <span class='title'>BTC+BNB</span> Pool screens</a></td>
+        <span class='title'>BTC+BNB</span> Pool screens</a>
+     </td>
     </tr>
    </table>
 </center>
@@ -68,7 +65,7 @@
     <script src="libs/charts/bar.js"></script>
     <script src="libs/charts/pie.js"></script>
     <script src='libs/dom.js'></script>
-    <script>populatePivotPoolUX(barChart, true);</script>
+    <script>menu('sidebar'); populatePivotPoolUX(barChart);</script>
 
   </body>
 </html>
