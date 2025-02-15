@@ -38,7 +38,6 @@ const linkerHr = (url, mi, loc) => {
 
 const menu = tableId => {
    let lepath = window.location.pathname;
-   console.log('pathname is ' + lepath);
    let table = document.getElementById(tableId);
    let rowIx = 0;
    sitemap.forEach(([url, mi]) => {
