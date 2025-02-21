@@ -49,32 +49,38 @@ const menu = tableId => {
 async function populatePivotPoolUX(graphf, piep = true, canvasName='pieChart') {
    let vars = params();
 
-   let pp = poolName(vars, '+');
-   if(!vars['title']) { vars['title'] = pp + ' Pivot'; }
    if(!vars['file']) { vars['file'] = poolName(vars, '-').toLowerCase(); }
-
-   replaceText('title', vars['title']);
-   replaceText('pair', pp);
-
-   document.getElementById('screens').href =
-      "diy.html?t1=" + poolName(vars, '&t2=');
-
-   let d = document.getElementById('detail');
-   if(d) { d.href = "detail.html?p1=" + poolName(vars, '&p2='); }
-
    let fileName = 'data/pools/' + vars['file'] + '.tsv';
 
-   fetch(fileName).then(response => response.text())
-      .then(data => graphf(data));
+   fetch(fileName).then(response => response.text()).then(data => {
+      let [assets, idx] = sortedTable(data);
+      const labels = usdLabels(idx);
+      graphf(labels, assets);
+      let pool = {};
+      pool['p1'] = labels[0][0];
+      pool['p2'] = labels[1][0];
 
-   if(piep) {
-      fetch('data/wallets.tsv').then(response => response.text())
-         .then(data => {
-            let [wallets, idx] = table(data);
-            let pool = wallets.filter(row => row[idx['pool']] === pp);
-            replaceText('tvl', tokenChart(pool, idx, canvasName));
-      });
-   }
+      let pp = poolName(pool, '+');
+      if(!vars['title']) { vars['title'] = pp + ' Pivot'; }
+
+      replaceText('title', vars['title']);
+      replaceText('pair', pp);
+
+      document.getElementById('screens').href =
+         "diy.html?t1=" + poolName(vars, '&t2=');
+
+      let d = document.getElementById('detail');
+      if(d) { d.href = "detail.html?p1=" + poolName(vars, '&p2='); }
+
+      if(piep) {
+         fetch('data/wallets.tsv').then(response => response.text())
+            .then(data => {
+               let [wallets, idx] = table(data);
+               let pool = wallets.filter(row => row[idx['name']] === pp);
+               replaceText('tvl', tokenChart(pool, idx, canvasName));
+         });
+      }
+   });
 }
 
 // ----- Pool-indexing --------------------------------------------------
@@ -126,11 +132,11 @@ async function indexPools() {
             let tvl = parseUSD(row[tvlIx]);
             if(tvl > 0) {
                let pool = row[idx['pool']];
+               let name = row[idx['name']];
                if(pool === 'n/a') {
-                  nonPools.push(poolRow(row[idx['name']],
-                                        row, idx, hrefIx, tvl, true));
+                  nonPools.push(poolRow(name, row, idx, hrefIx, tvl, true));
                } else { 
-                  pools.push(poolRow(pool, row, idx, hrefIx, tvl));
+                  pools.push(poolRow(name, row, idx, hrefIx, tvl));
                   tot += tvl;
                }
             }
