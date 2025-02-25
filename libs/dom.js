@@ -126,7 +126,7 @@ async function indexPools() {
       let hrefIx = idx['href'];
       let dappIx = idx['dapp'];
       let tvlIx = idx['TVL'];
-      let tpSet = new Set(['pools', 'treasury']);
+      let tpSet = new Set(['pools', 'treasury', 'vault']);
       wallets.forEach(row => {
          if(tpSet.has(row[dappIx])) {
             let tvl = parseUSD(row[tvlIx]);

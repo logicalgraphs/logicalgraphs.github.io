@@ -22,15 +22,10 @@ const pieChart = (wallets, idx, canvasName, labelRow, randomizeColors = false,
 
 const tokenChart = (wallets, idx, canvasName, randomizedColors = false,
                     position = 'left', chartType='doughnut') => {
-   let amounts = [];
-   let labels = usdLabels(idx).map(([lab, ix]) => {
-      let tot = total(wallets.map(row => row[ix]));
-      amounts.push(tot);
-      return lab;
-   });
+   let [amounts, labels] = amountsAndLabels(wallets, idx);
    doughnutChartTbl(labels, amounts, canvasName, randomizedColors,
                     chartType, position);
-   return showUsd(sum(amounts));
+   return usdAmts(amounts);
 };
 
 const doughnutChartTbl = (labels, amounts, canvasName, randomizeColors = false,

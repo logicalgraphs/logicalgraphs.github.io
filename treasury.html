@@ -5,6 +5,22 @@
     <link rel="icon" href="/icon/favicon.ico" type="image/x-icon"></link>
     <link rel='stylesheet' href='styles.css?version=2'></link>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src='https://d3js.org/d3.v4.min.js'></script>
+    <style>
+     div { background: rgba(15,15,15,0.7); }
+   .venntooltip {
+      position: absolute;
+      text-align: center;
+      width: 400px;
+      heigth: 200px;
+      background: #333;
+      color: #ddd;
+      padding: 2px;
+      border: 0px;
+      border-radius: 8px;
+      opacity: 0;
+   }
+    </style>
   </head>
   <body>
 
@@ -21,11 +37,7 @@
         <tr><td align='center'>
          <table border="0" width='75%'>
    <tr><td><h2>Treasury TVL <span class='tvl'>$0.00</span></h2></td></tr>
-   <tr>
-    <td align="center">
-     <canvas id="pieChart" width="200" height="200"></canvas>
-    </td>
-   </tr>
+   <tr><td colspan='5'><div id='vennChart'></div></td></tr>
    <tr>
     <td align="center">
      <canvas id="barChart" width="400" height="200"></canvas>
@@ -40,10 +52,10 @@
     <script src='libs/usd.js'></script>
     <script src='libs/tokens.js'></script>
     <script src="libs/charts/bar.js"></script>
-    <script src="libs/charts/pie.js"></script>
     <script src='libs/dom.js'></script>
     <script src='libs/indicators.js'></script>
-
+    <script src='https://benfred.github.io/venn.js/venn.js'></script>
+    <script src='libs/charts/venn.js'></script>
     <script>
 menu('sidebar');
        fetch('data/treasury.tsv')
@@ -52,9 +64,11 @@ menu('sidebar');
        fetch('data/wallets.tsv')
             .then(result => result.text())
             .then(data => {
+   let treas = new Set(['treasury', 'vault']);
    let [wallets, idx] = table(data);
-   let treasz = wallets.filter(addy => addy[idx['dapp']] === 'treasury');
-   replaceText('tvl', tokenChart(treasz, idx, 'pieChart'));
+   let treasz = wallets.filter(addy => treas.has(addy[idx['dapp']]));
+   replaceText('tvl', tvl(treasz, idx));
+   vennTbl(treasz, idx, 'vennChart');
 });
 
     </script>

@@ -30,3 +30,20 @@ const showUsd = n => {
    let cents = c === 0 ? "00" : c < 10 ? "0" + c : c;
    return "$" + d + '.' + cents;
 };
+
+const usdAmts = amounts => showUsd(sum(amounts));
+
+const tvl = (wallets, idx) => {
+   let [amounts, _] = amountsAndLabels(wallets, idx);
+   return usdAmts(amounts);
+}; 
+   
+const amountsAndLabels = (wallets, idx) => {
+   let amounts = [];
+   let labels = usdLabels(idx).map(([lab, ix]) => {
+      let tot = total(wallets.map(row => row[ix]));
+      amounts.push(tot);
+      return lab;
+   });
+   return [amounts, labels];
+}; 
