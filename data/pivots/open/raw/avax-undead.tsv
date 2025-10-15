@@ -1,0 +1,5 @@
+opened	pivot	close	tx_id	from	amount1	virtual	10% gain	quote1	val1	to	quote2	amount computed	amount2	commission	gas token	gas	gas quote	fees $	net	sAVAX factor	as sAVAX	val2	diff	δ	closed
+2025-09-27	1	1	virtual swap	AVAX	0	17.7	15.82	$28.37	$502.15	UNDEAD	$0.002717	177296	177296	0	AVAX	0	$28.37	$0.00	177296	0.8125	14.38	$481.71	-$20.43	0	✅
+2025-09-27	2	0	virtual swap	UNDEAD	0	181400	199540	$0.002717	$492.86	AVAX	$28.37	17.15	17.15	0	AVAX	0	$28.37	$0.00	17.15	0.8125	13.94	$486.67	-$6.20	0	
+2025-10-14	3	0	virtual swap	UNDEAD	0	333923	367315	$0.002681	$895.25	AVAX	$22.58	38.61	38.61	0	AVAX	0	$22.58	$0.00	38.61	0.8125	31.37	$871.65	-$23.59	-1650	
+2025-10-14	4	0	https://snowtrace.io/tx/0xa5585fc1995ae562eb4e3c1d6cd57d785209765e25c71998fcc82d2d4c529cbd	AVAX	22.15	0	19.80	$22.577030	$500.17	UNDEAD	$0.002681	186560	177,543	0	AVAX	0.006043183666	$22.58	$0.14	177,543	0.8125	18	$475.99	-$24.17	-1650	
