@@ -1,0 +1,5 @@
+opened	pivot	close	tx_id	from	amount1	virtual	10% gain	quote1	val1	to	quote2	amount computed	amount2	commission	gas token	gas	gas quote	fees $	net	val2	diff	δ	closed
+2025-06-04	1	1	virtual swap	LTC	0	3	3.3000	$89.95	$269.85	LINK	$14.14	19.0842	19.0369	0.01498	BNB	0.0000000	$668.05	$1.35	19.0369	$269.18	-$0.67	0.148	✅
+2025-06-04	2	0	virtual swap	LINK	0	21	23.1000	$14.14	$296.94	LTC	$89.95	3.3012	3.2746	0.10480	BNB	0.0000000	$668.05	$1.48	3.2746	$294.55	-$2.39	0.148	
+2025-10-20	3	0	virtual swap	LTC	0	2.6	2.8600	$94.40	$245.44	LINK	$18.99	12.9247	12.6224	0.01248	BNB	0.0000000	$1,110.00	$1.18	12.6224	$239.70	-$5.74	-0.538	
+2025-10-20	4	0	virtual swap	LINK	0	11	12.1000	$18.99	$208.89	LTC	$94.40	2.2128	2.1594	0.05599	BNB	0.0000000	$1,110.00	$1.06	2.1594	$203.84	-$5.05	-0.538	
