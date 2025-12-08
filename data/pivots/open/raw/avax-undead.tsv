@@ -1,5 +1,7 @@
-opened	pivot	close	tx_id	from	amount1	virtual	10% gain	quote1	val1	to	quote2	amount computed	amount2	commission	gas token	gas	gas quote	fees $	net	sAVAX factor	as sAVAX	val2	diff	δ	closed
-2025-09-27	1	1	virtual swap	AVAX	0	17.7	15.82	$28.37	$502.15	UNDEAD	$0.002717	177296	177296	0	AVAX	0	$28.37	$0.00	177296	0.8125	14.38	$481.71	-$20.43	0	✅
-2025-09-27	2	0	virtual swap	UNDEAD	0	181400	199540	$0.002717	$492.86	AVAX	$28.37	17.15	17.15	0	AVAX	0	$28.37	$0.00	17.15	0.8125	13.94	$486.67	-$6.20	0	
-2025-10-14	3	0	virtual swap	UNDEAD	0	333923	367315	$0.002681	$895.25	AVAX	$22.58	38.61	38.61	0	AVAX	0	$22.58	$0.00	38.61	0.8125	31.37	$871.65	-$23.59	-1650	
-2025-10-14	4	0	https://snowtrace.io/tx/0xa5585fc1995ae562eb4e3c1d6cd57d785209765e25c71998fcc82d2d4c529cbd	AVAX	22.15	0	19.80	$22.577030	$500.17	UNDEAD	$0.002681	186560	177,543	0	AVAX	0.006043183666	$22.58	$0.14	177,543	0.8125	18	$475.99	-$24.17	-1650	
+opened	pivot	close	tx_id	from	from_blockchain	amount1	virtual	10% gain	quote1	val1	to	to_blockchain	quote2	amount computed	amount2	commission	gas token	gas	gas quote	fees $	net	sAVAX factor	as sAVAX	val2	diff	δ
+2025-09-27	1	1	virtual swap	AVAX	Avalanche	0	17.7	15.71	$28.37	$502.15	UNDEAD	Avalanche	$0.002717	177296	177296	0	AVAX	0	$28.37	$0.00	177296	0.8069	14.28	$481.71	-$20.43	0
+2025-09-27	2	0	virtual swap	UNDEAD	Avalanche	0	181400	199540	$0.002717	$492.86	AVAX	Avalanche	$28.37	17.15	17.15	0	AVAX	0	$28.37	$0.00	17.15	0.8069	13.84	$486.67	-$6.20	0
+2025-10-14	3	2	virtual swap	UNDEAD	Avalanche	0	333923	367315	$0.002681	$895.25	AVAX	Avalanche	$22.58	38.61	38.61	0	AVAX	0	$22.58	$0.00	38.61	0.8069	31.15	$871.65	-$23.59	-1650
+2025-10-14	4	0	https://snowtrace.io/tx/0xa5585fc1995ae562eb4e3c1d6cd57d785209765e25c71998fcc82d2d4c529cbd	AVAX	Avalanche	22.31	0	19.80	$22.58	$503.64	UNDEAD	Avalanche	$0.002681	187855	177,543	0	AVAX	0.006043183666	$22.58	$0.14	177,543	0.8069	18	$475.99	-$27.65	-1650
+2025-12-08	5	0	https://snowtrace.io/tx/0x318d27e79afcb683995ebbba793d7bd07742f2de32a49700c92e759f16f71041	UNDEAD	Avalanche	179000	0	196900	$0.001351	$241.83	AVAX	Avalanche	$13.69	17.15	18.06	0	AVAX	0.002979264563	$13.69	$0.04	18.06	0.8069	14.58	$247.27	$5.45	2379
+2025-12-08	6	0	virtual swap	AVAX	Avalanche	0	37	32.84	$13.69	$506.46	UNDEAD	Avalanche	$0.001351	374878	357,342	0	AVAX	0	$13.69	$0.00	357,342	0.8069	29.8553	$482.77	-$23.69	2379
