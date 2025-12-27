@@ -1,0 +1,6 @@
+opened	pivot	close	tx_id	from	from_blockchain	amount1	10% gain	quote1	val1	to	to_blockchain	quote2	amount computed	amount2	commission	gas token	gas	gas quote	fees $	net	val2	diff	δ	closed
+2025-03-07	1	1	https://cexplorer.io/tx/352a52860fd2291601e69d8ac616741eef7bd2f83b5a98943268f1c038f5df28	ADA	Cardano	1100	1,210.00	$0.88	$968.00	iETH	Cardano	$2,193.51	0.44130	0.39720	3.51	ADA	1.03	$0.88	$4.00	0.39720	$871.26	-$96.74	-548	✅
+2025-05-14	2	0	https://cardanoscan.io/transaction/0c2f7ce1f70ddbc2a860c94b54b972ca41d7b16e89041518e65c287eca5de63c	iETH	Cardano	0.40385	0.4442	$2,623.33	$1,059.43	ADA	Cardano	$0.83	1276	1256	2.7	ADA	0.66	$0.83	$2.79	1253	$1,039.93	-$19.50	331	
+2025-05-18	3	0	https://cexplorer.io/tx/6fde6be0a296e0a409c3a8644d62b3ab94dea924adc3d000dffc961dd3b855a6	ADA	Cardano	625	687.50	$0.74	$462.50	iETH	Cardano	$2,502.93	0.18478	0.1936	6.25	ADA	1.56	$0.74	$5.78	0.1936	$484.56	$22.06	313	*hedge
+2025-05-26	4	0	https://cexplorer.io/tx/5ad60c2e887f2b209aacafe837c806273fdc66fab2fbbb12ad4fe0b12b6d43b6	ADA	Cardano	1310	1,441.00	$0.76	$995.60	ADA	Cardano	$2,565.18	0.38812	0.3942	13.1	ADA	1.56	$0.76	$11.14	0.3942	$1,011.09	$15.49	150	
+2025-05-26	5	0	virtual swap	iETH	Cardano	0.3942	0.4336	$2,565.18	$1,011.19	ADA	Cardano	$0.76	1331	1284	0	ADA	0.00	$0.76	$0.00	1284	$976.03	-$35.17	150	
