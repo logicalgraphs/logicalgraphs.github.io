@@ -1,4 +1,4 @@
-date	blockchain	iETH quote	iETH	iETH $	iETH %	factor γiETH	γiETH	ADA	ADA quote	ADA $	ADA %	factor γADA	γADA	γ	subtotal	distributions	distributions_total	total	Total without trades	diff
+date	blockchain	ETH quote	ETH	ETH $	ETH %	factor γETH	γETH	ADA	ADA quote	ADA $	ADA %	factor γADA	γADA	γ	subtotal	distributions	distributions_total	total	Total without trades	diff
 2025-05-26	Cardano	$2,565.18	0.59169	$1,517.80	38.53%	66.68	39.45	3186.44	$0.76	$2,421.70	61.47%	0.0198	62.95	102.40	$3,939.49	$0.00	$90.76	$4,030.26	$3,847.26	$182.99
 2025-05-18	Cardano	$2,502.93	0.19753	$494.41	25.73%	130.57	25.79	1877.77	$0.76	$1,427.10	74.27%	0.0386	72.55	98.35	$1,921.51	$90.76	$90.76	$2,012.27	$1,940.55	$71.73
 2025-05-14	Cardano	$2,623.33	0.39720	$1,041.99	47.74%	130.57	51.86	1374.42	$0.83	$1,140.77	52.26%	0.0386	53.11	104.97	$2,182.77	$0.00	$0.00	$2,182.77	$2,074.80	$107.96
