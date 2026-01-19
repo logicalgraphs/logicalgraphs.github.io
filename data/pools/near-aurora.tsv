@@ -1,2 +1,2 @@
-date	NEAR	NEAR quote	NEAR $	NEAR %	factor γNEAR	γNEAR	AURORA	AURORA quote	AURORA $	AURORA %	factor γAURORA	γAURORA	total	Total	Total without trades	diff
-2025-06-04	193.6024	$2.50	$484.01	49.74%	0.2569	49.74	6,000.2200	$0.0815	$489.02	50.26%	0.008376	50.26	100.00	$973.02	$973.02	$0.00
+date	blockchain	NEAR	NEAR quote	NEAR $	NEAR %	factor γNEAR	γNEAR	AURORA	AURORA quote	AURORA $	AURORA %	factor γAURORA	γAURORA	totalγ	subtotal	distributions	distributions_total	total	Total without trades	diff
+2025-06-04	Aurora	193.6024	$2.50	$484.01	49.74%	0.2569	49.74	6,000.2200	$0.0815	$489.02	50.26%	0.008376	50.26	100.00	$973.02	$0.00	$0.00	$973.02	$973.02	$0.00
