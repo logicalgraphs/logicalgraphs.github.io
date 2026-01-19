@@ -1,2 +1,2 @@
-date	NEAR	NEAR quote	NEAR $	NEAR %	factor γNEAR	γNEAR	USDC	USDC quote	USDC $	USDC %	factor γUSDC	γUSDC	total	Total	Total without trades	diff
-2025-06-06	242.2972	$2.30	$557.28	61.39%	0.2516	60.97	350.4840	$1.00	$350.48	38.61%	0.109401	38.34	99.31	$907.77	$907.77	$0.00
+date	blockchain	NEAR	NEAR quote	NEAR $	NEAR %	factor γNEAR	γNEAR	USDC	USDC quote	USDC $	USDC %	factor γUSDC	γUSDC	γ	subtotal	distributions	distributions_total	total	Total without trades	diff
+2025-06-06	Aurora	242.2972	$2.30	$557.28	61.39%	0.2516	60.97	350.4840	$1.00	$350.48	38.61%	0.109401	38.34	99.31	$907.77	$0.00	$0.00	$907.77	$907.77	$0.00

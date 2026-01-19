@@ -1,0 +1,3 @@
+opened	pivot	close	tx_id	from	from_blockchain	amount1	10% gain	quote1	val1	to	to_blockchain	quote2	amount computed	amount2	commission	gas token	gas	gas quote	fees $	net	val2	diff	δ	closed
+2025-06-06	1	0	https://explorer.aurora.dev/tx/0xb526de077c5e7f4ac369b2f30d1feee60be8f9a558b82f96ecc85da8ab9d2146	NEAR	Aurora	40.0000	44.0000	$2.50	$100.00	USDC	Aurora	$1.00	100.00000	92.76	0.23964	ETH	0.0000033	$2,624.58	$0.61	92.76	$92.76	-$7.24	97	*hedge
+2025-06-06	2	0	https://explorer.aurora.dev/tx/0x17334f08bdd15ea402120e9ea88476d2e5bd57a32e92b12ca3a8c67b381afdc2	USDC	Aurora	200.0000	220.0000	$1.00	$200.00	NEAR	Aurora	$2.30	86.96	83.90	0.00000	ETH	0.0000000	$2,624.58	$0.00	83.90	$192.98	-$7.02	97	

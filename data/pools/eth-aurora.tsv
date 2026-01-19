@@ -1,2 +1,2 @@
-date	ETH	ETH quote	ETH $	ETH %	factor γETH	γETH	AURORA	AURORA quote	AURORA $	AURORA %	factor γAURORA	γAURORA	total	Total	Total without trades	diff
-2025-06-04	0.2000	$2,624.58	$524.92	51.97%	259.8370	51.97	5,953	$0.0815	$485.17	48.03%	0.008069	48.03	100.00	$1,010.09	$1,010.09	$0.00
+date	blockchain	ETH	ETH quote	ETH $	ETH %	factor γETH	γETH	AURORA	AURORA quote	AURORA $	AURORA %	factor γAURORA	γAURORA	γ	subtotal	distributions	distributions_total	total	Total without trades	diff
+2025-06-04	Aurora	0.2000	$2,624.58	$524.92	51.97%	259.8370	51.97	5,953	$0.0815	$485.17	48.03%	0.008069	48.03	100.00	$1,010.09	$0.00	$0.00	$1,010.09	$1,010.09	$0.00
