@@ -4,8 +4,11 @@
     <link rel="shortcut icon" href="/icon/favicon.ico" type="image/x-icon">
     </link>
     <link rel="icon" href="/icon/favicon.ico" type="image/x-icon"></link>
-    <link rel='stylesheet' href='styles.css?version=2'></link>
+    <link rel='stylesheet' href='styles.css?version=3'></link>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+     const version=3; // MAKE SURE THIS MATCHES THE VERSION NUMBER ABOVE
+    </script>
   </head>
   <body>
 
@@ -53,7 +56,7 @@
     <script src='libs/dom.js'></script>
     <script src='libs/indicators.js'></script>
     <script>
-menu('sidebar');
+menu('sidebar', version);
 fetch('data/assets.tsv')
      .then(result => result.text())
      .then(data => tvlChart(data));

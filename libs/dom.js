@@ -24,25 +24,33 @@ const sitemap = [
    ['hr', 'hr'],
    ['/pools.html', 'Pools'],
    ['hr', 'hr'],
-   ['/diy.html', 'DIY Charts++']
+   ['/diy.html', 'DIY Charts++'],
+   ['hr', 'hr'],
+   ['em', 'LogicalGraphs portfolio, revision 3']
 ];
 
+const em = txt => { return "<em>" + txt + "</em>"; }
 const ahref = (href, txt) => {
    let url = href + (href === '/diy.html' ? '?t1=BTC&t2=ETH' : '');
    return "<a href='" + url + "'>" + txt + "</a>";
 };
 
-const linkerHr = (url, mi, loc) => {
-   return mi === 'hr' ? "<hr/>" : url !== loc ? ahref(url, mi) : mi;
+const linkerHr = (url, mi, loc, vers) => {
+   let value = '';
+   if(mi === 'hr') { value = "<hr/>";
+   } else if(url === 'em') { value = em(mi, vers);
+   } else if(url !== loc) { value = ahref(url, mi);
+   } else { value = mi; }
+   return value;
 };
 
-const menu = tableId => {
+const menu = (tableId,version) => {
    let lepath = window.location.pathname;
    let table = document.getElementById(tableId);
    let rowIx = 0;
    sitemap.forEach(([url, mi]) => {
       let tr = table.insertRow(rowIx++);
-      datum(tr, 0, linkerHr(url, mi, lepath));
+      datum(tr, 0, linkerHr(url, mi, lepath, version));
    });
 };
 
