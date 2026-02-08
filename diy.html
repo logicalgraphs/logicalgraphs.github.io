@@ -32,10 +32,11 @@
     </tr>
     <tr>
      <td colspan='3'>
-      <select id='token1' onchange="selected(this)"></select>
-      <select id='token2'></select>
-      <input type='button' onclick="go()" value='DIY'
-             style='background-color: lightgreen'></input>
+<div class="line-container">
+    <select id="token1" class="styled-select"></select>
+    <select id="token2" class="styled-select"></select>
+    <button class="ok-btn" onclick="go()">DIY</button>
+</div>
      </td>
     </tr>
     <tr>
@@ -49,11 +50,13 @@
      </td>
      <td width="30%">
       <table border="0">
-       <tr><th align='center'>Pivot Swap</th></tr>
        <tr><td>&nbsp;</td></tr>
        <tr>
 <td>
 <div class="aqua-container">
+  <div class="field-group">
+    <label for="field1">Pivot Swap</label>
+  </div>
   <div class="field-group">
     <label for="field1" id="label1">Label A</label>
     <input type="text" id="field1" value="Value 1" onChange="recompute()">

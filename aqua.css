@@ -4,7 +4,6 @@
   padding: 20px;
   border-radius: 10px;
   border: 2px solid #00bcd4;
-/*  width: 300px; */
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
@@ -45,4 +44,31 @@ button {
 button:hover {
   background-color: #0097a7;
 }
+
+.line-container {
+        display: flex;
+        gap: 10px; 
+        padding: 10px;
+        background-color: indigo;
+        border-radius: 8px; 
+        align-items: center;
+        font-family: sans-serif;
+}     
+    
+.styled-select, .ok-btn {
+        padding: 8px 12px;
+        border-radius: 20px; /* Rounded edges */
+        border: 2px solid #00ced1; /* Aqua border */
+        background-color: #f0ffff; /* Light aqua background */
+        color: #008b8b;
+        font-family: sans-serif;
+}    
+.ok-btn { 
+        background-color: #00ced1;
+        color: white;
+        cursor: pointer;
+        border: none;
+        font-weight: bold;
+}   
+.ok-btn:hover { background-color: #00838f; }
 
