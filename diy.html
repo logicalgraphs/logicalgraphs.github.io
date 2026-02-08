@@ -33,7 +33,8 @@
     <tr>
      <td colspan='3'>
 <div class="line-container">
-    <select id="token1" class="styled-select"></select>
+    <select id="token1" class="styled-select" onchange="selected(this)">
+    </select>
     <select id="token2" class="styled-select"></select>
     <button class="ok-btn" onclick="go()">DIY</button>
 </div>
@@ -97,7 +98,9 @@
     <script src="libs/charts/line.js"></script>
     <script src="libs/charts/pivot.js"></script>
     <script src='libs/dom.js'></script>
-    <script>menu('sidebar'); 
+    <script>
+menu('sidebar'); 
+
 const removeOptions = selectElement => {
    var i, L = selectElement.options.length - 1;
    for(i = L; i >= 0; i--) {
