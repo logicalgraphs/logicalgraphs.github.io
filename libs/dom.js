@@ -26,7 +26,7 @@ const sitemap = [
    ['hr', 'hr'],
    ['/diy.html', 'DIY Charts++'],
    ['hr', 'hr'],
-   ['em', 'LogicalGraphs portfolio, revision 3']
+   ['em', 'LogicalGraphs portfolio, revision 4']
 ];
 
 const em = txt => { return "<em>" + txt + "</em>"; }
@@ -122,6 +122,12 @@ const pivotTR = (tableId, rowIx, row) => {
   datum(tr, 2, showUsd(tvl));
   datum(tr, 3, roi);
   datum(tr, 4, apr);
+};
+
+const assets = names => {
+   let ans = new Set();
+   names.forEach(toks => { toks.forEach(tok => ans.add(tok)); });
+   return ans;
 };
 
 async function indexPools() {
