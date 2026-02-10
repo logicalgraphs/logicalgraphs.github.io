@@ -26,7 +26,7 @@ const sitemap = [
    ['hr', 'hr'],
    ['/diy.html', 'DIY Charts++'],
    ['hr', 'hr'],
-   ['em', 'LogicalGraphs portfolio, revision 4']
+   ['em', 'LogicalGraphs portfolio, revision 5']
 ];
 
 const em = txt => { return "<em>" + txt + "</em>"; }

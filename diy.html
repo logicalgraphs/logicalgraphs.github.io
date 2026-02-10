@@ -157,14 +157,16 @@ let [t1, t2] = Object.values(params());
       }
    }
    tag1.value = t1;
-   l1.innerText = t1;
    refreshOptions(t1);
    tag2.value = t2;
-   l2.innerText = t2;
-   f1.value = round(1000.0 / prices[t1]);
-   f2.innerText = round(1000.0 / prices[t2]);
 
-   pivotChartsTbl(t1, t2, table, idx);
+   let rev = pivotChartsTbl(t1, t2, table, idx);
+   let [a, b] = [t1, t2];
+   if(rev) { [b, a] = [t1, t2]; }
+   l1.innerText = a;
+   l2.innerText = b;
+   f1.value = round(1000.0 / prices[a]);
+   f2.innerText = round(1000.0 / prices[b]);
 });
 
 const recompute = () => {

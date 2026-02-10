@@ -22,7 +22,7 @@ const pivotChartsTbl = (primary, secondary, table, idx) => {
 
    drawDeltas(dates, ds, mins, maxs);
    drawLineChart(dates, [ratios1, sma100s, ema20s], 'pivotChart');
-   drawRec(dates, ds, mins, maxs, primary, secondary);
+   return drawRec(dates, ds, mins, maxs, primary, secondary);
 };
 
 const drawDeltas = (dates, ds, mins, maxs) => {
@@ -86,4 +86,5 @@ const drawRec = (dates, ds, mins, maxs, prim, sec) => {
       let msg = call + swap + ", δ-confidence: " + conf + "%";
       field.innerText = msg;
    }
+   return (d < 0);
 };
