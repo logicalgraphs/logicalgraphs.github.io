@@ -1,6 +1,7 @@
-opened	pivot	close	tx_id	from	from_blockchain	amount1	10% gain	quote1	val1	to	to_blockchain	quote2	amount computed	amount2	commission	gas token	gas	gas quote	fees $	net	val2	diff	δ	closed
-2025-05-24	1	0	virtual swap	ADA	Cardano	618	679.80	$0.76	$469.68	SNEK	Cardano	$0.00332377	141309	142084	0.00	ADA	0	$0.76	$2.34	142084	$472.25	$2.57	13.207	
-2025-05-24	2	0	virtual swap	SNEK	Cardano	75000	82,500.00	$0.00332	$249.28275	ADA	Cardano	$0.76	328.00	319.66252	0.00	ADA	0	$0.76	$0.00	319.6625	$242.94	-$6.34	13.207	*hedge
-2025-05-26	3	0	https://cexplorer.io/tx/09d37d49ca87eb3ab4e4a7ed22f012e00e1482b2b6fdfb11e48f63949d1c7c15	ADA	Cardano	622	684.20	$0.77	$478.94	SNEK	Cardano	$0.00322481	148517	146913	6.22	ADA	1.55	$0.77	$8.32	146913	$473.77	-$5.17	10.462	
-2025-05-26	4	0	https://cexplorer.io/tx/8147cb1db42543e85d268a0b53dbec2ef3a01715e4c64bbd1d6e4b4e4ee8abc3	ADA	Cardano	1267	1,393.70	$0.77	$975.59	SNEK	Cardano	$0.00322481	302526	308506	12.67	ADA	1.75	$0.77	$13.44	308506	$994.87	$19.28	10.462	
-2025-05-26	5	0	virtual swap	SNEK	Cardano	308506	339,356.60	$0.00322481	$994.87	ADA	Cardano	$0.77	1292	1242	0.00	ADA	1.75	$0.77	$3.69	1242	$956.41	-$38.46	10.462	
+opened	pivot	close	tx_id	from	from_blockchain	amount1	virtual	10% gain	quote1	val1	to	to_blockchain	quote2	amount computed	amount2	commission	gas token	gas	gas quote	fees $	net	val2	diff	δ	closed
+2025-05-24	1	1	virtual swap	ADA	Cardano	0	618	679.80	$0.76	$469.68	SNEK	Cardano	$0.00332377	141309	142084	0.00	ADA	0	$0.76	$2.34	142084	$472.25	$2.57	13.207	canceled
+2025-05-24	2	1	virtual swap	SNEK	Cardano	0	75000	82,500.00	$0.00332	$249.28275	ADA	Cardano	$0.76	328.00	319.66252	0.00	ADA	0	$0.76	$0.00	319.6625	$242.94	-$6.34	13.207	*hedge
+2025-05-26	3	0	https://cexplorer.io/tx/09d37d49ca87eb3ab4e4a7ed22f012e00e1482b2b6fdfb11e48f63949d1c7c15	ADA	Cardano	622	0	684.20	$0.77	$478.94	SNEK	Cardano	$0.00322481	148517	146913	6.22	ADA	1.55	$0.77	$8.32	146913	$473.77	-$5.17	10.462	
+2025-05-26	4	0	https://cexplorer.io/tx/8147cb1db42543e85d268a0b53dbec2ef3a01715e4c64bbd1d6e4b4e4ee8abc3	ADA	Cardano	1267	0	1,393.70	$0.77	$975.59	SNEK	Cardano	$0.00322481	302526	308506	12.67	ADA	1.75	$0.77	$13.44	308506	$994.87	$19.28	10.462	
+2025-05-26	5	1	virtual swap	SNEK	Cardano	0	308506	339,356.60	$0.00322481	$994.87323386	ADA	Cardano	$0.77	1292	1242	0.00	ADA	1.75	$0.77	$3.69	1242	$956.41	-$38.46	10.462	✅
+2025-05-26	6	0	https://cexplorer.io/tx/c1b010cb399a461ccc03bd43c9ce7c272736a92d67764258b78e2b139aea0ed6	SNEK	Cardano	800550	0	880,605.00	$0.00061	$490.81721	ADA	Cardano	$0.28	1744	1686	8,005.00	ADA	2.9	$0.28	$5.72	1683	$473.68	-$17.13	-2.447	
