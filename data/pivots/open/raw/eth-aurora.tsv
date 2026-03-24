@@ -1,3 +1,3 @@
-opened	pivot	close	tx_id	from	from_blockchain	amount1	10% gain	quote1	val1	to	to_blockchain	quote2	amount computed	amount2	commission	gas token	gas	gas quote	fees $	net	val2	diff	δ	closed
-2025-06-04	1	0	virtual swap	AURORA	Aurora	1500	1650.0000	$0.0815	$122.25	ETH	Aurora	$2,624.58	0.04658	0.04653	0.00000	ETH	0.0000000	$2,624.58	$0.00	0.04653	$122.13	-$0.12	3613	*hedge
-2025-06-04	2	0	virtual swap	ETH	Aurora	0.1000	0.1100	$2,624.58	$262.46	AURORA	Aurora	$0.08	3220.34	3153	0.00000	ETH	0.0000000	$2,624.58	$0.00	3153.00	$256.97	-$5.49	3613	
+opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1	gain_10_percent	to	to_blockchain	net	ersatz	quote2	val2
+2025-06-04	1	0	virtual swap	n/a	AURORA	Aurora	1500	0	$0.0815	$122.25	1650	ETH	Aurora	0.04653	0	$2624.58	$122.12
+2025-06-04	2	0	virtual swap	n/a	ETH	Aurora	0.1	0	$2624.58	$262.46	0.11000001	AURORA	Aurora	3153	0	$0.0800	$252.24
