@@ -5,7 +5,7 @@ const barChart = data => {
 };
 
 const tvlChart = data => {
-   let [assets, idx] = sortedTable(data);
+   let [assets, idx] = sortedTable(data, ',');
    let labels = orderedIndices(idx).slice(1);
    barChartTbl(labels, assets);
 };

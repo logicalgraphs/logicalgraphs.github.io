@@ -57,7 +57,7 @@
     <script src='libs/indicators.js'></script>
     <script>
 menu('sidebar', version);
-fetch('data/assets.tsv')
+fetch('data/assets.csv')
      .then(result => result.text())
      .then(data => tvlChart(data));
 fetch('data/wallets.tsv')
