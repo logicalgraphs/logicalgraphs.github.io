@@ -1,0 +1,57 @@
+name: virr
+
+on:
+  workflow_dispatch:
+  schedule:
+    # test the cron ("Min Hour Day Month DayofWeek" in UTC) at scheduled time 
+    - cron: "05 08 * * *" # in our time zone, this is 4:05 AM Eastern Time
+
+permissions:
+  contents: write
+
+jobs:
+  run-virtsz:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout logicalgraphs.github.io
+        uses: actions/checkout@v4
+
+      - name: Checkout protocol
+        uses: actions/checkout@v4
+        with: 
+          repository: pivoteur/protocol
+          path: protocol
+
+      - name: Set up rust
+        uses: dtolnay/rust-toolchain@stable
+          
+      - name: Checkout crypto-n-rust
+        uses: actions/checkout@v4
+        with:
+          repository: logicalgraphs/crypto-n-rust
+          path: crypto-n-rust
+
+      - name: Build virtsz 
+        run: cargo build --manifest-path protocol/dapps/virtsz/Cargo.toml --bin virtsz 
+
+      - name: Putting date into the env
+        run: |
+          echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+          echo "PATH=protocol/dapps/virtsz/target/debug:$PATH" >> $GITHUB_ENV
+          echo "LG_URL=https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io" >> $GITHUB_ENV
+
+      - name: Run virtsz
+        run: |
+          sh ./protocol/scripts/auto-virtsz.sh data/pivots/open/raw
+
+      - name: Commit and push results
+        env: 
+          USER0_NAME: ${{ vars.USER0_NAME }}
+          USER0_EMAIL: ${{ secrets.USER0_EMAIL }}
+        run: |
+          git config --local user.name "$USER0_NAME"
+          git config --local user.email "$USER0_EMAIL"
+          git add data/pivots/open/raw/*.tsv
+          git diff --staged --quiet && echo "Nothing to commit, skipping push" && exit 0
+          git commit -m "virtsz $LE_DATE"
+          git push

@@ -1,0 +1,58 @@
+name: pools
+
+on:
+  workflow_dispatch:
+  schedule:
+    # test the cron ("Min Hour Day Month DayofWeek" in UTC) at scheduled time 
+    - cron: "02 06 * * *" # in our time zone, this is 1.02 AM Eastern Time
+
+permissions:
+  contents: write
+
+jobs:
+  run-pools:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout logicalgraphs.github.io
+        uses: actions/checkout@v4
+
+      - name: Checkout protocol
+        uses: actions/checkout@v4
+        with: 
+          repository: pivoteur/protocol
+          path: protocol
+
+      - name: Set up rust
+        uses: dtolnay/rust-toolchain@stable
+          
+      - name: Checkout crypto-n-rust
+        uses: actions/checkout@v4
+        with:
+          repository: logicalgraphs/crypto-n-rust
+          path: crypto-n-rust
+
+      - name: Build pools
+        run: |
+          cargo build --manifest-path protocol/dapps/pools/Cargo.toml --bin pools
+          echo "$GITHUB_WORKSPACE/protocol/dapps/pools/target/debug" >> $GITHUB_PATH
+
+      - name: Adding the date and pivot_data_dir into the env
+        run: |
+          echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+          echo "LG_DATA_DIR=data" >> $GITHUB_ENV
+
+      - name: run pools
+        run: |
+          pools lg $LE_DATE > libs/pool-assets.js
+
+      - name: Commit and push results
+        env: 
+          USER0_NAME: ${{ vars.USER0_NAME }}
+          USER0_EMAIL: ${{ secrets.USER0_EMAIL }}
+        run: |
+          git config --local user.name "$USER0_NAME"
+          git config --local user.email "$USER0_EMAIL"
+          git add libs/pool-assets.js
+          git diff --staged --quiet && echo "Nothing to commit, skipping push" && exit 0
+          git commit -m "pools $LE_DATE"
+          git push
