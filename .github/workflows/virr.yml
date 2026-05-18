@@ -42,7 +42,7 @@ jobs:
 
       - name: Run virtsz
         run: |
-          sh ./protocol/scripts/auto-virtsz.sh data/pivots/open/raw
+          sh ./protocol/scripts/auto-virtsz.sh lg data/pivots/open/raw
 
       - name: Commit and push results
         env: 
