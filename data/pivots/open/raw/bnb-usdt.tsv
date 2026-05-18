@@ -1,9 +1,9 @@
 opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1	gain_10_percent	to	to_blockchain	net	ersatz	quote2	val2
 2025-03-05	1	4	https://bscscan.com/tx/0xe4fd558aac167742f2f05536d8ecc13b48a9e6d06c13bafd830276cf905f8d30	n/a	USDt	Binance	989.99	0	$1.00	$989.99	1088.989	BNB	Binance	1.6724	0	$591.55	$989.31
-2025-03-06	2	5	virtual swap	n/a	USDt	Binance	991.56	0	$1.00	$991.56	1090.7161	BNB	Binance	1.6629	0	$600.74	$998.97
-2025-03-07	3	3	virtual swap	n/a	USDt	Binance	1005.06	0	$1.00	$1005.06	1105.566	BNB	Binance	1.6905	0	$602.52	$1018.56
-2025-03-08	4	2	virtual swap	n/a	USDt	Binance	997.451	0	$1.00	$997.45	1097.1962	BNB	Binance	1.6935	0	$597.33	$1011.58
-2025-03-09	5	1	virtual swap	n/a	USDt	Binance	996.94	0	$1.00	$996.94	1096.634	BNB	Binance	1.8631	0	$568.24	$1058.69
+2025-03-06	2	5	virtual_swap	n/a	USDt	Binance	991.56	0	$1.00	$991.56	1090.7161	BNB	Binance	1.6629	0	$600.74	$998.97
+2025-03-07	3	3	virtual_swap	n/a	USDt	Binance	1005.06	0	$1.00	$1005.06	1105.566	BNB	Binance	1.6905	0	$602.52	$1018.56
+2025-03-08	4	2	virtual_swap	n/a	USDt	Binance	997.451	0	$1.00	$997.45	1097.1962	BNB	Binance	1.6935	0	$597.33	$1011.58
+2025-03-09	5	1	virtual_swap	n/a	USDt	Binance	996.94	0	$1.00	$996.94	1096.634	BNB	Binance	1.8631	0	$568.24	$1058.69
 2025-03-11	6	0	https://bscscan.com/tx/0x6b4422e03b627668acb44cb9ffdf2fb1760f47b9715f6539a0a95ea2d0ab5790	n/a	BNB	Binance	0.917	0	$544.50	$499.31	1.0087	USDt	Binance	501.1385	0	$1.00	$501.14
 2025-03-18	7	0	https://bscscan.com/tx/0xbcc9ea0f2744adf42e865f9cf5c9bb411c3fc95d33db3ed390b55ae50cd07240	n/a	BNB	Binance	1.62	0	$632.14	$1024.07	1.7820001	USDt	Binance	1001.1292	0	$1.00	$1001.13
 2025-04-21	8	0	https://bscscan.com/tx/0x7178c012d3c6424c9baf698147d88887f625a85bff7b3474b1e0c4b481ea9c37	n/a	BNB	Binance	1.67	0	$602.06	$1005.44	1.837	USDt	Binance	1000.1266	0	$1.00	$1000.13
@@ -14,7 +14,7 @@ opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1
 2025-05-14	13	0	https://bscscan.com/tx/0x7dda73af00fe5023fac6ddf084cd443ab3ceceb7f58e4b9fe407214eed94bd84	n/a	BNB	Binance	1.2909	0	$656.68	$847.71	1.4199901	USDt	Binance	838.1574	0	$1.00	$838.16
 2025-05-16	14	7	https://bscscan.com/tx/0xd2e3de8c1c9fb4f84d44cc6bf2730c1aa0f9141d0a4b6ba404e2fe95c3df2b75	n/a	USDt	Binance	500	0	$1.00	$500.00	550	BNB	Binance	0.7793	0	$653.83	$509.53
 2025-05-23	15	7	https://bscscan.com/tx/0xa82ce5120a881a6e3f862dc2172614660c5d2f37da55342805435b556e22a0e1	n/a	USDt	Binance	500	0	$1.00	$500.00	550	BNB	Binance	0.76	0	$673.50	$511.86
-2025-10-19	16	8	virtual swap	n/a	BNB	Binance	0	0.444	$1119.11	$496.88	0.4884	USDt	Binance	501.463	0	$1.00	$501.46
+2025-10-19	16	8	virtual_swap	n/a	BNB	Binance	0	0.444	$1119.11	$496.88	0.4884	USDt	Binance	501.463	0	$1.00	$501.46
 2025-10-19	17	0	https://bscscan.com/tx/0x470ea6576fbcd7cc7dacb07d0a23e807fbfe8e012d82219c0dce62b34b49a86b	n/a	USDt	Binance	1000	0	$1.00	$1000.00	1100	BNB	Binance	0.8866	0	$1119.11	$992.20
-2025-10-19	18	8	virtual swap	n/a	BNB	Binance	0	0.564	$866.47	$488.69	0.6204	USDt	Binance	500.057	0	$1.00	$500.06
+2025-10-19	18	8	virtual_swap	n/a	BNB	Binance	0	0.564	$866.47	$488.69	0.6204	USDt	Binance	500.057	0	$1.00	$500.06
 2025-10-19	19	0	https://bscscan.com/tx/0x470ea6576fbcd7cc7dacb07d0a23e807fbfe8e012d82219c0dce62b34b49a86b	n/a	USDt	Binance	500	0	$1.00	$500.00	550	BNB	Binance	0.564	0	$866.47	$488.69

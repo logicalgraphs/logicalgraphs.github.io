@@ -1,7 +1,7 @@
 opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1	gain_10_percent	to	to_blockchain	net	ersatz	quote2	val2
-2025-05-24	1	1	virtual swap	n/a	ADA	Cardano	0	618	$0.7600	$469.68	679.8	SNEK	Cardano	142084	0	$0.003324	$472.25
-2025-05-24	2	1	virtual swap	n/a	SNEK	Cardano	0	75000	$0.003320	$249.00	82500	ADA	Cardano	319.6625	0	$0.7600	$242.94
-2025-05-26	3	0	https://cexplorer.io/tx/09d37d49ca87eb3ab4e4a7ed22f012e00e1482b2b6fdfb11e48f63949d1c7c15	n/a	ADA	Cardano	622	0	$0.7700	$478.94	684.2	SNEK	Cardano	146913	0	$0.003225	$473.77
-2025-05-26	4	0	https://cexplorer.io/tx/8147cb1db42543e85d268a0b53dbec2ef3a01715e4c64bbd1d6e4b4e4ee8abc3	n/a	ADA	Cardano	1267	0	$0.7700	$975.59	1393.7001	SNEK	Cardano	308506	0	$0.003225	$994.87
-2025-05-26	5	1	virtual swap	n/a	SNEK	Cardano	0	308506	$0.003225	$994.87	339356.6	ADA	Cardano	1242	0	$0.7700	$956.34
+2025-05-24	1	1	virtual_swap	n/a	ADA	Cardano	0	618	$0.7600	$469.68	679.8	SNEK	Cardano	142084	0	$0.003324	$472.29
+2025-05-24	2	1	virtual_swap	n/a	SNEK	Cardano	0	75000	$0.003320	$249.00	82500	ADA	Cardano	319.6625	0	$0.7600	$242.94
+2025-05-26	3	0	https://cexplorer.io/tx/09d37d49ca87eb3ab4e4a7ed22f012e00e1482b2b6fdfb11e48f63949d1c7c15	n/a	ADA	Cardano	622	0	$0.7700	$478.94	684.2	SNEK	Cardano	146913	0	$0.003225	$473.79
+2025-05-26	4	0	https://cexplorer.io/tx/8147cb1db42543e85d268a0b53dbec2ef3a01715e4c64bbd1d6e4b4e4ee8abc3	n/a	ADA	Cardano	1267	0	$0.7700	$975.59	1393.7001	SNEK	Cardano	308506	0	$0.003225	$994.93
+2025-05-26	5	1	virtual_swap	n/a	SNEK	Cardano	0	308506	$0.003225	$994.93	339356.6	ADA	Cardano	1242	0	$0.7700	$956.34
 2025-05-26	6	0	https://cexplorer.io/tx/c1b010cb399a461ccc03bd43c9ce7c272736a92d67764258b78e2b139aea0ed6	n/a	SNEK	Cardano	800550	0	$0.000610	$488.34	880605	ADA	Cardano	1683	0	$0.2800	$471.24

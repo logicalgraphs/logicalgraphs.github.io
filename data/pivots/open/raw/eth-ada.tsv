@@ -3,5 +3,5 @@ opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1
 2025-05-14	2	0	https://cardanoscan.io/transaction/0c2f7ce1f70ddbc2a860c94b54b972ca41d7b16e89041518e65c287eca5de63c	n/a	iETH	Cardano	0.40385	0	$2623.33	$1059.43	0.444235	ADA	Cardano	1253	0	$0.8300	$1039.99
 2025-05-18	3	2	https://cexplorer.io/tx/6fde6be0a296e0a409c3a8644d62b3ab94dea924adc3d000dffc961dd3b855a6	n/a	ADA	Cardano	625	0	$0.7400	$462.50	687.5	iETH	Cardano	0.1936	0	$2502.93	$484.57
 2025-05-26	4	0	https://cexplorer.io/tx/5ad60c2e887f2b209aacafe837c806273fdc66fab2fbbb12ad4fe0b12b6d43b6	n/a	ADA	Cardano	1310	0	$0.7600	$995.60	1441	ADA	Cardano	0.3942	0	$2565.18	$1011.19
-2025-05-26	5	2	virtual swap	n/a	iETH	Cardano	0	0.3942	$2565.18	$1011.19	0.43362	ADA	Cardano	1284	0	$0.7600	$975.84
+2025-05-26	5	2	virtual_swap	n/a	iETH	Cardano	0	0.3942	$2565.18	$1011.19	0.43362	ADA	Cardano	1284	0	$0.7600	$975.84
 2026-02-18	6	0		n/a	ADA	Cardano	2727	0	$0.2800	$763.56	2999.7	ADA	Cardano	0.3451	0	$1950.39	$673.08

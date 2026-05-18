@@ -13,14 +13,14 @@ opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1
 2025-06-15	12	14	https://snowtrace.io/tx/0x3acb123cecdfb0de57ec0d8b1b103e9507d970b85fb0881d626af5a560eece7b	n/a	USDC	Avalanche	500	0	$1.00	$500.00	550	AVAX	Avalanche	25.4	0	$19.71	$500.63
 2025-06-18	13	16	https://snowtrace.io/tx/0x4a0928a03b2bf59e0d70cf0e02075271e3103e1fdf3a64ecf11f64991dfb22b7	n/a	AVAX	Avalanche	13.8542	0	$18.15	$251.45	15.239621	USDC	Avalanche	250.27	0	$1.00	$250.27
 2025-06-18	14	14	https://snowtrace.io/tx/0x2b3659a38aaab7c5a3c1d401c6cf1db2d54862bcadfacd991135b092bdafb7a7	n/a	USDC	Avalanche	500	0	$1.00	$500.00	550	AVAX	Avalanche	27.73	0	$18.15	$503.30
-2025-06-20	15	14	virtual swap	n/a	USDC	Avalanche	0	1000	$1.00	$1000.00	1100	AVAX	Avalanche	57.05	0	$17.35	$989.82
+2025-06-20	15	14	virtual_swap	n/a	USDC	Avalanche	0	1000	$1.00	$1000.00	1100	AVAX	Avalanche	57.05	0	$17.35	$989.82
 2025-06-20	16	16	https://snowtrace.io/tx/0x53c7ed43b41e595e9063976eff8c0c245b4190cdb7991694b365b4f4f08204c7	n/a	AVAX	Avalanche	13.24	0	$17.35	$229.71	14.564	USDC	Avalanche	232.13	0	$1.00	$232.13
-2025-09-24	17	15	virtual swap	n/a	USDC	Avalanche	0	1000	$1.00	$1000.00	1100	AVAX	Avalanche	57.05	0	$17.35	$989.82
+2025-09-24	17	15	virtual_swap	n/a	USDC	Avalanche	0	1000	$1.00	$1000.00	1100	AVAX	Avalanche	57.05	0	$17.35	$989.82
 2025-09-24	18	16	https://snowtrace.io/tx/0x53c7ed43b41e595e9063976eff8c0c245b4190cdb7991694b365b4f4f08204c7	n/a	AVAX	Avalanche	13.24	0	$17.35	$229.71	14.564	USDC	Avalanche	232.13	0	$1.00	$232.13
 2025-10-14	19	0	https://snowtrace.io/tx/0xc2d3206c78dfce8fbb1419b5e1433ea26ea0b80ab87454fc096db35f75d18282	n/a	USDC	Avalanche	1000	0	$1.00	$1000.00	1100	AVAX	Avalanche	44.32	0	$22.58	$1000.75
-2025-10-14	20	16	virtual swap	n/a	AVAX	Avalanche	0	22.2	$22.58	$501.28	24.420002	USDC	Avalanche	500.66	0	$1.00	$500.66
-2025-12-22	21	0	virtual swap	2026-03-23	USDC	Avalanche	0	738.03265	$1.00	$737.99	811.83594	AVAX	Avalanche	82.09	0	$8.99	$737.99
-2025-12-22	22	17	virtual swap	n/a	AVAX	Avalanche	0	82	$12.48	$1023.36	90.200005	USDC	Avalanche	997.97	0	$1.00	$997.97
+2025-10-14	20	16	virtual_swap	n/a	AVAX	Avalanche	0	22.2	$22.58	$501.28	24.420002	USDC	Avalanche	500.66	0	$1.00	$500.66
+2025-12-22	21	0	virtual_swap	2026-03-23	USDC	Avalanche	0	738.03265	$1.00	$738.03	811.83594	AVAX	Avalanche	82.09	0	$8.99	$737.99
+2025-12-22	22	17	virtual_swap	n/a	AVAX	Avalanche	0	82	$12.48	$1023.36	90.200005	USDC	Avalanche	997.97	0	$1.00	$997.97
 2026-02-23	23	0	https://snowtrace.io/tx/0xb1af8a053aa6c3c5546dfebbda0e43bd274d00033e356dc0bf5f70a1e0826ba8	n/a	USDC	Avalanche	2000	0	$1.00	$2000.00	2200	AVAX	Avalanche	242.73	0	$8.41	$2041.36
-2026-02-23	24	0	virtual swap	2026-03-23	AVAX	Avalanche	0	99.95295	$8.99	$898.58	109.94825	USDC	Avalanche	898.63	0	$1.00	$898.58
-2026-02-23	25	0	virtual swap	n/a	USDC	Avalanche	0	1150	$1.00	$1150.00	1265	AVAX	Avalanche	139.34	0	$8.41	$1171.85
+2026-02-23	24	0	virtual_swap	2026-05-18	AVAX	Avalanche	0	99.16392	$9.06	$898.43	109.080315	USDC	Avalanche	898.63	0	$1.00	$898.43
+2026-02-23	25	0	virtual_swap	n/a	USDC	Avalanche	0	1150	$1.00	$1150.00	1265	AVAX	Avalanche	139.34	0	$8.41	$1171.85
