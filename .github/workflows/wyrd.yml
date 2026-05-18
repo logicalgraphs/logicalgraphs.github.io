@@ -60,11 +60,10 @@ jobs:
         run: |
           echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
           echo "LG_URL=https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io" >> $GITHUB_ENV
-          echo "CLOSE_PIVOT_DIR=data/pivots/close/raw" >> $GITHUB_ENV
 
       - name: run wyrd with manual inputs on Github Actions
         run: |
-          wyrd lg "${{inputs.ix}}" "${{inputs.tx_id}}" "${{inputs.new_to_actual}}"
+          wyrd lg data/pivots/close/raw "${{inputs.ix}}" "${{inputs.tx_id}}" "${{inputs.new_to_actual}}"
 
       - name: Commit and push results
         run: |
