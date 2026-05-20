@@ -1,7 +1,7 @@
 opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1	gain_10_percent	to	to_blockchain	net	ersatz	quote2	val2
 2025-06-04	1	1	virtual_swap	n/a	LTC	Binance	0	3	$89.95	$269.85	3.3000002	LINK	Binance	19.0369	0	$14.14	$269.18
-2025-06-04	2	0	virtual_swap	2026-05-19	LINK	Binance	0	18.490051	$9.59	$177.32	20.339056	LTC	Binance	3.2746	0	$54.15	$177.32
+2025-06-04	2	0	virtual_swap	2026-05-20	LINK	Binance	0	18.482006	$9.58	$177.06	20.330208	LTC	Binance	3.2746	0	$54.07	$177.06
 2025-10-20	3	0	virtual_swap	2026-03-23	LTC	Binance	0	2.02965	$53.67	$108.93	2.232615	LINK	Binance	12.6224	0	$8.63	$108.93
 2025-10-20	4	2	virtual_swap	n/a	LINK	Binance	0	11	$18.99	$208.89	12.1	LTC	Binance	2.1594	0	$94.40	$203.85
 2025-12-27	5	0	virtual_swap	n/a	LTC	Binance	0	3.45	$77.25	$266.51	3.795	LINK	Binance	21.7874	0	$12.44	$271.04
-2025-12-27	6	0	virtual_swap	2026-05-19	LINK	Binance	0	21.424541	$9.59	$205.46	23.566996	LTC	Binance	3.7943	0	$54.15	$205.46
+2025-12-27	6	0	virtual_swap	2026-05-20	LINK	Binance	0	21.41522	$9.58	$205.16	23.556744	LTC	Binance	3.7943	0	$54.07	$205.16
