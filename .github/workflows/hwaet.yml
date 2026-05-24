@@ -63,7 +63,7 @@ jobs:
       - name: protocol URL and paths to dapps
         run: |
           echo "LG_URL=$GIT_RAW_URL/$PROTOCOL" >> $GITHUB_ENV
-          echo "$GIT_DAPPS_DIR/$DAPP/$TARGET_DIR" >> $GITHUB_PATH
+          echo "$GIT_DAPPS_DIR/$TARGET_DIR" >> $GITHUB_PATH
 
       - name: Build hwaet
         run: |
