@@ -19,6 +19,6 @@ opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1
 2025-06-20	18	0	https://snowtrace.io/tx/0x910051af4cb3b574edbff5d6f087d6987bab0b793fd992410071886ef588be82	n/a	USDC	Avalanche	1012.26	0	$1.00	$1012.26	1113.4861	BTC	Avalanche	0.009764	0	$104214.00	$1017.55
 2025-06-26	19	6	https://snowtrace.io/tx/0x9483c2d077868a915ac3f5b7fb01c550bfbc681e82f36eadcdc581909bd276d2	n/a	BTC	Avalanche	0.004674	0	$107377.00	$501.88	0.0051414003	USDC	Avalanche	500.33	0	$1.00	$500.33
 2025-06-26	20	0	https://snowtrace.io/tx/0x7323697bd92e9500791de8b2da2e08e9c1cdda62340d7583cb2a2652c92ab143	n/a	USDC	Avalanche	250	0	$1.00	$250.00	275	BTC	Avalanche	0.002334	0	$107377.00	$250.62
-2026-02-23	21	0	virtual_swap	2026-06-06	USDC	Avalanche	0	293.39838	$1.00	$293.32	322.73822	BTC	Avalanche	0.004805	0	$61045.00	$293.32
-2026-02-23	22	0	virtual_swap	2026-06-06	USDC	Avalanche	0	1666.9058	$1.00	$1666.47	1833.5964	BTC	Avalanche	0.027299	0	$61045.00	$1666.47
+2026-02-23	21	0	virtual_swap	2026-06-06	USDC	Avalanche	0	293.39838	$1.00	$293.40	322.73822	BTC	Avalanche	0.004805	0	$61045.00	$293.32
+2026-02-23	22	0	virtual_swap	2026-06-06	USDC	Avalanche	0	1666.9058	$1.00	$1666.91	1833.5964	BTC	Avalanche	0.027299	0	$61045.00	$1666.47
 2026-02-23	23	0	https://snowtrace.io/tx/0x396c78e5a2cd55030499de33dbf0e869feecfb22e98877a12a9dc545d4ebc3ed	n/a	BTC	Avalanche	0.025945	0	$64710.00	$1678.90	0.028539501	USDC	Avalanche	1661.4393	0	$1.00	$1661.44
