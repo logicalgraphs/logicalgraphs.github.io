@@ -1,5 +1,5 @@
 opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1	gain_10_percent	to	to_blockchain	net	ersatz	quote2	val2
-2025-03-10	1	0	virtual_swap	2026-03-23	BNB	Binance	0	1.0475166	$624.84	$654.53	1.1522683	LINK	Binance	75.8436	0	$8.63	$654.53
+2025-03-10	1	0	virtual_swap	2026-05-31	BNB	Binance	0	0.9512727	$734.30	$698.52	1.0464001	LINK	Binance	75.8436	0	$9.21	$698.52
 2025-03-11	2	1	virtual_swap	n/a	BNB	Binance	0	1.791	$544.50	$975.20	1.9701	LINK	Binance	76.6686	0	$12.72	$975.22
 2025-03-11	3	3	virtual_swap	n/a	LINK	Binance	0	39.04	$12.72	$496.59	42.944	BNB	Binance	0.912	0	$544.50	$496.58
 2025-04-22	4	3	https://bscscan.com/tx/0x23415b08a71906f167cd1396055209dba25c20be89bfc086d0ca26712af59a4d	n/a	LINK	Binance	76.5	0	$13.44	$1028.16	84.15	BNB	Binance	1.6963	0	$606.11	$1028.14
@@ -7,7 +7,7 @@ opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1
 2025-05-16	6	0	https://bscscan.com/tx/0x8d855edae6abe7be80b7018437ed63b607179e01bd643518362549c7bea0f357	n/a	BNB	Binance	0.78	0	$653.83	$509.99	0.858	LINK	Binance	31.3068	0	$16.29	$509.99
 2025-05-24	7	0	https://bscscan.com/tx/0xf0e3abb29099a41d60466f6ce8ab1a6870b6ae2ffae3f96cfd50a295946de440	n/a	BNB	Binance	1.5	0	$674.88	$1012.32	1.6500001	LINK	Binance	64.5078	0	$15.74	$1015.35
 2025-10-19	8	4	https://bscscan.com/tx/0x6a8b61dfd96b53f687032c0f202b32e6fec5667e1a23d695e8b12b30318b31be	n/a	LINK	Binance	28.5	0	$17.48	$498.18	31.35	BNB	Binance	0.4443	0	$1119.11	$497.22
-2025-10-19	9	0	virtual_swap	2026-03-23	BNB	Binance	0	0.7826873	$624.84	$489.05	0.8609561	LINK	Binance	56.6691	0	$8.63	$489.05
+2025-10-19	9	0	virtual_swap	2026-05-31	BNB	Binance	0	0.7107755	$734.30	$521.92	0.7818531	LINK	Binance	56.6691	0	$9.21	$521.92
 2025-12-11	10	4	https://bscscan.com/tx/0x13d7ab741a90e8a8cc56e29180d64b0f98c5e028bb75dda8691c7727268768e5	n/a	LINK	Binance	78	0	$13.60	$1060.80	85.8	BNB	Binance	1.2347	0	$866.47	$1069.83
 2026-02-05	11	0	https://bscscan.com/tx/0x5b3d856a58425a13e23194c1a7df771568fee2b26e6367f38e9de6d6201328f3	n/a	LINK	Binance	55	0	$8.00	$440.00	60.5	BNB	Binance	0.6803	0	$623.02	$423.84
-2026-02-05	12	0	virtual_swap	n/a	BNB	Binance	0	0.71	$623.02	$442.34	0.781	LINK	Binance	53.6114	0	$8.00	$428.89
+2026-02-05	12	0	virtual_swap	2026-05-31	BNB	Binance	0	0.67242414	$734.30	$493.76	0.7396666	LINK	Binance	53.6114	0	$9.21	$493.76

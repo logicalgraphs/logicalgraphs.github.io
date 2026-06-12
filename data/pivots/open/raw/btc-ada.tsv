@@ -4,5 +4,5 @@ opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1
 2025-05-18	3	0	https://cexplorer.io/tx/141d3ac6bcb87fcbb67d40af33d5f9a22dba693f438e2ddf6f3febb9fdefb538	n/a	iBTC	Cardano	0.00677	0	$103831.00	$702.94	0.007447	ADA	Cardano	874.35	0	$0.7600	$664.51
 2025-05-18	4	2	https://cexplorer.io/tx/f1d527e56dda6d7ffcacae13232b658818be02fb3bd4cb8f884e564164609265	n/a	ADA	Cardano	1000	0	$0.7600	$760.00	1100	iBTC	Cardano	0.007591	0	$103831.00	$788.18
 2025-05-26	5	2	https://cexplorer.io/tx/5e4de778aaac4554f2e1cf8cc639e6197755ddb53a36574069541ee942ae2cfa	n/a	ADA	Cardano	1307	0	$0.7600	$993.32	1437.7001	iBTC	Cardano	0.009293	0	$109805.00	$1020.42
-2025-05-26	6	0	virtual_swap	2026-05-25	iBTC	Cardano	0	0.0040654177	$77361.00	$314.50	0.0044719595	ADA	Cardano	1281.0001	0	$0.2455	$314.50
+2025-05-26	6	0	virtual_swap	2026-06-06	iBTC	Cardano	0	0.003240073	$61045.00	$197.79	0.0035640805	ADA	Cardano	1281.0001	0	$0.1544	$197.79
 2026-02-17	7	0	https://cexplorer.io/tx/5876bd8c74a46fa2cb68db544cf61890d70fd57dceaeacac0719550bf62c4c3f	n/a	ADA	Cardano	2929	0	$0.2800	$820.12	3221.9001	iBTC	Cardano	0.012099	0	$68134.99	$824.37
