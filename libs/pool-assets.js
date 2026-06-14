@@ -3,7 +3,7 @@
 
  
 const poolAssets = {
-   generated: '2026-06-13',
+   generated: '2026-06-14',
    assets: [
       [ 'ETH', 'NEAR' ],
       [ 'BTC', 'DOGE' ],
