@@ -21,4 +21,4 @@ opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1
 2026-02-05	20	0	virtual_swap	2026-06-06	BNB	Binance	0	3.4667437	$576.65	$1999.10	3.8134181	ETH	Binance	1.2728	0	$1570.63	$1999.10
 2026-02-05	21	9	virtual_swap	2026-05-18	ETH	Binance	0	1.0392087	$2114.42	$2197.32	1.1431296	BNB	Binance	3.4423	0	$638.33	$2197.32
 2026-06-12	22	0	virtual_swap	2026-06-14	BNB	Binance	0	2.9337187	$610.75	$1791.77	3.2270906	ETH	Binance	1.07	0	$1674.55	$1791.77
-2026-06-12	23	0	virtual_swap	n/a	ETH	Binance	0	0.28	$1658.63	$464.42	0.308	BNB	Binance	0.7795	0	$598.22	$466.31
+2026-06-12	23	0	virtual_swap	2026-06-15	ETH	Binance	0	0.27937013	$1720.05	$480.53	0.30730715	BNB	Binance	0.7795	0	$616.46	$480.53
