@@ -21,11 +21,11 @@ opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1
 2025-06-14	20	12	https://snowtrace.io/tx/0xa3b2c020e65386dcc546c6b2cc573bce7a8c4eb651e122a0f864ae1bf5108b9e	n/a	AVAX	Avalanche	13.1	0	$19.06	$249.69	14.410001	ETH	Avalanche	0.0985	0	$2533.93	$249.59
 2025-06-15	21	0	https://snowtrace.io/tx/0x2718b4066892aec61cee3c28a4316a0cd36350c762f09478a14b65b547ba05f6	n/a	ETH	Avalanche	0.1901	0	$2522.18	$479.47	0.20911	AVAX	Avalanche	25.4141	0	$19.79	$502.95
 2025-06-15	22	12	https://snowtrace.io/tx/0x14811a77e2da6141df66a5db19e3eb99859b2e7e34348c98e7377d1c4a748c4e	n/a	AVAX	Avalanche	12.71	0	$19.79	$251.53	13.981	ETH	Avalanche	0.0953	0	$2522.18	$240.36
-2025-06-19	23	0	virtual_swap	2026-06-19	ETH	Avalanche	0	0.197735	$1694.48	$335.06	0.2175085	AVAX	Avalanche	55.843	0	$6.00	$335.06
+2025-06-19	23	0	virtual_swap	2026-06-20	ETH	Avalanche	0	0.19397686	$1724.43	$334.50	0.21337456	AVAX	Avalanche	55.843	0	$5.99	$334.50
 2025-06-19	24	15	https://snowtrace.io/tx/0xb1df9c2a1041192aa9c644895d5a98a4677c4cf8d38fcd4e25b07b64b7b0187c	n/a	AVAX	Avalanche	27.58	0	$17.90	$493.68	30.338001	ETH	Avalanche	0.1975	0	$2518.42	$497.39
-2025-06-20	25	0	virtual_swap	2026-06-19	ETH	Avalanche	0	0.1957397	$1694.48	$331.68	0.21531367	AVAX	Avalanche	55.2795	0	$6.00	$331.68
+2025-06-20	25	0	virtual_swap	2026-06-20	ETH	Avalanche	0	0.19201949	$1724.43	$331.12	0.21122144	AVAX	Avalanche	55.2795	0	$5.99	$331.12
 2025-06-20	26	13	https://snowtrace.io/tx/0x8942eab1d6dfa8f411b129312017d132eab1c348995db45ac8c9ff9753cf18a2	n/a	AVAX	Avalanche	29	0	$17.35	$503.15	31.900002	ETH	Avalanche	0.2095	0	$2495.99	$522.91
-2025-06-26	27	0	virtual_swap	2026-06-19	ETH	Avalanche	0	0.12906934	$1694.48	$218.71	0.14197628	AVAX	Avalanche	36.4509	0	$6.00	$218.71
+2025-06-26	27	0	virtual_swap	2026-06-20	ETH	Avalanche	0	0.12661625	$1724.43	$218.34	0.13927789	AVAX	Avalanche	36.4509	0	$5.99	$218.34
 2025-06-26	28	15	https://snowtrace.io/tx/0x0d8e9e871bddffd9141f5f3d5ae2ddcc73f1786a4d51de8e935b61fb0d9b84e9	n/a	AVAX	Avalanche	29.04	0	$17.32	$502.97	31.944002	ETH	Avalanche	0.2072	0	$2451.32	$507.91
 2025-07-01	29	0	https://snowtrace.io/tx/0x261d72fb500c30dcf744438c9bd0906e281856a629bb5c268c54f27c4cf8bea2	n/a	ETH	Avalanche	0.2068	0	$2442.89	$505.19	0.22748001	AVAX	Avalanche	29.1157	0	$17.09	$497.59
 2025-07-01	30	15	https://snowtrace.io/tx/0xec5bbebfef6e348b91bc8070ac427b0ea937e7766581bdf7f68ac15c37cc7883	n/a	AVAX	Avalanche	14.56	0	$17.09	$248.83	16.016	ETH	Avalanche	0.1034	0	$2442.89	$252.59
@@ -34,9 +34,9 @@ opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1
 2025-07-20	33	0	https://snowtrace.io/tx/0x112d432958bd6e5b19d2fb09b5a1d53794fd15d15e0182aa4ef35f8a7bd1b68e	n/a	ETH	Avalanche	0.27	0	$3736.78	$1008.93	0.29700002	AVAX	Avalanche	38.8875	0	$25.43	$988.91
 2025-07-20	34	15	https://snowtrace.io/tx/0xc6d2574484f31448e1236885393c5fb01dcbc05af9752e69aaf81b5fd6229c7e	n/a	AVAX	Avalanche	19.86	0	$25.43	$505.04	21.846	ETH	Avalanche	0.1327	0	$3736.78	$495.87
 2025-07-23	35	14	virtual_swap	n/a	ETH	Avalanche	0	0.23	$3608.83	$830.03	0.25300002	AVAX	Avalanche	36.4509	0	$23.85	$869.35
-2025-09-28	36	0	virtual_swap	2026-06-19	ETH	Avalanche	0	0.028826896	$1694.48	$48.85	0.031709585	AVAX	Avalanche	8.1411	0	$6.00	$48.85
+2025-09-28	36	0	virtual_swap	2026-06-20	ETH	Avalanche	0	0.028279016	$1724.43	$48.77	0.031106917	AVAX	Avalanche	8.1411	0	$5.99	$48.77
 2025-09-28	37	15	virtual_swap	n/a	AVAX	Avalanche	0	35.28	$28.26	$997.01	38.808	ETH	Avalanche	0.251	0	$3941.42	$989.30
-2025-10-13	38	0	virtual_swap	2026-06-19	ETH	Avalanche	0	0.14908645	$1694.48	$252.62	0.16399509	AVAX	Avalanche	42.104	0	$6.00	$252.62
+2025-10-13	38	0	virtual_swap	2026-06-20	ETH	Avalanche	0	0.14625293	$1724.43	$252.20	0.16087823	AVAX	Avalanche	42.104	0	$5.99	$252.20
 2025-10-13	39	16	https://snowtrace.io/tx/0xc9f43f3d1a406196379d93e2be537bc63f43467513dec7885f883642af530351	n/a	AVAX	Avalanche	21.102497	0	$24.00	$506.46	23.212748	ETH	Avalanche	0.1189	0	$4105.17	$488.10
-2025-12-22	40	0	virtual_swap	2026-06-19	ETH	Avalanche	0	0.115513325	$1694.48	$195.74	0.12706466	AVAX	Avalanche	32.6225	0	$6.00	$195.74
+2025-12-22	40	0	virtual_swap	2026-06-20	ETH	Avalanche	0	0.11331789	$1724.43	$195.41	0.12464968	AVAX	Avalanche	32.6225	0	$5.99	$195.41
 2025-12-22	41	0	https://snowtrace.io/tx/0xed3f5bfb5372037013533e1b9d12ee9b66a01c483d6e8420e5bbdfe72bd1c1bb	n/a	AVAX	Avalanche	32.786293	0	$12.48	$409.17	36.064922	ETH	Avalanche	0.1352	0	$3057.44	$413.37
