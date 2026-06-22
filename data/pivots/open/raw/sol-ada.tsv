@@ -4,6 +4,6 @@ opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1
 2025-05-15	3	2	https://cardanoscan.io/transaction/fdcbbac53be1aa1383bfacf231bdc76b0a2e0f9479ed12ac2b8bf2b1f5baec18	n/a	ADA	Cardano	500	0	$0.7700	$385.00	550	iSOL	Cardano	2.27	0	$170.18	$386.31
 2025-05-18	4	0	https://cexplorer.io/tx/a1f0d0a62e6ec58e0a05e2de9be7cb4908813cd851adf38952220492f54855d4	n/a	iSOL	Cardano	2.35518	0	$170.75	$402.15	2.590698	ADA	Cardano	564	0	$0.7400	$417.36
 2025-05-18	5	0	https://cexplorer.io/tx/d23c52b6e6f55319b2f326aafa0da94790f6513e1e85d5e4ca23cbfe4bd683e9	n/a	ADA	Cardano	600	0	$0.7400	$444.00	660	iSOL	Cardano	2.4423	0	$170.75	$417.02
-2025-05-26	6	0	virtual_swap	2026-06-21	iSOL	Cardano	0	2.7551281	$73.31	$201.98	3.030641	ADA	Cardano	1255	0	$0.1609	$201.98
+2025-05-26	6	0	virtual_swap	2026-06-22	iSOL	Cardano	0	2.7363527	$73.78	$201.89	3.009988	ADA	Cardano	1255	0	$0.1609	$201.89
 2025-05-26	7	0	https://cexplorer.io/tx/35cc37294dcea95305290385677b1ff1889b869f133309ec7778feb464b59b17	n/a	ADA	Cardano	655	0	$0.7600	$497.80	720.5	iSOL	Cardano	2.5307	0	$177.64	$449.55
 2025-05-26	8	0	https://cexplorer.io/tx/d27bfbaca6fc409ab9265cf57f3b3d258aeeb74f6db8b559c25c0c43c0216f80	n/a	ADA	Cardano	655	0	$0.7600	$497.80	720.5	iSOL	Cardano	2.402	0	$177.64	$426.69
