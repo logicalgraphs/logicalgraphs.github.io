@@ -1,3 +1,4 @@
-date	blockchain	pool	token	quote	amount	amount $	paydown	paydown $	sum	asUSD	total
-2025-05-15	Cardano	iSOL+ADA	ADA	$0.77	125	$96.15	0	$0.00	125	$96.15	$96.15
-2025-05-18	Cardano	iSOL+ADA		$0.74	52	$38.21	0	$0.00	52	$38.21	$134.36
+date	blockchain	pool	token	quote	amount	amount $	paydown	paydown $	sum	SOL $	ADA $	asUSD	total
+2025-05-15	Cardano	iSOL+ADA	ADA	$0.77	125	$96.15	0	$0.00	125	$0.00	$96.15	$96.15	$96.15
+2025-05-18	Cardano	iSOL+ADA	ADA	$0.74	52	$38.21	0	$0.00	52	$0.00	$134.36	$38.21	$134.36
+2026-06-26	Cardano	iSOL+ADA	ADA	$0.15	1507.2	$225.33	188.4	$28.17	1695.6	$0.00	$387.85	$253.49	$387.85
