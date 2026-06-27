@@ -1,0 +1,88 @@
+name: offrian
+
+on:
+  workflow_dispatch:
+    inputs:
+      protocol:
+        description: 'Protocol to counter-offer (e.g. PIVOT)'
+        required: true
+        type: string
+      ix:
+        description: 'Call index being countered (e.g. 1)'
+        required: true
+        type: string
+      target:
+        description: 'target volume of the new pivot (e.g. 1000)'
+        required: true
+        type: string
+      debug:
+        description: 'Show debug information?'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  run-offrian:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout pivoteur.github.io
+        uses: actions/checkout@v4
+
+      - name: Checkout protocol
+        uses: actions/checkout@v4
+        with:
+          repository: pivoteur/protocol
+          path: protocol
+
+      - name: Show input parameters
+        run: |
+          echo "=== Running offrian with manual inputs ==="
+          echo "protocol: ${{ inputs.protocol }}"
+          echo "ix:       ${{ inputs.ix }}"
+          echo "target:   ${{ inputs.target }}"
+          echo "debug:    ${{ inputs.debug }}"
+
+      - name: Cache offrian binary
+        id: binary-cache
+        uses: actions/cache@v3
+        with:
+          path: protocol/dapps/offrian/target/release/offrian
+          key: offrian-binary-${{ hashFiles('protocol/quizzes/src/quiz08/e_offrian/**/*.rs', 'protocol/dapps/offrian/Cargo.toml', 'protocol/dapps/offrian/Cargo.lock') }}
+
+      - name: Install Rust toolchain
+        if: steps.binary-cache.outputs.cache-hit != 'true'
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+
+      - name: Checkout crypto-n-rust
+        if: steps.binary-cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: logicalgraphs/crypto-n-rust
+          path: crypto-n-rust
+
+      - name: Build offrian
+        if: steps.binary-cache.outputs.cache-hit != 'true'
+        run: |
+          cargo build --manifest-path protocol/dapps/offrian/Cargo.toml \
+            --bin offrian \
+            --release
+
+      - name: Add offrian to PATH
+        run: echo "$GITHUB_WORKSPACE/protocol/dapps/offrian/target/release" >> $GITHUB_PATH
+
+      - name: Set PIVOT_URL
+        run: |
+          echo "PIVOT_URL=https://raw.githubusercontent.com/pivoteur/pivoteur.github.io" >> $GITHUB_ENV
+
+      - name: Run offrian
+        run: |
+          offrian ${{ inputs.debug && '--debug' || '' }} \
+                  "${{ inputs.protocol }}" \
+                  "${{ inputs.ix }}" \
+                  "${{ inputs.target }}"
+                  

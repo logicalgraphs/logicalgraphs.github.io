@@ -1,16 +1,16 @@
-name: hwaet
+name: dusk
 
 on:
   workflow_dispatch:
   schedule:
     # test the cron ("Min Hour Day Month DayofWeek" in UTC) at scheduled time 
-    - cron: "45 08 * * *" # this is 4:45 AM Eastern Standard Time
+    - cron: "14 08 * * *" # this is 12:14 AM Eastern Standard Time
 
 permissions:
   contents: write
 
 jobs:
-  run-hwaet:
+  run-dusk:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout pivoteur.github.io # This repo is the root dir for this workflow
@@ -22,12 +22,12 @@ jobs:
           repository: pivoteur/protocol
           path: protocol
 
-      - name: Cache hwaet binary
+      - name: Cache dusk binary
         id: binary-cache
         uses: actions/cache@v3
         with:
-          path: protocol/dapps/hwaet/target/release/hwaet
-          key: hwaet-binary-${{ hashFiles('protocol/quizzes/src/quiz07/d_health/**/*.rs', 'protocol/dapps/hwaet/Cargo.toml', 'protocol/dapps/hwaet/Cargo.lock') }}
+          path: protocol/dapps/dusk/target/release/dusk
+          key: dusk-binary-${{ hashFiles('protocol/quizzes/src/quiz05/b_dusk_min/**/*.rs', 'protocol/dapps/dusk/Cargo.toml', 'protocol/dapps/dusk/Cargo.lock') }}
 
       - name: Install Rust toolchain
         if: steps.binary-cache.outputs.cache-hit != 'true'
@@ -42,23 +42,23 @@ jobs:
           repository: logicalgraphs/crypto-n-rust
           path: crypto-n-rust
 
-      - name: Build hwaet
+      - name: Build dusk
         if: steps.binary-cache.outputs.cache-hit != 'true'
         run: |
-          cargo build --manifest-path protocol/dapps/hwaet/Cargo.toml \
-            --bin hwaet \
+          cargo build --manifest-path protocol/dapps/dusk/Cargo.toml \
+            --bin dusk \
             --release
 
-      - name: Add hwaet to PATH
-        run: echo "$GITHUB_WORKSPACE/protocol/dapps/hwaet/target/release" >> $GITHUB_PATH
+      - name: Add dusk to PATH
+        run: echo "$GITHUB_WORKSPACE/protocol/dapps/dusk/target/release" >> $GITHUB_PATH
 
       - name: Setting date and URL
         run: |
           echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
           echo "PIVOT_URL=https://raw.githubusercontent.com/pivoteur/pivoteur.github.io" >> $GITHUB_ENV
 
-      - name: Run hwaet
-        run: hwaet pivot $LE_DATE > libs/pool-health.js
+      - name: Run dusk and log output
+        run: dusk --min pivot $LE_DATE > data/pivots/calls.csv
 
       - name: Commit and push results
         env:
@@ -67,12 +67,12 @@ jobs:
         run: |
           git config --local user.name "$USER0_NAME"
           git config --local user.email "$USER0_EMAIL"
-          git add libs/pool-health.js
+          git add data/pivots/calls.csv
 
           if git diff --staged --quiet; then
             echo "Nothing to commit, skipping push"
             exit 0
           fi
 
-          git commit -m "hwaet $LE_DATE"
+          git commit -m "dusk --min $LE_DATE"
           git push

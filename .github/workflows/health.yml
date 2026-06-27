@@ -1,0 +1,71 @@
+name: health
+
+on:
+  workflow_dispatch:
+  schedule:
+    # test the cron ("Min Hour Day Month DayofWeek" in UTC) at scheduled time 
+    - cron: "33 07 * * *" # this is 3:33 AM Eastern Standard Time
+
+permissions:
+  contents: write
+
+jobs:
+  update_health:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout pivoteur.github.io
+        uses: actions/checkout@v4
+        with:
+          path: pivoteur.github.io
+
+      - name: Checkout protocol
+        uses: actions/checkout@v4
+        with:
+          repository: pivoteur/protocol
+          path: protocol
+
+      - name: Copy diagnostics to pivoteur.github.io
+        run: |
+          cp protocol/data/diagnostics.txt pivoteur.github.io/data/diagnostics.txt
+
+      - name: Fetch workflow run status
+        run: |
+          fetch_status() {
+            local repo=$1 workflow=$2 name=$3
+            local url="https://api.github.com/repos/${repo}/actions/workflows/${workflow}/runs?per_page=1"
+            local result=$(curl -s "$url")
+            local status=$(echo "$result" | jq -r '.workflow_runs[0].conclusion // "unknown"')
+            local ran_at=$(echo "$result" | jq -r '.workflow_runs[0].updated_at // "unknown"')
+            echo "{\"name\":\"$name\",\"repo\":\"$repo\",\"status\":\"$status\",\"ran_at\":\"$ran_at\"}"
+          }
+
+          json=$(jq -n --argjson entries "$(
+            echo '['
+            fetch_status "logicalgraphs/crypto-n-rust"      "quotes.yml"  "Quotes"
+            echo ','
+            fetch_status "pivoteur/pivoteur.github.io" "assets.yml"  "Assets"
+            echo ','
+            fetch_status "pivoteur/pivoteur.github.io" "virtsz.yml"  "Virtsz"
+            echo ','
+            fetch_status "pivoteur/pivoteur.github.io" "dusk.yml"    "Dusk"
+            echo ','
+            fetch_status "pivoteur/pivoteur.github.io" "hwaet.yml"   "Hwaet"
+            echo ','
+            fetch_status "pivoteur/protocol"           "rat.yml"     "R.A.T."
+            echo ']'
+          )" '$entries')
+
+          echo "$json" > pivoteur.github.io/data/workflows.json 
+
+      - name: Commit and push diagnostics
+        env:
+          USER0_NAME: ${{ vars.USER0_NAME }}
+          USER0_EMAIL: ${{ secrets.USER0_EMAIL }}
+        run: |
+          cd pivoteur.github.io
+          git config user.name "$USER0_NAME"
+          git config user.email "$USER0_EMAIL"
+          git add data/diagnostics.txt data/workflows.json
+          git commit -m "health of the protocol [skip ci]" || echo "No changes to commit"
+          git push

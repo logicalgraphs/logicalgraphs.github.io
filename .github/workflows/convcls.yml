@@ -1,0 +1,104 @@
+name: convcls
+
+on:
+  workflow_dispatch:
+    inputs:
+      pool:
+        description: 'Pool to convert'
+        required: true
+        type: choice
+        options:
+          - avax-undead
+          - btc-avax
+          - btc-eth
+          - btc-undead
+          - btc-usdc
+          - eth-undead
+          - undead-usdc
+      dry_run:
+        description: 'Dry run (print to stdout only, no commit)'
+        required: true
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  run-convcls:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout pivoteur.github.io
+        uses: actions/checkout@v4
+
+      - name: Checkout protocol
+        uses: actions/checkout@v4
+        with:
+          repository: pivoteur/protocol
+          path: protocol
+
+      - name: Cache convcls binary
+        id: binary-cache
+        uses: actions/cache@v3
+        with:
+          path: protocol/dapps/convcls/target/release/convcls
+          key: convcls-binary-${{ hashFiles('protocol/quizzes/src/quiz08/d_convcls/**/*.rs', 'protocol/dapps/convcls/Cargo.toml', 'protocol/dapps/convcls/Cargo.lock') }}
+
+      - name: Set up Rust
+        if: steps.binary-cache.outputs.cache-hit != 'true'
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Checkout crypto-n-rust
+        if: steps.binary-cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: logicalgraphs/crypto-n-rust
+          path: crypto-n-rust
+
+      - name: Show inputs
+        run: |
+          echo "=== Running convcls with manual inputs ==="
+          echo "pool:     ${{ inputs.pool }}"
+          echo "dry_run:  ${{ inputs.dry_run }}"
+
+      - name: Build convcls
+        if: steps.binary-cache.outputs.cache-hit != 'true'
+        run: |
+          cargo build --manifest-path protocol/dapps/convcls/Cargo.toml --bin convcls
+
+      - name: Add convcls to PATH
+        run: echo "$GITHUB_WORKSPACE/protocol/dapps/convcls/target/release" >> $GITHUB_PATH
+
+      - name: Run convcls
+        run: |
+          convcls data/pivots/open/raw/${{ inputs.pool }}.tsv \
+                    data/pivots/close/raw/${{ inputs.pool }}.tsv \
+                    > /tmp/convcls_out.tsv
+          if [ "${{ inputs.dry_run }}" = "false" ]; then
+            mv /tmp/convcls_out.tsv data/pivots/close/raw/${{ inputs.pool }}.tsv
+          else
+            cat /tmp/convcls_out.tsv
+          fi
+
+      - name: Set date 
+        if: ${{ inputs.dry_run == false }}
+        run: echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      - name: Commit and push results
+        if: ${{ inputs.dry_run == false }}
+        env:
+          USER0_NAME: ${{ vars.USER0_NAME }}
+          USER0_EMAIL: ${{ secrets.USER0_EMAIL }}
+        run: |
+          git config user.name "$USER0_NAME"
+          git config user.email "$USER0_EMAIL"
+          git add data/pivots/close/raw/${{ inputs.pool }}.tsv
+
+          if git diff --staged --quiet; then
+            echo "Nothing to commit, skipping push"
+            exit 0
+          fi
+
+          git commit -m "convcls ${{ inputs.pool }} $LE_DATE"
+          git push
