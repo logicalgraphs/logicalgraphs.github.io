@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout pivoteur.github.io
+      - name: Checkout logicalgraphs.github.io
         uses: actions/checkout@v4
 
       - name: Checkout protocol
@@ -73,16 +73,16 @@ jobs:
       - name: Base variables
         run: |
           echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-          echo "PGI=pivoteur.github.io" >> $GITHUB_ENV
+          echo "LiGI=logicalgraphs.github.io" >> $GITHUB_ENV
           echo "GIT_RAW_URL=https://raw.githubusercontent.com" >> $GITHUB_ENV
 
       - name: Establish pathing to dapps
         run: |
-          echo "PROTOCOL=pivoteur/$PGI" >> $GITHUB_ENV
+          echo "PROTOCOL=logicalgraphs/$LGI" >> $GITHUB_ENV
 
       - name: protocol URL and paths to dapps
         run: |
-          echo "PIVOT_URL=$GIT_RAW_URL/$PROTOCOL" >> $GITHUB_ENV
+          echo "LG_URL=$GIT_RAW_URL/$PROTOCOL" >> $GITHUB_ENV
           echo "$GITHUB_WORKSPACE/protocol/dapps/wyrd/target/release" >> $GITHUB_PATH
           echo "$GITHUB_WORKSPACE/protocol/dapps/appender/target/release" >> $GITHUB_PATH
 

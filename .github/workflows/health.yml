@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout pivoteur.github.io
+      - name: Checkout logicalgraphs.github.io
         uses: actions/checkout@v4
         with:
-          path: pivoteur.github.io
+          path: logicalgraphs.github.io
 
       - name: Checkout protocol
         uses: actions/checkout@v4
@@ -25,9 +25,9 @@ jobs:
           repository: pivoteur/protocol
           path: protocol
 
-      - name: Copy diagnostics to pivoteur.github.io
+      - name: Copy diagnostics to logicalgraphs.github.io
         run: |
-          cp protocol/data/diagnostics.txt pivoteur.github.io/data/diagnostics.txt
+          cp protocol/data/diagnostics.txt logicalgraphs.github.io/data/diagnostics.txt
 
       - name: Fetch workflow run status
         run: |
@@ -44,26 +44,26 @@ jobs:
             echo '['
             fetch_status "logicalgraphs/crypto-n-rust"      "quotes.yml"  "Quotes"
             echo ','
-            fetch_status "pivoteur/pivoteur.github.io" "assets.yml"  "Assets"
+            fetch_status "logicalgraphs/logicalgraphs.github.io" "assets.yml"  "Assets"
             echo ','
-            fetch_status "pivoteur/pivoteur.github.io" "virtsz.yml"  "Virtsz"
+            fetch_status "logicalgraphs/logicalgraphs.github.io" "virtsz.yml"  "Virtsz"
             echo ','
-            fetch_status "pivoteur/pivoteur.github.io" "dusk.yml"    "Dusk"
+            fetch_status "logicalgraphs/logicalgraphs.github.io" "dusk.yml"    "Dusk"
             echo ','
-            fetch_status "pivoteur/pivoteur.github.io" "hwaet.yml"   "Hwaet"
+            fetch_status "logicalgraphs/logicalgraphs.github.io" "hwaet.yml"   "Hwaet"
             echo ','
             fetch_status "pivoteur/protocol"           "rat.yml"     "R.A.T."
             echo ']'
           )" '$entries')
 
-          echo "$json" > pivoteur.github.io/data/workflows.json 
+          echo "$json" > logicalgraphs.github.io/data/workflows.json 
 
       - name: Commit and push diagnostics
         env:
           USER0_NAME: ${{ vars.USER0_NAME }}
           USER0_EMAIL: ${{ secrets.USER0_EMAIL }}
         run: |
-          cd pivoteur.github.io
+          cd logicalgraphs.github.io
           git config user.name "$USER0_NAME"
           git config user.email "$USER0_EMAIL"
           git add data/diagnostics.txt data/workflows.json

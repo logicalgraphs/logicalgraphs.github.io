@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       protocol:
-        description: 'Protocol to counter-offer (e.g. PIVOT)'
+        description: 'Protocol to counter-offer (e.g. LG)'
         required: true
         type: string
       ix:
@@ -28,7 +28,7 @@ jobs:
   run-offrian:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout pivoteur.github.io
+      - name: Checkout logicalgraphs.github.io
         uses: actions/checkout@v4
 
       - name: Checkout protocol
@@ -75,9 +75,9 @@ jobs:
       - name: Add offrian to PATH
         run: echo "$GITHUB_WORKSPACE/protocol/dapps/offrian/target/release" >> $GITHUB_PATH
 
-      - name: Set PIVOT_URL
+      - name: Set LG_URL
         run: |
-          echo "PIVOT_URL=https://raw.githubusercontent.com/pivoteur/pivoteur.github.io" >> $GITHUB_ENV
+          echo "LG_URL=https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io" >> $GITHUB_ENV
 
       - name: Run offrian
         run: |
