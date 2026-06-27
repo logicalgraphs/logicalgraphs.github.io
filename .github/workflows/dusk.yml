@@ -58,7 +58,7 @@ jobs:
           echo "LG_URL=https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io" >> $GITHUB_ENV
 
       - name: Run dusk and log output
-        run: dusk --min pivot $LE_DATE > data/pivots/calls.csv
+        run: dusk --min lg $LE_DATE > data/pivots/calls.csv
 
       - name: Commit and push results
         env:

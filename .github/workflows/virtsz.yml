@@ -52,7 +52,7 @@ jobs:
       - name: Add virtsz to PATH
         run: echo "$GITHUB_WORKSPACE/protocol/dapps/virtsz/target/release" >> $GITHUB_PATH
 
-      - name: Set date and pivot_url
+      - name: Set date and lg_url
         run: |
           echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
           echo "LG_URL=https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io" >> $GITHUB_ENV
@@ -64,7 +64,7 @@ jobs:
           echo "Looking for virtsz binary:"
           find . -name virtsz -type f
 
-          sh ./protocol/scripts/auto-virtsz.sh pivot data/pivots/open/raw
+          sh ./protocol/scripts/auto-virtsz.sh lg data/pivots/open/raw
 
       - name: Commit and push results
         env:

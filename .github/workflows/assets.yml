@@ -52,13 +52,13 @@ jobs:
       - name: Add assets to PATH
         run: echo "$GITHUB_WORKSPACE/protocol/dapps/assets/target/release" >> $GITHUB_PATH
 
-      - name: Set date and pivot_url
+      - name: Set date and lg_url
         run: |
           echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-          echo "LG=https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io" >> $GITHUB_ENV
+          echo "LG_URL=https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io" >> $GITHUB_ENV
 
       - name: Run assets and log output
-        run: assets pivot $LE_DATE >> data/assets.csv
+        run: assets lg $LE_DATE >> data/assets.csv
 
       - name: Commit and push results
         env:

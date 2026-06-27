@@ -58,7 +58,7 @@ jobs:
           echo "LG_URL=https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io" >> $GITHUB_ENV
 
       - name: Run hwaet
-        run: hwaet pivot $LE_DATE > libs/pool-health.js
+        run: hwaet lg $LE_DATE > libs/pool-health.js
 
       - name: Commit and push results
         env:
