@@ -4,33 +4,33 @@
 
  
 const poolAssets = {
-   generated: '2026-08-06',
+   generated: '2026-08-07',
    assets: [
+      [ 'ADA', 'USDC' ],
       [ 'NEAR', 'USDC' ],
-      [ 'BTC', 'BNB' ],
+      [ 'AVAX', 'USDC' ],
+      [ 'BNB', 'USDT' ],
+      [ 'BTC', 'USDC' ],
+      [ 'BTC', 'ETH' ],
+      [ 'SOL', 'ADA' ],
+      [ 'ETH', 'BNB' ],
+      [ 'AURORA', 'USDC' ],
+      [ 'BTC', 'DOGE' ],
+      [ 'AVAX', 'UNDEAD' ],
       [ 'ETH', 'AURORA' ],
       [ 'ETH', 'AVAX' ],
-      [ 'AVAX', 'UNDEAD' ],
-      [ 'BNB', 'LINK' ],
-      [ 'LTC', 'LINK' ],
-      [ 'ETH', 'NEAR' ],
-      [ 'ETH', 'BNB' ],
-      [ 'BNB', 'USDT' ],
-      [ 'BTC', 'ADA' ],
-      [ 'ADA', 'USDC' ],
-      [ 'ADA', 'SNEK' ],
-      [ 'BTC', 'DOGE' ],
-      [ 'BTC', 'ETH' ],
-      [ 'NEAR', 'AURORA' ],
+      [ 'BTC', 'BNB' ],
       [ 'BTC', 'AVAX' ],
+      [ 'ETH', 'NEAR' ],
+      [ 'LTC', 'LINK' ],
       [ 'ETH', 'ADA' ],
-      [ 'ETH', 'USDC' ],
+      [ 'BNB', 'LINK' ],
       [ 'INDY', 'ADA' ],
-      [ 'AVAX', 'USDC' ],
-      [ 'AURORA', 'USDC' ],
       [ 'BNB', 'LTC' ],
-      [ 'SOL', 'ADA' ],
-      [ 'BTC', 'USDC' ]
+      [ 'BTC', 'ADA' ],
+      [ 'ADA', 'SNEK' ],
+      [ 'NEAR', 'AURORA' ],
+      [ 'ETH', 'USDC' ]
       ]
 };
 
