@@ -1,35 +1,34 @@
 
-// created by: pools 2.05
+// created by: pools 2.04
 
 
  
 const poolAssets = {
    generated: '2026-08-08',
    assets: [
-      [ 'NEAR', 'USDC' ],
-      [ 'BTC', 'BNB' ],
-      [ 'ETH', 'AURORA' ],
-      [ 'ETH', 'AVAX' ],
-      [ 'AVAX', 'UNDEAD' ],
-      [ 'BNB', 'LINK' ],
-      [ 'LTC', 'LINK' ],
       [ 'ETH', 'NEAR' ],
-      [ 'ETH', 'BNB' ],
+      [ 'AVAX', 'UNDEAD' ],
+      [ 'AVAX', 'USDC' ],
+      [ 'BNB', 'LINK' ],
+      [ 'BNB', 'LTC' ],
+      [ 'ADA', 'USDC' ],
+      [ 'LTC', 'LINK' ],
+      [ 'NEAR', 'USDC' ],
       [ 'BNB', 'USDT' ],
       [ 'BTC', 'ADA' ],
-      [ 'ADA', 'USDC' ],
-      [ 'ADA', 'SNEK' ],
-      [ 'BTC', 'DOGE' ],
-      [ 'BTC', 'ETH' ],
-      [ 'NEAR', 'AURORA' ],
-      [ 'BTC', 'AVAX' ],
-      [ 'ETH', 'ADA' ],
       [ 'ETH', 'USDC' ],
+      [ 'ETH', 'BNB' ],
+      [ 'BTC', 'BNB' ],
+      [ 'ETH', 'ADA' ],
+      [ 'ETH', 'AVAX' ],
+      [ 'ETH', 'AURORA' ],
+      [ 'BTC', 'DOGE' ],
+      [ 'NEAR', 'AURORA' ],
       [ 'INDY', 'ADA' ],
-      [ 'AVAX', 'USDC' ],
+      [ 'BTC', 'AVAX' ],
       [ 'AURORA', 'USDC' ],
-      [ 'BNB', 'LTC' ],
-      [ 'SOL', 'ADA' ],
+      [ 'BTC', 'ETH' ],
+      [ 'ADA', 'SNEK' ],
       [ 'BTC', 'USDC' ]
       ]
 };
