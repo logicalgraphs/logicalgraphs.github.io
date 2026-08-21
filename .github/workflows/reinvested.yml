@@ -1,0 +1,133 @@
+name: reinvested
+
+on:
+  workflow_dispatch:
+    inputs:
+      investor:
+        description: 'Investor name / Telegram chat'
+        required: true
+        type: choice
+        options:
+          - Pivot_Internal_Bot
+          - alpha
+          - phi
+          - psi
+          - pi
+          - tau
+      token_a:
+        description: 'Reinvested token, left side of pool (e.g. AVAX)'
+        required: true
+        type: string
+      token_b:
+        description: 'Paired token, right side of pool (e.g. BTC)'
+        required: true
+        type: string
+      pivot_count:
+        description: 'Number of pivots closed (e.g. 2)'
+        required: true
+        type: string
+        default: '1'
+      amount:
+        description: 'Amount reinvested (e.g. 0.59)'
+        required: true
+        type: string
+      url:
+        description: 'Tweet URL (e.g. x.com/pivocateur)'
+        required: true
+        type: string
+      send:
+        description: 'Let Robbie send the message? (uncheck to display only)'
+        required: false
+        type: boolean
+        default: true
+      flipped:
+        description: 'When you trade in the opposite direction (e.g. BTC/AVAX instead of AVAX/BTC)'
+        required: false
+        type: boolean
+        default: false
+
+env:
+  DAPP: reinvested
+
+jobs:
+  run-reinvested:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout pivoteur.github.io # This repo is the root dir for this workflow
+        uses: actions/checkout@v4
+
+      - name: Checkout protocol # needed by cache step to locate Cargo.toml
+        uses: actions/checkout@v4
+        with:
+          repository: pivoteur/protocol
+          path: protocol
+
+      - name: Load Shared Environment Variables
+        uses: doughepi/yaml-env-action@v1.0.0
+        with:
+          files: .github/config/protocol-env.yml
+          
+      - name: Establish app path
+        run: echo "DAPP_DIR=$DAPPS_DIR/$DAPP" >> $GITHUB_ENV
+
+      - name: Establish git path
+        run: echo "GIT_DAPP_DIR=$GITHUB_PATH/$DAPP_DIR" >> $GITHUB_ENV
+
+      - name: Cache reinvested binary
+        id: binary-cache
+        uses: actions/cache@v4
+        with:
+          path: $DAPP_DIR/target/release/$DAPP
+          key: >-
+            reinvested-binary-
+            ${{ hashFiles(format('{0}/quiz11/a_reinvested/**/*.rs', env.QUIZZES_SRC)) }}-
+            ${{ hashFiles(format('{0}/Cargo.toml', env.DAPP_DIR)) }}-
+            ${{ hashFiles(format('{0}/Cargo.lock', env.DAPP_DIR)) }}
+
+      - name: Install Rust toolchain
+        if: steps.binary-cache.outputs.cache-hit != 'true'
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+
+      - name: Checkout crypto-n-rust
+        if: steps.binary-cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: logicalgraphs/crypto-n-rust
+          path: crypto-n-rust
+
+      - name: Show input parameters
+        run: |
+          echo "=== Running reinvested with manual inputs ==="
+          echo "investor:    ${{ inputs.investor }}"
+          echo "token_a:     ${{ inputs.token_a }}"
+          echo "token_b:     ${{ inputs.token_b }}"
+          echo "pivot_count: ${{ inputs.pivot_count }}"
+          echo "amount:      ${{ inputs.amount }}"
+          echo "url:         ${{ inputs.url }}"
+          echo "send:        ${{ inputs.send }}"
+          echo "flipped:     ${{ inputs.flipped }}"
+
+      - name: Build reinvested
+        if: steps.binary-cache.outputs.cache-hit != 'true'
+        run: |
+          cargo build --manifest-path $DAPP_DIR/Cargo.toml --bin $DAPP --release
+
+      - name: Add reinvested to PATH
+        run: echo "$DAPP_DIR/$EXE_SUBDIR" >> $GITHUB_PATH
+
+      - name: Run reinvested
+        env:
+          REINVESTED_BOT:    ${{ secrets.PIVOT_PROTOCOL_ROBBIE }}
+          INVESTOR_CHAT_IDS: ${{ secrets.INVESTOR_CHAT_IDS }}
+        run: |
+          $DAPP "${{ inputs.investor }}"    \
+                     "${{ inputs.token_a }}"     \
+                     "${{ inputs.token_b }}"     \
+                     "${{ inputs.pivot_count }}" \
+                     "${{ inputs.amount }}"      \
+                     "${{ inputs.url }}"         \
+                     "${{ inputs.send }}"        \
+                     "${{ inputs.flipped }}"

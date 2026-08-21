@@ -1,0 +1,119 @@
+name: health
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (print to stdout only, no commit)'
+        type: boolean
+        default: false
+  schedule:
+    # ("Min Hour Day Month DayofWeek" in UTC) at a scheduled time 
+    - cron: "45 07 * * *" 
+
+permissions:
+  contents: write
+
+jobs:
+  update_health:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout pivoteur.github.io
+        uses: actions/checkout@v4
+        with:
+          path: pivoteur.github.io
+
+      - name: Checkout protocol
+        uses: actions/checkout@v4
+        with:
+          repository: pivoteur/protocol
+          path: protocol
+
+      - name: Copy diagnostics to pivoteur.github.io
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            echo "=== DRY RUN: diagnostics.txt would be copied from protocol ==="
+            diff protocol/data/diagnostics.txt pivoteur.github.io/data/diagnostics.txt || true
+          else
+            cp protocol/data/diagnostics.txt pivoteur.github.io/data/diagnostics.txt
+          fi
+
+      - name: Fetch workflow run status and closed issues
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          fetch_status() {
+            local repo=$1 workflow=$2 name=$3
+            local url="https://api.github.com/repos/${repo}/actions/workflows/${workflow}/runs?per_page=1"
+            local result=$(curl -s \
+              -H "Authorization: token $GITHUB_TOKEN" \
+              "$url")
+            local status=$(echo "$result" | jq -r '.workflow_runs[0].conclusion // "unknown"')
+            local ran_at=$(echo "$result" | jq -r '.workflow_runs[0].updated_at // "unknown"')
+            echo "{\"name\":\"$name\",\"repo\":\"$repo\",\"status\":\"$status\",\"ran_at\":\"$ran_at\"}"
+          }
+
+          DATE=$(date -u +"%Y-%m-%d")
+          REPOS=("pivoteur/protocol" "pivoteur/pivoteur.github.io" "logicalgraphs/crypto-n-rust")
+
+          workflows=$(jq -n --argjson entries "$(
+            echo '['
+            fetch_status "logicalgraphs/crypto-n-rust"  "quotes.yml"  "Quotes"
+            echo ','
+            fetch_status "pivoteur/pivoteur.github.io"  "assets.yml"  "Assets"
+            echo ','
+            fetch_status "pivoteur/pivoteur.github.io"  "virtsz.yml"  "Virtsz"
+            echo ','
+            fetch_status "pivoteur/pivoteur.github.io"  "dusk.yml"    "Dusk"
+            echo ','
+            fetch_status "pivoteur/pivoteur.github.io"  "hwaet.yml"   "Hwaet"
+            echo ','
+            fetch_status "pivoteur/pivoteur.github.io" "daily.yml"  "Daily"
+            echo ','
+            fetch_status "pivoteur/pivoteur.github.io" "pools.yml"  "Pools"
+            echo ','
+            fetch_status "pivoteur/protocol"           "rat.yml"     "R.A.T."
+            echo ']'
+          )" '$entries')
+
+          closed='[]'
+          for repo in "${REPOS[@]}"; do
+            count=$(curl -s \
+              -H "Authorization: token $GITHUB_TOKEN" \
+              -H "Accept: application/vnd.github.v3+json" \
+              "https://api.github.com/search/issues?q=repo:${repo}+type:issue+is:closed+closed:${DATE}" \
+              | jq '.total_count // 0')
+            closed=$(echo "$closed" | jq \
+              --arg repo "$repo" \
+              --argjson count "$count" \
+              '. += [{"repo": $repo, "closed_today": $count}]')
+            sleep 2
+          done
+
+          jq -n \
+            --arg date "$DATE" \
+            --argjson workflows "$workflows" \
+            --argjson closed_issues "$closed" \
+            '{"date": $date, "workflows": $workflows, "closed_issues": $closed_issues}' \
+            > /tmp/workflows_out.json
+
+          echo "--- workflows.json ---"
+          cat /tmp/workflows_out.json
+
+          if [ "${{ github.event.inputs.dry_run }}" != "true" ]; then
+            mv /tmp/workflows_out.json pivoteur.github.io/data/workflows.json
+          fi
+
+      - name: Commit and push diagnostics
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        env:
+          USER0_NAME: ${{ vars.USER0_NAME }}
+          USER0_EMAIL: ${{ secrets.USER0_EMAIL }}
+        run: |
+          cd pivoteur.github.io
+          git config user.name "$USER0_NAME"
+          git config user.email "$USER0_EMAIL"
+          git add data/diagnostics.txt data/workflows.json
+          git commit -m "health of the protocol [skip ci]" || echo "No changes to commit"
+          git push

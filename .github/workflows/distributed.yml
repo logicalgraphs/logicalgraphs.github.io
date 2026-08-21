@@ -1,0 +1,125 @@
+name: distributed
+
+on:
+  workflow_dispatch:
+    inputs:
+      investor:
+        description: 'Investor name / Telegram chat'
+        required: true
+        type: choice
+        options:
+          - Pivot_Internal_Bot
+          - alpha
+          - phi
+          - psi
+          - pi
+          - tau
+      token_a:
+        description: 'Distributed token, left side of pool (e.g. USDC)'
+        required: true
+        type: string
+      token_b:
+        description: 'Paired token, right side of pool (e.g. UNDEAD)'
+        required: true
+        type: string
+      amount:
+        description: 'Amount distributed to investor (e.g. 0.4349)'
+        required: true
+        type: string
+      tweet_url:
+        description: 'Tweet URL (default: x.com/pivocateur/status/2054570565474635869)'
+        required: false
+        type: string
+        default: 'x.com/pivocateur/status/2054570565474635869'
+      tx_url:
+        description: 'Snowtrace tx URL (default: asdf)'
+        required: false
+        type: string
+        default: 'asdf'
+      send:
+        description: 'Let Robbie send the message? (uncheck to display only)'
+        required: false
+        type: boolean
+        default: true
+
+env:
+  DAPP: distributed
+
+jobs:
+  run-distributed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout pivoteur.github.io
+        uses: actions/checkout@v4
+
+      - name: Checkout protocol
+        uses: actions/checkout@v4
+        with:
+          repository: pivoteur/protocol
+          path: protocol
+
+      - name: Load Shared Environment Variables
+        uses: doughepi/yaml-env-action@v1.0.0
+        with:
+          files: .github/config/protocol-env.yml
+
+      - name: Establish app path
+        run: echo "DAPP_DIR=$DAPPS_DIR/$DAPP" >> $GITHUB_ENV
+
+      - name: Establish git path
+        run: echo "GIT_DAPP_DIR=$GITHUB_PATH/$DAPP_DIR" >> $GITHUB_ENV
+
+      - name: Cache distributed binary
+        id: binary-cache
+        uses: actions/cache@v4
+        with:
+          path: protocol/dapps/distributed/target/release/distributed
+          key: >-
+            distributed-binary-
+            ${{ hashFiles(format('{0}/quiz11/b_distributed/**/*.rs', env.QUIZZES_SRC)) }}-
+            ${{ hashFiles(format('{0}/Cargo.toml', env.DAPP_DIR)) }}-
+            ${{ hashFiles(format('{0}/Cargo.lock', env.DAPP_DIR)) }}
+
+      - name: Set up Rust
+        if: steps.binary-cache.outputs.cache-hit != 'true'
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Checkout crypto-n-rust
+        if: steps.binary-cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: logicalgraphs/crypto-n-rust
+          path: crypto-n-rust
+
+      - name: Show input parameters
+        run: |
+          echo "=== Running distributed with manual inputs ==="
+          echo "investor:  ${{ inputs.investor }}"
+          echo "token_a:   ${{ inputs.token_a }}"
+          echo "token_b:   ${{ inputs.token_b }}"
+          echo "amount:    ${{ inputs.amount }}"
+          echo "tweet_url: ${{ inputs.tweet_url }}"
+          echo "tx_url:    ${{ inputs.tx_url }}"
+          echo "send:      ${{ inputs.send }}"
+
+      - name: Build distributed
+        if: steps.binary-cache.outputs.cache-hit != 'true'
+        run: |
+          cargo build --manifest-path $DAPP_DIR/Cargo.toml --bin $DAPP --release
+
+      - name: Add distributed to PATH
+        run: echo "$DAPP_DIR/$EXE_SUBDIR" >> $GITHUB_PATH
+
+      - name: Run distributed
+        env:
+          REINVESTED_BOT:    ${{ secrets.PIVOT_PROTOCOL_ROBBIE }}
+          INVESTOR_CHAT_IDS: ${{ secrets.INVESTOR_CHAT_IDS }}
+        run: |
+          $DAPP "${{ inputs.investor }}"  \
+                "${{ inputs.token_a }}"   \
+                "${{ inputs.token_b }}"   \
+                "${{ inputs.amount }}"    \
+                "${{ inputs.tweet_url }}" \
+                "${{ inputs.tx_url }}"    \
+                "${{ inputs.send }}"
+                

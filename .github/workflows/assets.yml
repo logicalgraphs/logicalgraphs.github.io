@@ -1,56 +1,54 @@
-name: hwaet
+name: assets
 
 on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: 'Dry run (print to stdout only, no commit)'
+        description: 'Dry run — do not commit/push results'
         type: boolean
         default: false
   schedule:
-    # ("Min Hour Day Month DayofWeek" in UTC) at a scheduled time 
-    - cron: "45 06 * * *" 
+    # ("Min Hour Day Month DayofWeek" in UTC) at a scheduled time
+    - cron: "57 04 * * *" 
 
-env: 
-  DAPP: hwaet
+env:
+   DAPP: assets
 
 permissions:
   contents: write
 
 jobs:
-  run-hwaet:
+  run-assets:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout pivoteur.github.io # This repo is the root dir for this workflow
+      - name: Checkout protocol repository
         uses: actions/checkout@v4
-
-      - name: Checkout protocol # needed by cache step to locate Cargo.toml
-        uses: actions/checkout@v4
-        with:
-          repository: pivoteur/protocol
-          path: protocol
 
       - name: Load Shared Environment Variables
         uses: doughepi/yaml-env-action@v1.0.0
         with:
           files: .github/config/protocol-env.yml
-          
+
       - name: Establish app path
         run: echo "DAPP_DIR=$DAPPS_DIR/$DAPP" >> $GITHUB_ENV
 
-      - name: Establish git path
-        run: echo "GIT_DAPP_DIR=$GITHUB_PATH/$DAPP_DIR" >> $GITHUB_ENV
+      - name: Checkout protocol
+        uses: actions/checkout@v4
+        with:
+          repository: pivoteur/protocol
+          path: protocol
 
-      - name: Cache hwaet binary
+      - name: Cache assets binary
         id: binary-cache
         uses: actions/cache@v4
         with:
-          path: protocol/dapps/hwaet/target/release/hwaet
+          path: protocol/dapps/assets/target/release/assets
           key: >-
-            hwaet-binary-
-            ${{ hashFiles(format('{0}/quiz07/d_health/**/*.rs', env.QUIZZES_SRC)) }}-
-            ${{ hashFiles(format('{0}/Cargo.toml', env.DAPP_DIR)) }}-
-            ${{ hashFiles(format('{0}/Cargo.lock', env.DAPP_DIR)) }}
+            assets-binary-
+            ${{ hashFiles( format('{0}/quiz06/c_assets/**/*.rs',
+                                  env.QUIZZES_SRC)) }}-
+            ${{ hashFiles( format('{0}/Cargo.toml', env.DAPP_DIR)) }}-
+            ${{ hashFiles( format('{0}/Cargo.lock', env.DAPP_DIR)) }}
 
       - name: Install Rust toolchain
         if: steps.binary-cache.outputs.cache-hit != 'true'
@@ -65,27 +63,27 @@ jobs:
           repository: logicalgraphs/crypto-n-rust
           path: crypto-n-rust
 
-      - name: Build hwaet
+      - name: Build assets
         if: steps.binary-cache.outputs.cache-hit != 'true'
         run: |
           cargo build --manifest-path $DAPP_DIR/Cargo.toml --bin $DAPP --release
 
-      - name: Add hwaet to PATH
+      - name: Add assets to PATH
         run: echo "$DAPP_DIR/$EXE_SUBDIR" >> $GITHUB_PATH
 
-      - name: Setting date and URL
+      - name: Set date and pivot_url
         run: |
           echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-          echo "PIVOT_URL=https://raw.githubusercontent.com/pivoteur/pivoteur.github.io" >> $GITHUB_ENV
+          echo "PIVOT_URL=$RAW_URL/${{ github.repository }}" >> $GITHUB_ENV
 
-      - name: Run hwaet
+      - name: Run assets and log output
+        env:
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
         run: |
-          $DAPP $PROTOCOL_ALIAS $LE_DATE > /tmp/hwaet_out.js
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
-            echo "=== DRY RUN: pool-health.js would be ==="
-            cat /tmp/hwaet_out.js
+          if [ "$DRY_RUN" = "true" ]; then
+            $DAPP $PROTOCOL_ALIAS $LE_DATE
           else
-            mv /tmp/hwaet_out.js libs/pool-health.js
+            $DAPP $PROTOCOL_ALIAS $LE_DATE >> data/assets.csv
           fi
 
       - name: Commit and push results
@@ -96,12 +94,12 @@ jobs:
         run: |
           git config --local user.name "$USER0_NAME"
           git config --local user.email "$USER0_EMAIL"
-          git add libs/pool-health.js
+          git add data/assets.csv
 
           if git diff --staged --quiet; then
             echo "Nothing to commit, skipping push"
             exit 0
-          fi
+          fi  
 
-          git commit -m "hwaet $LE_DATE"
+          git commit -m "$DAPP $LE_DATE"
           git push

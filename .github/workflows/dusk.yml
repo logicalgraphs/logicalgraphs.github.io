@@ -1,4 +1,4 @@
-name: hwaet
+name: dusk
 
 on:
   workflow_dispatch:
@@ -9,16 +9,16 @@ on:
         default: false
   schedule:
     # ("Min Hour Day Month DayofWeek" in UTC) at a scheduled time 
-    - cron: "45 06 * * *" 
+    - cron: "14 05 * * *" 
 
 env: 
-  DAPP: hwaet
+  DAPP: dusk
 
 permissions:
   contents: write
 
 jobs:
-  run-hwaet:
+  run-dusk:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout pivoteur.github.io # This repo is the root dir for this workflow
@@ -40,15 +40,15 @@ jobs:
 
       - name: Establish git path
         run: echo "GIT_DAPP_DIR=$GITHUB_PATH/$DAPP_DIR" >> $GITHUB_ENV
-
-      - name: Cache hwaet binary
+          
+      - name: Cache dusk binary
         id: binary-cache
         uses: actions/cache@v4
         with:
-          path: protocol/dapps/hwaet/target/release/hwaet
+          path: protocol/dapps/dusk/target/release/dusk
           key: >-
-            hwaet-binary-
-            ${{ hashFiles(format('{0}/quiz07/d_health/**/*.rs', env.QUIZZES_SRC)) }}-
+            dusk-binary-
+            ${{ hashFiles(format('{0}/quiz05/b_dusk_min/**/*.rs', env.QUIZZES_SRC)) }}-
             ${{ hashFiles(format('{0}/Cargo.toml', env.DAPP_DIR)) }}-
             ${{ hashFiles(format('{0}/Cargo.lock', env.DAPP_DIR)) }}
 
@@ -65,12 +65,12 @@ jobs:
           repository: logicalgraphs/crypto-n-rust
           path: crypto-n-rust
 
-      - name: Build hwaet
+      - name: Build dusk
         if: steps.binary-cache.outputs.cache-hit != 'true'
         run: |
           cargo build --manifest-path $DAPP_DIR/Cargo.toml --bin $DAPP --release
 
-      - name: Add hwaet to PATH
+      - name: Add dusk to PATH
         run: echo "$DAPP_DIR/$EXE_SUBDIR" >> $GITHUB_PATH
 
       - name: Setting date and URL
@@ -78,14 +78,14 @@ jobs:
           echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
           echo "PIVOT_URL=https://raw.githubusercontent.com/pivoteur/pivoteur.github.io" >> $GITHUB_ENV
 
-      - name: Run hwaet
+      - name: Run dusk and log output
         run: |
-          $DAPP $PROTOCOL_ALIAS $LE_DATE > /tmp/hwaet_out.js
+          $DAPP --min $PROTOCOL_ALIAS $LE_DATE > /tmp/dusk_out.csv
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
-            echo "=== DRY RUN: pool-health.js would be ==="
-            cat /tmp/hwaet_out.js
+            echo "=== DRY RUN: calls.csv would be ==="
+            cat /tmp/dusk_out.csv
           else
-            mv /tmp/hwaet_out.js libs/pool-health.js
+            mv /tmp/dusk_out.csv data/pivots/calls.csv
           fi
 
       - name: Commit and push results
@@ -96,12 +96,12 @@ jobs:
         run: |
           git config --local user.name "$USER0_NAME"
           git config --local user.email "$USER0_EMAIL"
-          git add libs/pool-health.js
+          git add data/pivots/calls.csv
 
           if git diff --staged --quiet; then
             echo "Nothing to commit, skipping push"
             exit 0
           fi
 
-          git commit -m "hwaet $LE_DATE"
+          git commit -m "dusk --min $LE_DATE"
           git push

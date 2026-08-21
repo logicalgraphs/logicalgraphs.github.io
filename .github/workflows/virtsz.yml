@@ -1,24 +1,24 @@
-name: hwaet
+name: virtsz
 
 on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: 'Dry run (print to stdout only, no commit)'
+        description: 'Dry run (skip commit/push; auto-virtsz.sh still writes to the runner checkout)'
         type: boolean
         default: false
   schedule:
-    # ("Min Hour Day Month DayofWeek" in UTC) at a scheduled time 
-    - cron: "45 06 * * *" 
+    # test the cron ("Min Hour Day Month DayofWeek" in UTC) at scheduled time 
+    - cron: "47 03 * * *" # this is 11:47 AM Eastern Standard Time
 
 env: 
-  DAPP: hwaet
+  DAPP: virtsz
 
 permissions:
   contents: write
 
 jobs:
-  run-hwaet:
+  run-virtsz:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout pivoteur.github.io # This repo is the root dir for this workflow
@@ -41,14 +41,14 @@ jobs:
       - name: Establish git path
         run: echo "GIT_DAPP_DIR=$GITHUB_PATH/$DAPP_DIR" >> $GITHUB_ENV
 
-      - name: Cache hwaet binary
+      - name: Cache virtsz binary
         id: binary-cache
         uses: actions/cache@v4
         with:
-          path: protocol/dapps/hwaet/target/release/hwaet
+          path: $DAPP_DIR/target/release/$DAPP
           key: >-
-            hwaet-binary-
-            ${{ hashFiles(format('{0}/quiz07/d_health/**/*.rs', env.QUIZZES_SRC)) }}-
+            virtsz-binary-
+            ${{ hashFiles(format('{0}/quiz07/b_virtual/**/*.rs', env.QUIZZES_SRC)) }}-
             ${{ hashFiles(format('{0}/Cargo.toml', env.DAPP_DIR)) }}-
             ${{ hashFiles(format('{0}/Cargo.lock', env.DAPP_DIR)) }}
 
@@ -65,28 +65,29 @@ jobs:
           repository: logicalgraphs/crypto-n-rust
           path: crypto-n-rust
 
-      - name: Build hwaet
+      - name: Build virtsz
         if: steps.binary-cache.outputs.cache-hit != 'true'
         run: |
           cargo build --manifest-path $DAPP_DIR/Cargo.toml --bin $DAPP --release
 
-      - name: Add hwaet to PATH
+      - name: Add virtsz to PATH
         run: echo "$DAPP_DIR/$EXE_SUBDIR" >> $GITHUB_PATH
 
-      - name: Setting date and URL
+      - name: Set date and pivot_url
         run: |
           echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
           echo "PIVOT_URL=https://raw.githubusercontent.com/pivoteur/pivoteur.github.io" >> $GITHUB_ENV
 
-      - name: Run hwaet
+      - name: Run virtsz
+        env:
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
         run: |
-          $DAPP $PROTOCOL_ALIAS $LE_DATE > /tmp/hwaet_out.js
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
-            echo "=== DRY RUN: pool-health.js would be ==="
-            cat /tmp/hwaet_out.js
-          else
-            mv /tmp/hwaet_out.js libs/pool-health.js
-          fi
+          echo "Current directory contents:"
+          ls -l
+          echo "Looking for virtsz binary:"
+          find . -name virtsz -type f
+
+          sh ./protocol/scripts/auto-virtsz.sh pivot data/pivots/open/raw
 
       - name: Commit and push results
         if: ${{ github.event.inputs.dry_run != 'true' }}
@@ -96,12 +97,12 @@ jobs:
         run: |
           git config --local user.name "$USER0_NAME"
           git config --local user.email "$USER0_EMAIL"
-          git add libs/pool-health.js
+          git add data/pivots/open/raw/*.tsv
 
           if git diff --staged --quiet; then
             echo "Nothing to commit, skipping push"
             exit 0
           fi
 
-          git commit -m "hwaet $LE_DATE"
+          git commit -m "virtsz $LE_DATE"
           git push

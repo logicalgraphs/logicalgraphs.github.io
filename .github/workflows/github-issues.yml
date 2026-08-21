@@ -1,0 +1,66 @@
+name: github-issues
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (print to stdout only, no commit)'
+        type: boolean
+        default: false
+  # schedule:
+    # ("Min Hour Day Month DayofWeek" in UTC) at a scheduled time
+    # - cron: "40 04 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  issues-to-json:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout pivoteur.github.io
+        uses: actions/checkout@v4
+
+      - name: Set today's date
+        run: echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      - name: Count closed issues per repo
+        run: |
+          count_closed () {
+            local repo="$1"
+            curl -s \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/search/issues?q=repo:${repo}+is:issue+is:closed+closed:${LE_DATE}" \
+              | jq '.total_count'
+          }
+
+          SITE_COUNT=$(count_closed "pivoteur/pivoteur.github.io")
+          PROTOCOL_COUNT=$(count_closed "pivoteur/protocol")
+          CRYPTO_COUNT=$(count_closed "logicalgraphs/crypto-n-rust")
+
+          jq -n \
+            --arg date "$LE_DATE" \
+            --argjson site "$SITE_COUNT" \
+            --argjson protocol "$PROTOCOL_COUNT" \
+            --argjson crypto "$CRYPTO_COUNT" \
+            '{date: $date, repos: {"pivoteur.github.io": $site, "protocol": $protocol, "crypto-n-rust": $crypto}}' \
+            > /tmp/github-issues_out.json
+
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            echo "=== DRY RUN: github-issues.json would be ==="
+            cat /tmp/github-issues_out.json
+          else
+            mv /tmp/github-issues_out.json libs/github-issues.json
+          fi
+
+      - name: Commit and push github-issues.json
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        env:
+          USER0_NAME: ${{ vars.USER0_NAME }}
+          USER0_EMAIL: ${{ secrets.USER0_EMAIL }}
+        run: |
+          git config --local user.email "$USER0_EMAIL"
+          git config --local user.name "$USER0_NAME"
+          git add libs/github-issues.json
+          git commit -m "Daily GitHub issues-closed JSON for $LE_DATE"
+          git push
