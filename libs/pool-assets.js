@@ -11,7 +11,6 @@ const poolAssets = {
       [ 'BNB', 'LINK' ],
       [ 'BNB', 'LTC' ],
       [ 'BTC', 'DOGE' ],
-      [ 'AURORA', 'USDC' ],
       [ 'AVAX', 'USDC' ],
       [ 'AVAX', 'UNDEAD' ],
       [ 'LTC', 'LINK' ],
