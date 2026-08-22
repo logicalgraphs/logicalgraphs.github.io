@@ -74,7 +74,7 @@ jobs:
       - name: Set date and pivot_url
         run: |
           echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-          echo "PIVOT_URL=$RAW_URL/${{ github.repository }}" >> $GITHUB_ENV
+          echo "LG_URL=$RAW_URL/${{ github.repository }}" >> $GITHUB_ENV
 
       - name: Run assets and log output
         env:
