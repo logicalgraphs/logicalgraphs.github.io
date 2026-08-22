@@ -78,7 +78,7 @@ jobs:
 
       - name: Run pools
         env:
-          PIVOT_DATA_DIR: data
+          LG_DATA_DIR: data
         run: |
           $DAPP $PROTOCOL_ALIAS $LE_DATE > /tmp/pools_out.js
 

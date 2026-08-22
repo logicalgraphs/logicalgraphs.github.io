@@ -1,4 +1,4 @@
-PROTOCOL_ALIAS: lg
+PROTOCOL_ALIAS: LG
 RAW_URL: https://raw.githubusercontent.com
 DAPPS_DIR: protocol/dapps
 EXE_SUBDIR: target/release
