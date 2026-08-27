@@ -1,7 +1,7 @@
 opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1	gain_10_percent	to	to_blockchain	net	ersatz	quote2	val2
-2025-03-08	1	0	virtual_swap	2026-08-27	BNB	Binance	0	0.6908626	$705.42	$487.35	0.75994885	LTC	Binance	9.8058	0	$49.70	$487.35
-2025-03-10	2	0	virtual_swap	2026-08-27	BNB	Binance	0	0.82245743	$705.42	$580.18	0.9047032	LTC	Binance	11.6736	0	$49.70	$580.18
-2025-03-11	3	0	virtual_swap	2026-08-27	BNB	Binance	0	0.79020345	$705.42	$557.43	0.86922383	LTC	Binance	11.2158	0	$49.70	$557.43
+2025-03-08	1	0	virtual_swap	2026-08-27	BNB	Binance	0	0.6903321	$705.82	$487.25	0.7593653	LTC	Binance	9.8058	0	$49.69	$487.25
+2025-03-10	2	0	virtual_swap	2026-08-27	BNB	Binance	0	0.8218259	$705.82	$580.06	0.9040085	LTC	Binance	11.6736	0	$49.69	$580.06
+2025-03-11	3	0	virtual_swap	2026-08-27	BNB	Binance	0	0.7895966	$705.82	$557.31	0.8685563	LTC	Binance	11.2158	0	$49.69	$557.31
 2025-03-11	4	1	https://bscscan.com/tx/0x16f525f03a27c4e37ac6e1d3ffb4465509b74643e64dee6f49de4aa9cfaffc49	n/a	LTC	Binance	5.62	0	$87.10	$489.50	6.182	BNB	Binance	0.9096	0	$544.50	$495.28
 2025-03-22	5	2	https://bscscan.com/tx/0x44531b0b811f6cfec3311eb312d93d5f26a07bec9f8819fa524f7cf4db58df34	n/a	LTC	Binance	5.48	0	$91.06	$499.01	6.0280004	BNB	Binance	0.7987	0	$627.78	$501.41
 2025-04-22	6	3	https://bscscan.com/tx/0x0a5f00cde06fdc3a5a1235e96050e4c4e26b443a5051e50affe9c9882c1b8d54	n/a	LTC	Binance	12.71	0	$80.39	$1021.76	13.981	BNB	Binance	1.6571	0	$602.06	$997.67
