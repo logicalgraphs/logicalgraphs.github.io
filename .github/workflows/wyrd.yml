@@ -100,7 +100,7 @@ jobs:
 
       - name: protocol URL and paths to dapps
         run: |
-          echo "LG_URL=$RAW_URL/${{ github.event.repository.name }}" >> $GITHUB_ENV
+          echo "LG_URL=$RAW_URL/${{ github.repository }}" >> $GITHUB_ENV
           echo "$DAPP_DIR/$EXE_SUBDIR" >> $GITHUB_PATH
           echo "$DAPPS_DIR/appender/$EXE_SUBDIR" >> $GITHUB_PATH
 
