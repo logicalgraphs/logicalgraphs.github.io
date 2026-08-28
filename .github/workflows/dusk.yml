@@ -3,8 +3,18 @@ name: dusk
 on:
   workflow_dispatch:
   schedule:
-    # test the cron ("Min Hour Day Month DayofWeek" in UTC) at scheduled time 
     - cron: "14 08 * * *" # this is 12:14 AM Eastern Standard Time
+    inputs:
+      dry_run:
+        description: 'Dry run (print to stdout only, no commit)'
+        type: boolean
+        default: false
+  schedule:
+    # ("Min Hour Day Month DayofWeek" in UTC) at a scheduled time 
+    - cron: "14 05 * * *" 
+
+env: 
+  DAPP: dusk
 
 permissions:
   contents: write
@@ -13,7 +23,7 @@ jobs:
   run-dusk:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout logicalgraphs.github.io # This repo is the root dir for this workflow
+      - name: Checkout logicalgraphs.github.io
         uses: actions/checkout@v4
 
       - name: Checkout protocol # needed by cache step to locate Cargo.toml
@@ -22,12 +32,27 @@ jobs:
           repository: pivoteur/protocol
           path: protocol
 
+      - name: Load Shared Environment Variables
+        uses: doughepi/yaml-env-action@v1.0.0
+        with:
+          files: .github/config/protocol-env.yml
+          
+      - name: Establish app path
+        run: echo "DAPP_DIR=$DAPPS_DIR/$DAPP" >> $GITHUB_ENV
+
+      - name: Establish git path
+        run: echo "GIT_DAPP_DIR=$GITHUB_PATH/$DAPP_DIR" >> $GITHUB_ENV
+          
       - name: Cache dusk binary
         id: binary-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: protocol/dapps/dusk/target/release/dusk
-          key: dusk-binary-${{ hashFiles('protocol/quizzes/src/quiz05/b_dusk_min/**/*.rs', 'protocol/dapps/dusk/Cargo.toml', 'protocol/dapps/dusk/Cargo.lock') }}
+          key: >-
+            dusk-binary-
+            ${{ hashFiles(format('{0}/quiz05/b_dusk_min/**/*.rs', env.QUIZZES_SRC)) }}-
+            ${{ hashFiles(format('{0}/Cargo.toml', env.DAPP_DIR)) }}-
+            ${{ hashFiles(format('{0}/Cargo.lock', env.DAPP_DIR)) }}
 
       - name: Install Rust toolchain
         if: steps.binary-cache.outputs.cache-hit != 'true'
@@ -45,22 +70,28 @@ jobs:
       - name: Build dusk
         if: steps.binary-cache.outputs.cache-hit != 'true'
         run: |
-          cargo build --manifest-path protocol/dapps/dusk/Cargo.toml \
-            --bin dusk \
-            --release
+          cargo build --manifest-path $DAPP_DIR/Cargo.toml --bin $DAPP --release
 
       - name: Add dusk to PATH
-        run: echo "$GITHUB_WORKSPACE/protocol/dapps/dusk/target/release" >> $GITHUB_PATH
+        run: echo "$DAPP_DIR/$EXE_SUBDIR" >> $GITHUB_PATH
 
       - name: Setting date and URL
         run: |
           echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-          echo "LG_URL=https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io" >> $GITHUB_ENV
+          echo "LG_URL=$RAW_URL/${{ github.repository }}" >> $GITHUB_ENV
 
       - name: Run dusk and log output
-        run: dusk --min lg $LE_DATE > data/pivots/calls.csv
+        run: |
+          $DAPP --min $PROTOCOL_ALIAS $LE_DATE > /tmp/dusk_out.csv
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            echo "=== DRY RUN: calls.csv would be ==="
+            cat /tmp/dusk_out.csv
+          else
+            mv /tmp/dusk_out.csv data/pivots/calls.csv
+          fi
 
       - name: Commit and push results
+        if: ${{ github.event.inputs.dry_run != 'true' }}
         env:
           USER0_NAME: ${{ vars.USER0_NAME }}
           USER0_EMAIL: ${{ secrets.USER0_EMAIL }}

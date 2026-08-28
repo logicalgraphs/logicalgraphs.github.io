@@ -1,28 +1,40 @@
-name: virtsz
+name: pools
 
 on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: 'Dry run (skip commit/push; auto-virtsz.sh still writes to the runner checkout)'
+        description: 'Dry run (print to stdout only, no commit)'
         type: boolean
         default: false
   schedule:
-    # test the cron ("Min Hour Day Month DayofWeek" in UTC) at scheduled time 
-    - cron: "47 03 * * *" # this is 11:47 AM Eastern Standard Time
+        # ("Min Hour Day Month DayofWeek" in UTC) at a scheduled time
+    - cron: "45 05 * * *"
 
-env: 
-  DAPP: virtsz
+env:
+  DAPP: pools
 
 permissions:
   contents: write
 
 jobs:
-  run-virtsz:
+  run-pools:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout logicalgraphs.github.io
         uses: actions/checkout@v4
+
+      - name: Load Shared Environment Variables
+        uses: doughepi/yaml-env-action@v1.0.0
+        with:
+          files: .github/config/protocol-env.yml
+
+      - name: Establish app path
+        run: echo "DAPP_DIR=$DAPPS_DIR/$DAPP" >> $GITHUB_ENV
+
+      - name: Establish git path
+        run: echo "GIT_DAPP_DIR=$GITHUB_PATH/$DAPP_DIR" >> $GITHUB_ENV
 
       - name: Checkout protocol
         uses: actions/checkout@v4
@@ -30,61 +42,54 @@ jobs:
           repository: pivoteur/protocol
           path: protocol
 
-      - name: Load Shared Environment Variables
-        uses: doughepi/yaml-env-action@v1.0.0
-        with:
-          files: .github/config/protocol-env.yml
-          
-      - name: Establish app path
-        run: echo "DAPP_DIR=$DAPPS_DIR/$DAPP" >> $GITHUB_ENV
-
-      - name: Establish git path
-        run: echo "GIT_DAPP_DIR=$GITHUB_PATH/$DAPP_DIR" >> $GITHUB_ENV
-
-      - name: Cache virtsz binary
-        id: binary-cache
+      - name: Cache pools binary
+        id: pools-cache
         uses: actions/cache@v4
         with:
-          path: $DAPP_DIR/target/release/$DAPP
+          path: protocol/dapps/pools/target/release/pools
           key: >-
-            virtsz-binary-
-            ${{ hashFiles(format('{0}/quiz07/b_virtual/**/*.rs', env.QUIZZES_SRC)) }}-
+            pools-binary-
+            ${{ hashFiles(format('{0}/quiz10/c_local_pools/**/*.rs', env.QUIZZES_SRC)) }}-
             ${{ hashFiles(format('{0}/Cargo.toml', env.DAPP_DIR)) }}-
             ${{ hashFiles(format('{0}/Cargo.lock', env.DAPP_DIR)) }}
 
       - name: Install Rust toolchain
-        if: steps.binary-cache.outputs.cache-hit != 'true'
+        if: steps.pools-cache.outputs.cache-hit != 'true'
         uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
 
       - name: Checkout crypto-n-rust
-        if: steps.binary-cache.outputs.cache-hit != 'true'
+        if: steps.pools-cache.outputs.cache-hit != 'true'
         uses: actions/checkout@v4
         with:
           repository: logicalgraphs/crypto-n-rust
           path: crypto-n-rust
 
-      - name: Build virtsz
-        if: steps.binary-cache.outputs.cache-hit != 'true'
+      - name: Build pools
+        if: steps.pools-cache.outputs.cache-hit != 'true'
         run: |
           cargo build --manifest-path $DAPP_DIR/Cargo.toml --bin $DAPP --release
 
-      - name: Add virtsz to PATH
-        run: echo "$DAPP_DIR/$EXE_SUBDIR" >> $GITHUB_PATH
-
-      - name: Set date and pivot_url
+      - name: Add pools and date to PATH
         run: |
+          echo "$DAPP_DIR/$EXE_SUBDIR" >> $GITHUB_PATH
           echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-          echo "LG_URL=$RAW_URL/${{ github.repository }}" >> $GITHUB_ENV
 
-      - name: Run virtsz
+      - name: Run pools
         env:
-          DRY_RUN: ${{ github.event.inputs.dry_run }}
+          LG_DATA_DIR: data
         run: |
-          sh ./protocol/scripts/auto-virtsz.sh $PROTOCOL_ALIAS data/pivots/open/raw
+          $DAPP $PROTOCOL_ALIAS $LE_DATE > /tmp/pools_out.js
 
-      - name: Commit and push results
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            echo "=== DRY RUN: libs/pool-assets.js would be ==="
+            cat /tmp/pools_out.js
+          else
+            mv /tmp/pools_out.js libs/pool-assets.js
+          fi
+
+      - name: Commit and push pool-assets.js
         if: ${{ github.event.inputs.dry_run != 'true' }}
         env:
           USER0_NAME: ${{ vars.USER0_NAME }}
@@ -92,7 +97,7 @@ jobs:
         run: |
           git config --local user.name "$USER0_NAME"
           git config --local user.email "$USER0_EMAIL"
-          git add data/pivots/open/raw/*.tsv
+          git add libs/pool-assets.js
 
           if git diff --staged --quiet; then
             echo "Nothing to commit, skipping push"

@@ -21,6 +21,10 @@ on:
         type: boolean
         default: true
 
+env:
+  DAPP: convcls
+  PIVOT_DIR: data/pivots
+
 permissions:
   contents: write
 
@@ -32,18 +36,31 @@ jobs:
       - name: Checkout logicalgraphs.github.io
         uses: actions/checkout@v4
 
-      - name: Checkout protocol
+      - name: Checkout protocol repository
         uses: actions/checkout@v4
         with:
           repository: pivoteur/protocol
           path: protocol
 
+      - name: Load Shared Environment Variables
+        uses: doughepi/yaml-env-action@v1.0.0
+        with:
+          files: .github/config/protocol-env.yml
+
+      - name: Establish app path
+        run: echo "DAPP_DIR=$DAPPS_DIR/$DAPP" >> $GITHUB_ENV
+
       - name: Cache convcls binary
         id: binary-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: protocol/dapps/convcls/target/release/convcls
-          key: convcls-binary-${{ hashFiles('protocol/quizzes/src/quiz08/d_convcls/**/*.rs', 'protocol/dapps/convcls/Cargo.toml', 'protocol/dapps/convcls/Cargo.lock') }}
+          key: >-
+            convcls-binary-
+            ${{ hashFiles(format('{0}/quiz08/d_convcls/**/*.rs',
+                                  env.QUIZZES_SRC )) }}-
+            ${{ hashFiles(format('{0}/Cargo.toml', env.DAPP_DIR)) }}-
+            ${{ hashFiles(format('{0}/Cargo.lock', env.DAPP_DIR)) }}
 
       - name: Set up Rust
         if: steps.binary-cache.outputs.cache-hit != 'true'
@@ -65,18 +82,18 @@ jobs:
       - name: Build convcls
         if: steps.binary-cache.outputs.cache-hit != 'true'
         run: |
-          cargo build --manifest-path protocol/dapps/convcls/Cargo.toml --bin convcls
+          cargo build --manifest-path $DAPP_DIR/Cargo.toml --bin $DAPP --release
 
       - name: Add convcls to PATH
-        run: echo "$GITHUB_WORKSPACE/protocol/dapps/convcls/target/release" >> $GITHUB_PATH
+        run: echo "$DAPP_DIR/$EXE_SUBDIR" >> $GITHUB_PATH
 
       - name: Run convcls
         run: |
-          convcls data/pivots/open/raw/${{ inputs.pool }}.tsv \
-                    data/pivots/close/raw/${{ inputs.pool }}.tsv \
+          $DAPP $PIVOT_DIR/open/raw/${{ inputs.pool }}.tsv \
+                $PIVOT_DIR/close/raw/${{ inputs.pool }}.tsv \
                     > /tmp/convcls_out.tsv
           if [ "${{ inputs.dry_run }}" = "false" ]; then
-            mv /tmp/convcls_out.tsv data/pivots/close/raw/${{ inputs.pool }}.tsv
+            mv /tmp/convcls_out.tsv $PIVOT_DIR/close/raw/${{ inputs.pool }}.tsv
           else
             cat /tmp/convcls_out.tsv
           fi
@@ -93,12 +110,12 @@ jobs:
         run: |
           git config user.name "$USER0_NAME"
           git config user.email "$USER0_EMAIL"
-          git add data/pivots/close/raw/${{ inputs.pool }}.tsv
+          git add $PIVOT_DIR/close/raw/${{ inputs.pool }}.tsv
 
           if git diff --staged --quiet; then
             echo "Nothing to commit, skipping push"
             exit 0
           fi
 
-          git commit -m "convcls ${{ inputs.pool }} $LE_DATE"
+          git commit -m "$DAPP ${{ inputs.pool }} $LE_DATE"
           git push

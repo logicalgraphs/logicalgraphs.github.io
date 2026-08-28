@@ -18,6 +18,14 @@ on:
         required: true
         type: string
         default: '8008'
+      dry_run:
+        description: 'Dry run (check to print to stdout only, no append, no commit)'
+        required: true
+        type: boolean
+        default: false
+
+env:
+  DAPP: wyrd
 
 permissions:
   contents: write
@@ -27,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout logicalgraphs.github.io
+      - name: Checkout pivoteur.github.io
         uses: actions/checkout@v4
 
       - name: Checkout protocol
@@ -36,16 +44,31 @@ jobs:
           repository: pivoteur/protocol
           path: protocol
 
+      - name: Load Shared Environment Variables
+        uses: doughepi/yaml-env-action@v1.0.0
+        with:
+          files: .github/config/protocol-env.yml
+          
+      - name: Establish app path
+        run: echo "DAPP_DIR=$DAPPS_DIR/$DAPP" >> $GITHUB_ENV
+
+      - name: Establish git path
+        run: echo "GIT_DAPP_DIR=$GITHUB_PATH/$DAPP_DIR" >> $GITHUB_ENV
+
       - name: Cache wyrd binary
         id: wyrd-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: protocol/dapps/wyrd/target/release/wyrd
-          key: wyrd-binary-${{ hashFiles('protocol/quizzes/src/quiz08/b_wyrd/**/*.rs', 'protocol/dapps/wyrd/Cargo.toml', 'protocol/dapps/wyrd/Cargo.lock') }}
+          key: >-
+            wyrd-binary- 
+            ${{ hashFiles(format('{0}/quiz08/b_wyrd/**/*.rs', env.QUIZZES_SRC)) }}- 
+            ${{ hashFiles(format('{0}/Cargo.toml', env.DAPP_DIR)) }}-
+            ${{ hashFiles(format('{0}/Cargo.lock', env.DAPP_DIR)) }}
 
       - name: Cache appender binary
         id: appender-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: protocol/dapps/appender/target/release/appender
           key: appender-binary-${{ hashFiles('protocol/quizzes/src/quiz08/c_appender/**/*.rs', 'protocol/dapps/appender/Cargo.toml', 'protocol/dapps/appender/Cargo.lock') }}
@@ -69,41 +92,43 @@ jobs:
           echo "ix: ${{ inputs.ix }}"
           echo "tx_id: ${{ inputs.tx_id }}"
           echo "new_to_actual: ${{ inputs.new_to_actual }}"
+          echo "dry_run: ${{ inputs.dry_run }}"
 
-      - name: Base variables
+      - name: Set today's date
         run: |
           echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-          echo "LiGI=logicalgraphs.github.io" >> $GITHUB_ENV
-          echo "GIT_RAW_URL=https://raw.githubusercontent.com" >> $GITHUB_ENV
-
-      - name: Establish pathing to dapps
-        run: |
-          echo "PROTOCOL=logicalgraphs/$LGI" >> $GITHUB_ENV
 
       - name: protocol URL and paths to dapps
         run: |
-          echo "LG_URL=$GIT_RAW_URL/$PROTOCOL" >> $GITHUB_ENV
-          echo "$GITHUB_WORKSPACE/protocol/dapps/wyrd/target/release" >> $GITHUB_PATH
-          echo "$GITHUB_WORKSPACE/protocol/dapps/appender/target/release" >> $GITHUB_PATH
+          echo "PIVOT_URL=$RAW_URL/${{ github.event.repository.name }}" >> $GITHUB_ENV
+          echo "$DAPP_DIR/$EXE_SUBDIR" >> $GITHUB_PATH
+          echo "$DAPPS_DIR/appender/$EXE_SUBDIR" >> $GITHUB_PATH
 
       - name: Build wyrd
         if: steps.wyrd-cache.outputs.cache-hit != 'true'
         run: |
-          cargo build --manifest-path protocol/dapps/wyrd/Cargo.toml \
-            --bin wyrd --release
+          cargo build --manifest-path $DAPP_DIR/Cargo.toml --bin $DAPP --release
 
       - name: Build appender
         if: steps.appender-cache.outputs.cache-hit != 'true'
         run: |
-          cargo build --manifest-path protocol/dapps/appender/Cargo.toml \
+          cargo build --manifest-path $DAPPS_DIR/appender/Cargo.toml \
             --bin appender --release
 
       - name: Run wyrd and append to close pivot table
         run: |
-          wyrd lg data/pivots/close/raw "${{inputs.ix}}" \
-          "${{inputs.tx_id}}" "${{inputs.new_to_actual}}" | appender
+          $DAPP $PROTOCOL_ALIAS data/pivots/close/raw "${{inputs.ix}}" \
+          "${{inputs.tx_id}}" "${{inputs.new_to_actual}}" > /tmp/wyrd_out.txt
+
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            echo "=== DRY RUN: would append the following to data/pivots/close/raw ==="
+            cat /tmp/wyrd_out.txt
+          else
+            cat /tmp/wyrd_out.txt | appender
+          fi
 
       - name: Commit and push results
+        if: ${{ inputs.dry_run != true }}
         env:
           USER0_NAME: ${{ vars.USER0_NAME }}
           USER0_EMAIL: ${{ secrets.USER0_EMAIL }}
@@ -117,5 +142,5 @@ jobs:
             exit 0
           fi
 
-          git commit -m "wyrd $LE_DATE"
+          git commit -m "$DAPP $LE_DATE"
           git push

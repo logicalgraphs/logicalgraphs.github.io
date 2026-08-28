@@ -1,5 +1,5 @@
 opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1	gain_10_percent	to	to_blockchain	net	ersatz	quote2	val2
-2025-02-22	1	0	virtual_swap	2026-06-06	BNB	Binance	0	1.0510813	$576.65	$606.11	1.1561894	ETH	Binance	0.3859	0	$1570.63	$606.11
+2025-02-22	1	10	virtual_swap	2026-06-06	BNB	Binance	0	1.0510813	$576.65	$606.11	1.1561894	ETH	Binance	0.3859	0	$1570.63	$606.11
 2025-03-03	2	4	virtual_swap	n/a	BNB	Binance	0	1.728	$570.55	$985.91	1.9008001	ETH	Binance	0.4695	0	$2102.13	$986.95
 2025-03-04	3	5	virtual_swap	n/a	BNB	Binance	0	1.69809	$590.11	$1002.06	1.867899	ETH	Binance	0.46	0	$2174.38	$1000.21
 2025-03-05	4	6	virtual_swap	n/a	BNB	Binance	0	1.65621	$591.41	$979.50	1.821831	ETH	Binance	0.4394	0	$2178.63	$957.29
@@ -16,9 +16,11 @@ opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1
 2025-06-04	15	0	https://bscscan.com/tx/0x712931564e91a7e71a9304e7ba78f61d0dcea528f074e081ee165f54c7412b4e	n/a	BNB	Binance	0.75	0	$666.95	$500.21	0.82500005	ETH	Binance	0.1806	0	$2770.98	$500.44
 2025-10-07	16	0	https://bscscan.com/tx/0x2eb01fbba326b8f2edccf1e4c25850ddccdc8ebc2c3b59931e1cd5f9aa1978d7	n/a	BNB	Binance	0.78	0	$1319.72	$1029.38	0.858	ETH	Binance	0.2251	0	$4713.12	$1060.92
 2025-10-07	17	8	virtual_swap	n/a	ETH	Binance	0	0.112	$4713.12	$527.87	0.12320001	BNB	Binance	0.3889	0	$1319.72	$513.24
-2025-10-17	18	0	virtual_swap	2026-06-06	BNB	Binance	0	0.35272104	$576.65	$203.40	0.38799316	ETH	Binance	0.1295	0	$1570.63	$203.40
+2025-10-17	18	10	virtual_swap	2026-06-06	BNB	Binance	0	0.35272104	$576.65	$203.40	0.38799316	ETH	Binance	0.1295	0	$1570.63	$203.40
 2025-10-17	19	8	virtual_swap	n/a	ETH	Binance	0	0.13	$3789.06	$492.58	0.14299999	BNB	Binance	0.4615	0	$1074.17	$495.73
-2026-02-05	20	0	virtual_swap	2026-06-06	BNB	Binance	0	3.4667437	$576.65	$1999.10	3.8134181	ETH	Binance	1.2728	0	$1570.63	$1999.10
+2026-02-05	20	10	virtual_swap	2026-06-06	BNB	Binance	0	3.4667437	$576.65	$1999.10	3.8134181	ETH	Binance	1.2728	0	$1570.63	$1999.10
 2026-02-05	21	9	virtual_swap	2026-05-18	ETH	Binance	0	1.0392087	$2114.42	$2197.32	1.1431296	BNB	Binance	3.4423	0	$638.33	$2197.32
-2026-06-12	22	0	virtual_swap	2026-06-14	BNB	Binance	0	2.9337187	$610.75	$1791.77	3.2270906	ETH	Binance	1.07	0	$1674.55	$1791.77
-2026-06-12	23	0	virtual_swap	2026-06-19	ETH	Binance	0	0.26375425	$1694.48	$446.93	0.2901297	BNB	Binance	0.7795	0	$573.35	$446.93
+2026-06-12	22	10	virtual_swap	2026-06-14	BNB	Binance	0	2.93	$610.75	$1789.50	3.223	ETH	Binance	1.07	0	$1674.55	$1791.77
+2026-06-12	23	0	virtual_swap	2026-08-20	ETH	Binance	0	0.21736825	$2236.71	$486.19	0.23910508	BNB	Binance	0.7795	0	$623.72	$486.19
+2026-07-10	24	0	virtual_swap	2026-08-20	ETH	Binance	0	1.4871391	$2236.71	$3326.30	1.635853	BNB	Binance	5.333	0	$623.72	$3326.30
+2026-07-10	25	0	https://bscscan.com/tx/0xff3d2badb9b5cac6e3c82bba933549e41069b47418ac63e2c66de6962a121854	n/a	BNB	Binance	2.58	0	$574.90	$1483.24	2.838	ETH	Binance	0.82812065	0	$1769.09	$1465.02

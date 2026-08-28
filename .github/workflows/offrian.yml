@@ -3,10 +3,6 @@ name: offrian
 on:
   workflow_dispatch:
     inputs:
-      protocol:
-        description: 'Protocol to counter-offer (e.g. LG)'
-        required: true
-        type: string
       ix:
         description: 'Call index being countered (e.g. 1)'
         required: true
@@ -20,6 +16,9 @@ on:
         required: false
         type: boolean
         default: false
+
+env:
+  DAPP: offrian
 
 permissions:
   contents: write
@@ -37,6 +36,17 @@ jobs:
           repository: pivoteur/protocol
           path: protocol
 
+      - name: Load Shared Environment Variables
+        uses: doughepi/yaml-env-action@v1.0.0
+        with:
+          files: .github/config/protocol-env.yml
+          
+      - name: Establish app path
+        run: echo "DAPP_DIR=$DAPPS_DIR/$DAPP" >> $GITHUB_ENV
+
+      - name: Establish git path
+        run: echo "GIT_DAPP_DIR=$GITHUB_PATH/$DAPP_DIR" >> $GITHUB_ENV
+
       - name: Show input parameters
         run: |
           echo "=== Running offrian with manual inputs ==="
@@ -47,10 +57,14 @@ jobs:
 
       - name: Cache offrian binary
         id: binary-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
-          path: protocol/dapps/offrian/target/release/offrian
-          key: offrian-binary-${{ hashFiles('protocol/quizzes/src/quiz08/e_offrian/**/*.rs', 'protocol/dapps/offrian/Cargo.toml', 'protocol/dapps/offrian/Cargo.lock') }}
+          path: $DAPP_DIR/target/release/$DAPP
+          key: >-
+            offrian-binary-
+            ${{ hashFiles(format('{0}/quiz08/e_offrian/**/*.rs', env.QUIZZES_SRC)) }}-
+            ${{ hashFiles(format('{0}/Cargo.toml', env.DAPP_DIR)) }}-
+            ${{ hashFiles(format('{0}/Cargo.lock', env.DAPP_DIR)) }}
 
       - name: Install Rust toolchain
         if: steps.binary-cache.outputs.cache-hit != 'true'
@@ -68,21 +82,18 @@ jobs:
       - name: Build offrian
         if: steps.binary-cache.outputs.cache-hit != 'true'
         run: |
-          cargo build --manifest-path protocol/dapps/offrian/Cargo.toml \
-            --bin offrian \
-            --release
+          cargo build --manifest-path $DAPP_DIR/Cargo.toml --bin $DAPP --release
 
       - name: Add offrian to PATH
-        run: echo "$GITHUB_WORKSPACE/protocol/dapps/offrian/target/release" >> $GITHUB_PATH
+        run: echo "$DAPP_DIR/$EXE_SUBDIR" >> $GITHUB_PATH
 
       - name: Set LG_URL
         run: |
-          echo "LG_URL=https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io" >> $GITHUB_ENV
+          echo "LG_URL=$RAW_URL/${{ github.repository }}" >> $GITHUB_ENV
 
       - name: Run offrian
         run: |
-          offrian ${{ inputs.debug && '--debug' || '' }} \
-                  "${{ inputs.protocol }}" \
+          $DAPP ${{ inputs.debug && '--debug' || '' }} \
+                  $PROTOCOL_ALIAS \
                   "${{ inputs.ix }}" \
                   "${{ inputs.target }}"
-                  

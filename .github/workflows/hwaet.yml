@@ -2,9 +2,16 @@ name: hwaet
 
 on:
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (print to stdout only, no commit)'
+        type: boolean
+        default: false
   schedule:
-    # test the cron ("Min Hour Day Month DayofWeek" in UTC) at scheduled time 
-    - cron: "45 08 * * *" # this is 4:45 AM Eastern Standard Time
+    - cron: "45 08 * * *"
+
+env: 
+  DAPP: hwaet
 
 permissions:
   contents: write
@@ -22,12 +29,22 @@ jobs:
           repository: pivoteur/protocol
           path: protocol
 
+      - name: Establish app path
+        run: echo "DAPP_DIR=$DAPPS_DIR/$DAPP" >> $GITHUB_ENV
+
+      - name: Establish git path
+        run: echo "GIT_DAPP_DIR=$GITHUB_PATH/$DAPP_DIR" >> $GITHUB_ENV
+
       - name: Cache hwaet binary
         id: binary-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: protocol/dapps/hwaet/target/release/hwaet
-          key: hwaet-binary-${{ hashFiles('protocol/quizzes/src/quiz07/d_health/**/*.rs', 'protocol/dapps/hwaet/Cargo.toml', 'protocol/dapps/hwaet/Cargo.lock') }}
+          key: >-
+            hwaet-binary-
+            ${{ hashFiles(format('{0}/quiz07/d_health/**/*.rs', env.QUIZZES_SRC)) }}-
+            ${{ hashFiles(format('{0}/Cargo.toml', env.DAPP_DIR)) }}-
+            ${{ hashFiles(format('{0}/Cargo.lock', env.DAPP_DIR)) }}
 
       - name: Install Rust toolchain
         if: steps.binary-cache.outputs.cache-hit != 'true'
@@ -45,22 +62,28 @@ jobs:
       - name: Build hwaet
         if: steps.binary-cache.outputs.cache-hit != 'true'
         run: |
-          cargo build --manifest-path protocol/dapps/hwaet/Cargo.toml \
-            --bin hwaet \
-            --release
+          cargo build --manifest-path $DAPP_DIR/Cargo.toml --bin $DAPP --release
 
       - name: Add hwaet to PATH
-        run: echo "$GITHUB_WORKSPACE/protocol/dapps/hwaet/target/release" >> $GITHUB_PATH
+        run: echo "$DAPP_DIR/$EXE_SUBDIR" >> $GITHUB_PATH
 
       - name: Setting date and URL
         run: |
           echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-          echo "LG_URL=https://raw.githubusercontent.com/logicalgraphs/logicalgraphs.github.io" >> $GITHUB_ENV
+          echo "LG_URL=$RAW_URL/${{ github.repository }}" >> $GITHUB_ENV
 
       - name: Run hwaet
-        run: hwaet lg $LE_DATE > libs/pool-health.js
+        run: |
+          $DAPP $PROTOCOL_ALIAS $LE_DATE > /tmp/hwaet_out.js
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            echo "=== DRY RUN: pool-health.js would be ==="
+            cat /tmp/hwaet_out.js
+          else
+            mv /tmp/hwaet_out.js libs/pool-health.js
+          fi
 
       - name: Commit and push results
+        if: ${{ github.event.inputs.dry_run != 'true' }}
         env:
           USER0_NAME: ${{ vars.USER0_NAME }}
           USER0_EMAIL: ${{ secrets.USER0_EMAIL }}
@@ -74,5 +97,5 @@ jobs:
             exit 0
           fi
 
-          git commit -m "hwaet $LE_DATE"
+          git commit -m "$DAPP $LE_DATE"
           git push
