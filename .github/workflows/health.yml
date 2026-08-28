@@ -8,7 +8,8 @@ on:
         type: boolean
         default: false
   schedule:
-    - cron: "33 07 * * *" # this is 3:33 AM Eastern Standard Time
+    # ("Min Hour Day Month DayofWeek" in UTC) at a scheduled time 
+    - cron: "45 07 * * *" 
 
 permissions:
   contents: write
@@ -29,7 +30,7 @@ jobs:
           repository: pivoteur/protocol
           path: protocol
 
-      - name: Copy diagnostics to logicalgraphs.github.io
+      - name: Copy diagnostics to pivoteur.github.io
         run: |
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             echo "=== DRY RUN: diagnostics.txt would be copied from protocol ==="
@@ -53,32 +54,29 @@ jobs:
             echo "{\"name\":\"$name\",\"repo\":\"$repo\",\"status\":\"$status\",\"ran_at\":\"$ran_at\"}"
           }
 
-          json=$(jq -n --argjson entries "$(
+          DATE=$(date -u +"%Y-%m-%d")
+          REPOS=("pivoteur/protocol" "${{ github.repository }}" "logicalgraphs/crypto-n-rust")
+
+          workflows=$(jq -n --argjson entries "$(
             echo '['
-            fetch_status "logicalgraphs/crypto-n-rust"      "quotes.yml"  "Quotes"
+            fetch_status "logicalgraphs/crypto-n-rust"  "quotes.yml"  "Quotes"
             echo ','
-            fetch_status "logicalgraphs/logicalgraphs.github.io" "assets.yml"  "Assets"
+            fetch_status "${{ github.repository }}"  "assets.yml"  "Assets"
             echo ','
-            fetch_status "logicalgraphs/logicalgraphs.github.io" "virtsz.yml"  "Virtsz"
+            fetch_status "${{ github.repository }}"  "virtsz.yml"  "Virtsz"
             echo ','
-            fetch_status "logicalgraphs/logicalgraphs.github.io" "dusk.yml"    "Dusk"
+            fetch_status "${{ github.repository }}"  "dusk.yml"    "Dusk"
             echo ','
-            fetch_status "logicalgraphs/logicalgraphs.github.io" "hwaet.yml"   "Hwaet"
+            fetch_status "${{ github.repository }}"  "hwaet.yml"   "Hwaet"
             echo ','
-            fetch_status "pivoteur/pivoteur.github.io" "daily.yml"  "Daily"
+            fetch_status "${{ github.repository }}" "daily.yml"  "Daily"
             echo ','
-            fetch_status "pivoteur/pivoteur.github.io" "pools.yml"  "Pools"
+            fetch_status "${{ github.repository }}" "pools.yml"  "Pools"
             echo ','
             fetch_status "pivoteur/protocol"           "rat.yml"     "R.A.T."
             echo ']'
           )" '$entries')
-          DATE=$(date -u +"%Y-%m-%d")
-          REPOS=("pivoteur/protocol" "logicalgraphs/logicalgraphs.github.io" "logicalgraphs/crypto-n-rust")
 
-
-          echo "$json" > logicalgraphs.github.io/data/workflows.json 
-
-      - name: Commit and push diagnostics
           closed='[]'
           for repo in "${REPOS[@]}"; do
             count=$(curl -s \
