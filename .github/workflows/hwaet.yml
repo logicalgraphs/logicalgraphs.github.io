@@ -20,14 +20,19 @@ jobs:
   run-hwaet:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout logicalgraphs.github.io # This repo is the root dir for this workflow
+      - name: Checkout logicalgraphs.github.io
         uses: actions/checkout@v4
 
-      - name: Checkout protocol # needed by cache step to locate Cargo.toml
+      - name: Checkout protocol
         uses: actions/checkout@v4
         with:
           repository: pivoteur/protocol
           path: protocol
+
+      - name: Load Shared Environment Variables
+        uses: doughepi/yaml-env-action@v1.0.0
+        with:
+          files: .github/config/protocol-env.yml
 
       - name: Establish app path
         run: echo "DAPP_DIR=$DAPPS_DIR/$DAPP" >> $GITHUB_ENV
