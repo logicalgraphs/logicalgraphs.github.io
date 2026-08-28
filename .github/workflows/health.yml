@@ -2,13 +2,13 @@ name: health
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "33 07 * * *" # this is 3:33 AM Eastern Standard Time
     inputs:
       dry_run:
         description: 'Dry run (print to stdout only, no commit)'
         type: boolean
         default: false
+  schedule:
+    - cron: "33 07 * * *" # this is 3:33 AM Eastern Standard Time
 
 permissions:
   contents: write
