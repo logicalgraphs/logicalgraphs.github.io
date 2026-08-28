@@ -34,9 +34,9 @@ jobs:
         run: |
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             echo "=== DRY RUN: diagnostics.txt would be copied from protocol ==="
-            diff protocol/data/diagnostics.txt pivoteur.github.io/data/diagnostics.txt || true
+            diff protocol/data/diagnostics.txt ${{ github.event.repository.name }}/data/diagnostics.txt || true
           else
-            cp protocol/data/diagnostics.txt pivoteur.github.io/data/diagnostics.txt
+            cp protocol/data/diagnostics.txt ${{ github.event.repository.name }}/data/diagnostics.txt
           fi
 
       - name: Fetch workflow run status and closed issues
@@ -111,7 +111,7 @@ jobs:
           USER0_NAME: ${{ vars.USER0_NAME }}
           USER0_EMAIL: ${{ secrets.USER0_EMAIL }}
         run: |
-          cd pivoteur.github.io
+          cd ${{ github.event.repository.name }}
           git config user.name "$USER0_NAME"
           git config user.email "$USER0_EMAIL"
           git add data/diagnostics.txt data/workflows.json
