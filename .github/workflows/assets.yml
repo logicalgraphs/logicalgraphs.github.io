@@ -2,8 +2,6 @@ name: assets
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "57 04 * * *" # this is 12:57 AM Eastern Standard Time
     inputs:
       dry_run:
         description: 'Dry run — do not commit/push results'
