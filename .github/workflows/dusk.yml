@@ -2,8 +2,6 @@ name: dusk
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "14 08 * * *" # this is 12:14 AM Eastern Standard Time
     inputs:
       dry_run:
         description: 'Dry run (print to stdout only, no commit)'
