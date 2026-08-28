@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout pivoteur.github.io
+      - name: Checkout logicalgraphs.github.io
         uses: actions/checkout@v4
 
       - name: Load Shared Environment Variables
@@ -104,5 +104,5 @@ jobs:
             exit 0
           fi
 
-          git commit -m "pools $LE_DATE"
+          git commit -m "$DAPP $LE_DATE"
           git push

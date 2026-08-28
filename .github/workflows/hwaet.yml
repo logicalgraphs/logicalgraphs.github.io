@@ -8,8 +8,7 @@ on:
         type: boolean
         default: false
   schedule:
-    # ("Min Hour Day Month DayofWeek" in UTC) at a scheduled time 
-    - cron: "45 06 * * *" 
+    - cron: "45 08 * * *"
 
 env: 
   DAPP: hwaet
@@ -21,10 +20,10 @@ jobs:
   run-hwaet:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout pivoteur.github.io # This repo is the root dir for this workflow
+      - name: Checkout logicalgraphs.github.io
         uses: actions/checkout@v4
 
-      - name: Checkout protocol # needed by cache step to locate Cargo.toml
+      - name: Checkout protocol
         uses: actions/checkout@v4
         with:
           repository: pivoteur/protocol
@@ -34,7 +33,7 @@ jobs:
         uses: doughepi/yaml-env-action@v1.0.0
         with:
           files: .github/config/protocol-env.yml
-          
+
       - name: Establish app path
         run: echo "DAPP_DIR=$DAPPS_DIR/$DAPP" >> $GITHUB_ENV
 
@@ -76,7 +75,7 @@ jobs:
       - name: Setting date and URL
         run: |
           echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-          echo "PIVOT_URL=https://raw.githubusercontent.com/pivoteur/pivoteur.github.io" >> $GITHUB_ENV
+          echo "LG_URL=$RAW_URL/${{ github.repository }}" >> $GITHUB_ENV
 
       - name: Run hwaet
         run: |
@@ -103,5 +102,5 @@ jobs:
             exit 0
           fi
 
-          git commit -m "hwaet $LE_DATE"
+          git commit -m "$DAPP $LE_DATE"
           git push

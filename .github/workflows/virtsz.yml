@@ -21,10 +21,10 @@ jobs:
   run-virtsz:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout pivoteur.github.io # This repo is the root dir for this workflow
+      - name: Checkout logicalgraphs.github.io
         uses: actions/checkout@v4
 
-      - name: Checkout protocol # needed by cache step to locate Cargo.toml
+      - name: Checkout protocol
         uses: actions/checkout@v4
         with:
           repository: pivoteur/protocol
@@ -99,5 +99,5 @@ jobs:
             exit 0
           fi
 
-          git commit -m "virtsz $LE_DATE"
+          git commit -m "$DAPP $LE_DATE"
           git push

@@ -94,31 +94,26 @@ jobs:
           echo "new_to_actual: ${{ inputs.new_to_actual }}"
           echo "dry_run: ${{ inputs.dry_run }}"
 
-      - name: Base variables
+      - name: Set today's date
         run: |
           echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-          echo "PGI=pivoteur.github.io" >> $GITHUB_ENV
-          echo "GIT_RAW_URL=https://raw.githubusercontent.com" >> $GITHUB_ENV
-
-      - name: Establish pathing to dapps
-        run: |
-          echo "PROTOCOL=pivoteur/$PGI" >> $GITHUB_ENV
 
       - name: protocol URL and paths to dapps
         run: |
-          echo "PIVOT_URL=$GIT_RAW_URL/$PROTOCOL" >> $GITHUB_ENV
-          echo "$GITHUB_WORKSPACE/protocol/dapps/wyrd/target/release" >> $GITHUB_PATH
-          echo "$GITHUB_WORKSPACE/protocol/dapps/appender/target/release" >> $GITHUB_PATH
+          echo "PIVOT_URL=$RAW_URL/${{ github.event.repository.name }}" >> $GITHUB_ENV
+          echo "$DAPP_DIR/$EXE_SUBDIR" >> $GITHUB_PATH
+          echo "$DAPPS_DIR/appender/$EXE_SUBDIR" >> $GITHUB_PATH
 
       - name: Build wyrd
         if: steps.wyrd-cache.outputs.cache-hit != 'true'
         run: |
-          cargo build --manifest-path $DAPP_DIR/Cargo.toml --bin wyrd --release
+          cargo build --manifest-path $DAPP_DIR/Cargo.toml --bin $DAPP --release
 
       - name: Build appender
         if: steps.appender-cache.outputs.cache-hit != 'true'
         run: |
-          cargo build --manifest-path protocol/dapps/appender/Cargo.toml --bin appender --release
+          cargo build --manifest-path $DAPPS_DIR/appender/Cargo.toml \
+            --bin appender --release
 
       - name: Run wyrd and append to close pivot table
         run: |
@@ -147,5 +142,5 @@ jobs:
             exit 0
           fi
 
-          git commit -m "wyrd $LE_DATE"
+          git commit -m "$DAPP $LE_DATE"
           git push
