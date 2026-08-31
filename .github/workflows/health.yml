@@ -30,7 +30,7 @@ jobs:
           repository: pivoteur/protocol
           path: protocol
 
-      - name: Copy diagnostics to pivoteur.github.io
+      - name: Copy diagnostics to logicalgraphs.github.io
         run: |
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             echo "=== DRY RUN: diagnostics.txt would be copied from protocol ==="
@@ -102,7 +102,7 @@ jobs:
           cat /tmp/workflows_out.json
 
           if [ "${{ github.event.inputs.dry_run }}" != "true" ]; then
-            mv /tmp/workflows_out.json pivoteur.github.io/data/workflows.json
+            mv /tmp/workflows_out.json ${{ github.event.repository.name }}/data/workflows.json
           fi
 
       - name: Commit and push diagnostics
