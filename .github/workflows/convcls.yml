@@ -4,17 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       pool:
-        description: 'Pool to convert'
+        description: 'Pool to convert (e.g.: btc-eth)'
         required: true
-        type: choice
-        options:
-          - avax-undead
-          - btc-avax
-          - btc-eth
-          - btc-undead
-          - btc-usdc
-          - eth-undead
-          - undead-usdc
+        type: string
       dry_run:
         description: 'Dry run (print to stdout only, no commit)'
         required: true
