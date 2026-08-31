@@ -1,53 +1,53 @@
 {
-  "date": "2026-08-27",
+  "date": "2026-08-31",
   "workflows": [
     {
       "name": "Quotes",
       "repo": "logicalgraphs/crypto-n-rust",
       "status": "success",
-      "ran_at": "2026-08-27T13:04:09Z"
+      "ran_at": "2026-08-31T08:53:31Z"
     },
     {
       "name": "Assets",
-      "repo": "pivoteur/pivoteur.github.io",
-      "status": "success",
-      "ran_at": "2026-08-27T16:04:58Z"
+      "repo": "logicalgraphs/logicalgraphs.github.io",
+      "status": "failure",
+      "ran_at": "2026-08-31T11:17:59Z"
     },
     {
       "name": "Virtsz",
-      "repo": "pivoteur/pivoteur.github.io",
+      "repo": "logicalgraphs/logicalgraphs.github.io",
       "status": "success",
-      "ran_at": "2026-08-27T14:50:08Z"
+      "ran_at": "2026-08-31T10:07:58Z"
     },
     {
       "name": "Dusk",
-      "repo": "pivoteur/pivoteur.github.io",
+      "repo": "logicalgraphs/logicalgraphs.github.io",
       "status": "success",
-      "ran_at": "2026-08-27T16:32:28Z"
+      "ran_at": "2026-08-31T11:35:24Z"
     },
     {
       "name": "Hwaet",
-      "repo": "pivoteur/pivoteur.github.io",
+      "repo": "logicalgraphs/logicalgraphs.github.io",
       "status": "success",
-      "ran_at": "2026-08-27T17:54:51Z"
+      "ran_at": "2026-08-31T20:29:37Z"
     },
     {
       "name": "Daily",
-      "repo": "pivoteur/pivoteur.github.io",
+      "repo": "logicalgraphs/logicalgraphs.github.io",
       "status": "success",
-      "ran_at": "2026-08-27T15:27:22Z"
+      "ran_at": "2026-08-31T11:05:06Z"
     },
     {
       "name": "Pools",
-      "repo": "pivoteur/pivoteur.github.io",
+      "repo": "logicalgraphs/logicalgraphs.github.io",
       "status": "success",
-      "ran_at": "2026-08-27T16:49:40Z"
+      "ran_at": "2026-08-31T11:50:56Z"
     },
     {
       "name": "R.A.T.",
       "repo": "pivoteur/protocol",
       "status": "success",
-      "ran_at": "2026-08-27T13:18:01Z"
+      "ran_at": "2026-08-31T07:23:11Z"
     }
   ],
   "closed_issues": [
@@ -56,7 +56,7 @@
       "closed_today": 0
     },
     {
-      "repo": "pivoteur/pivoteur.github.io",
+      "repo": "logicalgraphs/logicalgraphs.github.io",
       "closed_today": 0
     },
     {
