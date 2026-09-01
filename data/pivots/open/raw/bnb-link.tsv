@@ -12,4 +12,4 @@ opened	open	close	tx_id	updated	from	from_blockchain	amount1	virtual	quote1	val1
 2026-02-05	11	0	https://bscscan.com/tx/0x5b3d856a58425a13e23194c1a7df771568fee2b26e6367f38e9de6d6201328f3	n/a	LINK	Binance	55	0.00	$8.00	$440.00	60.5	BNB	Binance	0.6803	0.0000	$623.02	$423.84
 2026-02-05	12	5	virtual_swap	2026-05-31	BNB	Binance	0	0.6724	$734.30	$493.76	0.7396666	LINK	Binance	53.6114	0.0000	$9.21	$493.76
 2026-08-31	13	0	virtual_swap	n/a	LINK	Binance	0	76.19	$11.27	$858.69	83.81155723	BNB	Binance	1.25000	0	$686.95	$858.69
-2026-08-31	14	0	https://bscscan.com/tx/0xf49d47447562f881ade0b84bb8757d6b574d5880b8ba6f7abbadee608683c67f	n/a	BNB	Binance	1.245	$0.00	$686.95	$855.25	1.3695	LINK	Binance	74.84285	0	$11.27	$843.48
+2026-08-31	14	0	https://bscscan.com/tx/0xf49d47447562f881ade0b84bb8757d6b574d5880b8ba6f7abbadee608683c67f	n/a	BNB	Binance	1.245	0.00	$686.95	$855.25	1.3695	LINK	Binance	74.84285	0	$11.27	$843.48
