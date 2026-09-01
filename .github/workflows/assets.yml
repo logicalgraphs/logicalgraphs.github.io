@@ -30,6 +30,12 @@ jobs:
           repository: pivoteur/protocol
           path: protocol
 
+      - name: Establish app path
+        run: echo "DAPP_DIR=$DAPPS_DIR/$DAPP" >> $GITHUB_ENV
+
+      - name: Establish git path
+        run: echo "GIT_DAPP_DIR=$GITHUB_PATH/$DAPP_DIR" >> $GITHUB_ENV
+
       - name: Cache assets binary
         id: binary-cache
         uses: actions/cache@v4
