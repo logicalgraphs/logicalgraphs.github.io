@@ -30,6 +30,11 @@ jobs:
           repository: pivoteur/protocol
           path: protocol
 
+      - name: Load Shared Environment Variables
+        uses: doughepi/yaml-env-action@v1.0.0
+        with:
+          files: .github/config/protocol-env.yml
+
       - name: Establish app path
         run: echo "DAPP_DIR=$DAPPS_DIR/$DAPP" >> $GITHUB_ENV
 
