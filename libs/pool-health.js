@@ -1,5 +1,5 @@
 const poolHealth = {
-   generated: '2026-09-01',
+   generated: '2026-09-02',
    pools: [
       { pool: "LTC+LINK", available: '$1.27' },
       { pool: "BNB+LINK", available: '$7.76' },
@@ -10,8 +10,8 @@ const poolHealth = {
       { pool: "BTC+USDC", available: '$101.68' },
       { pool: "BTC+ETH", available: '$178.49' },
       { pool: "ETH+AVAX", available: '$335.41' },
+      { pool: "BNB+USDT", available: '$1295.15' },
       { pool: "BNB+LTC", available: '$1761.75' },
-      { pool: "BNB+USDT", available: '$1908.41' },
       { pool: "BTC+BNB", available: '$3128.94' },
       { pool: "BTC+DOGE", available: '$4514.71' }
    ]
