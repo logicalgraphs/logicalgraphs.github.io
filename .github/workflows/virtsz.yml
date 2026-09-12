@@ -45,7 +45,7 @@ jobs:
         id: binary-cache
         uses: actions/cache@v4
         with:
-          path: $DAPP_DIR/target/release/$DAPP
+          path: $DAPP_DIR/$EXE_SUBDIR/$DAPP
           key: >-
             virtsz-binary-
             ${{ hashFiles(format('{0}/quiz07/b_virtual/**/*.rs', env.QUIZZES_SRC)) }}-
@@ -82,7 +82,7 @@ jobs:
         env:
           DRY_RUN: ${{ github.event.inputs.dry_run }}
         run: |
-          sh ./protocol/scripts/auto-virtsz.sh $PROTOCOL_ALIAS data/pivots/open/raw
+          sh ./protocol/scripts/auto-virtsz.sh data/pivots/open/raw
 
       - name: Commit and push results
         if: ${{ github.event.inputs.dry_run != 'true' }}
