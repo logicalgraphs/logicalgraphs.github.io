@@ -21,7 +21,7 @@ jobs:
   run-virtsz:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout pivoteur.github.io
+      - name: Checkout logicalgraphs.github.io
         uses: actions/checkout@v4
 
       - name: Checkout protocol
@@ -76,7 +76,7 @@ jobs:
       - name: Set date and pivot_url
         run: |
           echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-          echo "PIVOT_URL=$RAW_URL/${{ github.repository }}" >> $GITHUB_ENV
+          echo "LG_URL=$RAW_URL/${{ github.repository }}" >> $GITHUB_ENV
 
       - name: Run virtsz
         env:
@@ -99,5 +99,5 @@ jobs:
             exit 0
           fi
 
-          git commit -m "virtsz $LE_DATE"
+          git commit -m "$DAPP $LE_DATE"
           git push
