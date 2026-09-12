@@ -21,7 +21,7 @@ jobs:
   run-virtsz:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout logicalgraphs.github.io
+      - name: Checkout pivoteur.github.io
         uses: actions/checkout@v4
 
       - name: Checkout protocol
@@ -45,7 +45,7 @@ jobs:
         id: binary-cache
         uses: actions/cache@v4
         with:
-          path: $DAPP_DIR/target/release/$DAPP
+          path: $DAPP_DIR/$EXE_SUBDIR/$DAPP
           key: >-
             virtsz-binary-
             ${{ hashFiles(format('{0}/quiz07/b_virtual/**/*.rs', env.QUIZZES_SRC)) }}-
@@ -76,13 +76,13 @@ jobs:
       - name: Set date and pivot_url
         run: |
           echo "LE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-          echo "LG_URL=$RAW_URL/${{ github.repository }}" >> $GITHUB_ENV
+          echo "PIVOT_URL=$RAW_URL/${{ github.repository }}" >> $GITHUB_ENV
 
       - name: Run virtsz
         env:
           DRY_RUN: ${{ github.event.inputs.dry_run }}
         run: |
-          sh ./protocol/scripts/auto-virtsz.sh $PROTOCOL_ALIAS data/pivots/open/raw
+          sh ./protocol/scripts/auto-virtsz.sh data/pivots/open/raw
 
       - name: Commit and push results
         if: ${{ github.event.inputs.dry_run != 'true' }}
@@ -99,5 +99,5 @@ jobs:
             exit 0
           fi
 
-          git commit -m "$DAPP $LE_DATE"
+          git commit -m "virtsz $LE_DATE"
           git push
