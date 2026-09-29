@@ -1,59 +1,59 @@
 {
-  "date": "2026-09-28",
+  "date": "2026-09-29",
   "workflows": [
     {
       "name": "Quotes",
       "repo": "logicalgraphs/crypto-n-rust",
       "status": "success",
-      "ran_at": "2026-09-28T08:56:01Z"
+      "ran_at": "2026-09-29T08:59:25Z"
     },
     {
       "name": "Assets",
       "repo": "logicalgraphs/logicalgraphs.github.io",
       "status": "success",
-      "ran_at": "2026-09-28T11:23:31Z"
+      "ran_at": "2026-09-29T11:01:06Z"
     },
     {
       "name": "Virtsz",
       "repo": "logicalgraphs/logicalgraphs.github.io",
       "status": "success",
-      "ran_at": "2026-09-28T10:12:06Z"
+      "ran_at": "2026-09-29T10:10:33Z"
     },
     {
       "name": "Dusk",
       "repo": "logicalgraphs/logicalgraphs.github.io",
       "status": "success",
-      "ran_at": "2026-09-28T11:40:46Z"
+      "ran_at": "2026-09-29T11:21:28Z"
     },
     {
       "name": "Hwaet",
       "repo": "logicalgraphs/logicalgraphs.github.io",
       "status": "success",
-      "ran_at": "2026-09-27T14:16:38Z"
+      "ran_at": "2026-09-28T16:59:24Z"
     },
     {
       "name": "Daily",
       "repo": "logicalgraphs/logicalgraphs.github.io",
       "status": "success",
-      "ran_at": "2026-09-28T11:10:10Z"
+      "ran_at": "2026-09-29T10:51:42Z"
     },
     {
       "name": "Pools",
       "repo": "logicalgraphs/logicalgraphs.github.io",
       "status": "success",
-      "ran_at": "2026-09-28T12:00:30Z"
+      "ran_at": "2026-09-29T11:35:15Z"
     },
     {
       "name": "R.A.T.",
       "repo": "pivoteur/protocol",
       "status": "success",
-      "ran_at": "2026-09-28T07:20:25Z"
+      "ran_at": "2026-09-29T07:20:22Z"
     }
   ],
   "closed_issues": [
     {
       "repo": "pivoteur/protocol",
-      "closed_today": 0
+      "closed_today": 1
     },
     {
       "repo": "logicalgraphs/logicalgraphs.github.io",
@@ -61,7 +61,7 @@
     },
     {
       "repo": "logicalgraphs/crypto-n-rust",
-      "closed_today": 0
+      "closed_today": 1
     }
   ]
 }
