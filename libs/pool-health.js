@@ -1,5 +1,5 @@
 const poolHealth = {
-   generated: '2026-10-16',
+   generated: '2026-10-17',
    pools: [
       { pool: "AVAX+USDC", available: '$5.42' },
       { pool: "LTC+LINK", available: '$5.84' },
