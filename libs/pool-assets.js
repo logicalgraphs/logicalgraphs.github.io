@@ -4,21 +4,21 @@
 
  
 const poolAssets = {
-   generated: '2026-10-22',
+   generated: '2026-10-23',
    assets: [
+      [ 'AVAX', 'USDC' ],
+      [ 'BNB', 'LINK' ],
+      [ 'BNB', 'USDT' ],
+      [ 'BTC', 'DOGE' ],
       [ 'BTC', 'USDC' ],
+      [ 'BTC', 'ETH' ],
+      [ 'BNB', 'LTC' ],
+      [ 'ETH', 'USDC' ],
+      [ 'BTC', 'AVAX' ],
+      [ 'ETH', 'AVAX' ],
       [ 'LTC', 'LINK' ],
       [ 'BTC', 'BNB' ],
-      [ 'BNB', 'LTC' ],
-      [ 'ETH', 'AVAX' ],
-      [ 'BNB', 'LINK' ],
-      [ 'BTC', 'DOGE' ],
-      [ 'BTC', 'AVAX' ],
-      [ 'ETH', 'USDC' ],
-      [ 'AVAX', 'USDC' ],
-      [ 'ETH', 'BNB' ],
-      [ 'BTC', 'ETH' ],
-      [ 'BNB', 'USDT' ]
+      [ 'ETH', 'BNB' ]
       ]
 };
 
