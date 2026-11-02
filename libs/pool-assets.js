@@ -1,10 +1,10 @@
 
-// created by: pools 2.05
+// created by: pools 2.0.6
 
 
  
 const poolAssets = {
-   generated: '2026-11-01',
+   generated: '2026-11-02',
    assets: [
       [ 'BTC', 'AVAX' ],
       [ 'ETH', 'USDC' ],
