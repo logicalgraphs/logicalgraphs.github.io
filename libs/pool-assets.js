@@ -4,7 +4,7 @@
 
  
 const poolAssets = {
-   generated: '2026-11-24',
+   generated: '2026-11-25',
    assets: [
       [ 'ETH', 'BNB' ],
       [ 'ETH', 'AVAX' ],
